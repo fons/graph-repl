@@ -9,6 +9,32 @@
 /* Begin PBXBuildFile section */
 		F9470FF615A8CC1300602C3C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9470FF515A8CC1300602C3C /* main.cpp */; };
 		F9470FF815A8CC1300602C3C /* graph_repl.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9470FF715A8CC1300602C3C /* graph_repl.1 */; };
+		F975127D15A8D3B700831089 /* graph.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F975126C15A8D2D600831089 /* graph.dylib */; };
+		F975127F15A8D3FD00831089 /* test.h in Headers */ = {isa = PBXBuildFile; fileRef = F975127E15A8D3FD00831089 /* test.h */; };
+		F975128115A8D42800831089 /* testy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F975128015A8D42800831089 /* testy.cpp */; };
+		F975128315A8D4B700831089 /* graph.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128215A8D4B700831089 /* graph.h */; };
+		F975128515A8D53500831089 /* edge.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128415A8D53500831089 /* edge.h */; };
+		F975128B15A9113200831089 /* graph_base.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128715A9113200831089 /* graph_base.h */; };
+		F975128C15A9113200831089 /* graph_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F975128815A9113200831089 /* graph_impl.cpp */; };
+		F975128D15A9113200831089 /* graph_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128915A9113200831089 /* graph_impl.h */; };
+		F975128F15A9124000831089 /* graph-type.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128E15A9124000831089 /* graph-type.h */; };
+		F975129215A9142F00831089 /* adjacency_matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F975129015A9142F00831089 /* adjacency_matrix.cpp */; };
+		F975129315A9142F00831089 /* adjacency_matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = F975129115A9142F00831089 /* adjacency_matrix.h */; };
+		F975129715A9146100831089 /* graph_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = F975129415A9146100831089 /* graph_utils.h */; };
+		F975129915A9146100831089 /* tuple.h in Headers */ = {isa = PBXBuildFile; fileRef = F975129615A9146100831089 /* tuple.h */; };
+		F975129B15A9148000831089 /* graph_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F975129A15A9148000831089 /* graph_utils.cpp */; };
+		F975129E15A916F300831089 /* adjacency_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F975129C15A916F300831089 /* adjacency_list.cpp */; };
+		F975129F15A916F300831089 /* adjacency_list.h in Headers */ = {isa = PBXBuildFile; fileRef = F975129D15A916F300831089 /* adjacency_list.h */; };
+		F97512A115A9171000831089 /* lwll.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512A015A9171000831089 /* lwll.h */; };
+		F97512A715A91B0700831089 /* bfs.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512A415A91B0700831089 /* bfs.h */; };
+		F97512A815A91B0700831089 /* dfs.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512A515A91B0700831089 /* dfs.h */; };
+		F97512A915A91B0700831089 /* search_base.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512A615A91B0700831089 /* search_base.h */; };
+		F97512AB15A91B3C00831089 /* graph-property.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512AA15A91B3C00831089 /* graph-property.h */; };
+		F97512AD15A91C2B00831089 /* algos.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512AC15A91C2B00831089 /* algos.h */; };
+		F97512B415A91CE400831089 /* degree.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512B015A91CE400831089 /* degree.h */; };
+		F97512B515A91CE400831089 /* graph_gen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97512B115A91CE400831089 /* graph_gen.cpp */; };
+		F97512B615A91CE400831089 /* graph_gen.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512B215A91CE400831089 /* graph_gen.h */; };
+		F97512B715A91CE400831089 /* transitive-clojure.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512B315A91CE400831089 /* transitive-clojure.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,10 +54,47 @@
 		F9470FF115A8CC1300602C3C /* graph-repl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "graph-repl"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9470FF515A8CC1300602C3C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F9470FF715A8CC1300602C3C /* graph_repl.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = graph_repl.1; sourceTree = "<group>"; };
+		F975126C15A8D2D600831089 /* graph.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = graph.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		F975126F15A8D2D600831089 /* graph-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "graph-Prefix.pch"; sourceTree = "<group>"; };
+		F975127015A8D2D600831089 /* graphProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = graphProj.xcconfig; sourceTree = "<group>"; };
+		F975127115A8D2D600831089 /* graphTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = graphTarget.xcconfig; sourceTree = "<group>"; };
+		F975127E15A8D3FD00831089 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		F975128015A8D42800831089 /* testy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testy.cpp; sourceTree = "<group>"; };
+		F975128215A8D4B700831089 /* graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph.h; sourceTree = "<group>"; };
+		F975128415A8D53500831089 /* edge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = edge.h; sourceTree = "<group>"; };
+		F975128715A9113200831089 /* graph_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_base.h; sourceTree = "<group>"; };
+		F975128815A9113200831089 /* graph_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_impl.cpp; sourceTree = "<group>"; };
+		F975128915A9113200831089 /* graph_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_impl.h; sourceTree = "<group>"; };
+		F975128E15A9124000831089 /* graph-type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "graph-type.h"; sourceTree = "<group>"; };
+		F975129015A9142F00831089 /* adjacency_matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjacency_matrix.cpp; sourceTree = "<group>"; };
+		F975129115A9142F00831089 /* adjacency_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjacency_matrix.h; sourceTree = "<group>"; };
+		F975129415A9146100831089 /* graph_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_utils.h; sourceTree = "<group>"; };
+		F975129615A9146100831089 /* tuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tuple.h; sourceTree = "<group>"; };
+		F975129A15A9148000831089 /* graph_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_utils.cpp; sourceTree = "<group>"; };
+		F975129C15A916F300831089 /* adjacency_list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjacency_list.cpp; sourceTree = "<group>"; };
+		F975129D15A916F300831089 /* adjacency_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjacency_list.h; sourceTree = "<group>"; };
+		F97512A015A9171000831089 /* lwll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lwll.h; sourceTree = "<group>"; };
+		F97512A415A91B0700831089 /* bfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bfs.h; sourceTree = "<group>"; };
+		F97512A515A91B0700831089 /* dfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfs.h; sourceTree = "<group>"; };
+		F97512A615A91B0700831089 /* search_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = search_base.h; sourceTree = "<group>"; };
+		F97512AA15A91B3C00831089 /* graph-property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "graph-property.h"; sourceTree = "<group>"; };
+		F97512AC15A91C2B00831089 /* algos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = algos.h; sourceTree = "<group>"; };
+		F97512B015A91CE400831089 /* degree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = degree.h; sourceTree = "<group>"; };
+		F97512B115A91CE400831089 /* graph_gen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_gen.cpp; sourceTree = "<group>"; };
+		F97512B215A91CE400831089 /* graph_gen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_gen.h; sourceTree = "<group>"; };
+		F97512B315A91CE400831089 /* transitive-clojure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "transitive-clojure.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F9470FEE15A8CC1300602C3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F975127D15A8D3B700831089 /* graph.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F975126915A8D2D600831089 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				F9470FF415A8CC1300602C3C /* graph-repl */,
+				F975126D15A8D2D600831089 /* graph */,
 				F9470FF215A8CC1300602C3C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				F9470FF115A8CC1300602C3C /* graph-repl */,
+				F975126C15A8D2D600831089 /* graph.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,7 +131,79 @@
 			path = "graph-repl";
 			sourceTree = "<group>";
 		};
+		F975126D15A8D2D600831089 /* graph */ = {
+			isa = PBXGroup;
+			children = (
+				F975128215A8D4B700831089 /* graph.h */,
+				F97512B015A91CE400831089 /* degree.h */,
+				F97512B215A91CE400831089 /* graph_gen.h */,
+				F97512B115A91CE400831089 /* graph_gen.cpp */,
+				F97512B315A91CE400831089 /* transitive-clojure.h */,
+				F97512AC15A91C2B00831089 /* algos.h */,
+				F97512AA15A91B3C00831089 /* graph-property.h */,
+				F97512A415A91B0700831089 /* bfs.h */,
+				F97512A515A91B0700831089 /* dfs.h */,
+				F97512A615A91B0700831089 /* search_base.h */,
+				F97512A015A9171000831089 /* lwll.h */,
+				F975129D15A916F300831089 /* adjacency_list.h */,
+				F975129C15A916F300831089 /* adjacency_list.cpp */,
+				F975129415A9146100831089 /* graph_utils.h */,
+				F975129A15A9148000831089 /* graph_utils.cpp */,
+				F975129615A9146100831089 /* tuple.h */,
+				F975129115A9142F00831089 /* adjacency_matrix.h */,
+				F975129015A9142F00831089 /* adjacency_matrix.cpp */,
+				F975128E15A9124000831089 /* graph-type.h */,
+				F975128715A9113200831089 /* graph_base.h */,
+				F975128915A9113200831089 /* graph_impl.h */,
+				F975128815A9113200831089 /* graph_impl.cpp */,
+				F975128415A8D53500831089 /* edge.h */,
+				F975127E15A8D3FD00831089 /* test.h */,
+				F975128015A8D42800831089 /* testy.cpp */,
+				F975127015A8D2D600831089 /* graphProj.xcconfig */,
+				F975127115A8D2D600831089 /* graphTarget.xcconfig */,
+				F975126E15A8D2D600831089 /* Supporting Files */,
+			);
+			path = graph;
+			sourceTree = "<group>";
+		};
+		F975126E15A8D2D600831089 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F975126F15A8D2D600831089 /* graph-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F975126A15A8D2D600831089 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F975127F15A8D3FD00831089 /* test.h in Headers */,
+				F975128315A8D4B700831089 /* graph.h in Headers */,
+				F975128515A8D53500831089 /* edge.h in Headers */,
+				F975128B15A9113200831089 /* graph_base.h in Headers */,
+				F975128D15A9113200831089 /* graph_impl.h in Headers */,
+				F975128F15A9124000831089 /* graph-type.h in Headers */,
+				F975129315A9142F00831089 /* adjacency_matrix.h in Headers */,
+				F975129715A9146100831089 /* graph_utils.h in Headers */,
+				F975129915A9146100831089 /* tuple.h in Headers */,
+				F975129F15A916F300831089 /* adjacency_list.h in Headers */,
+				F97512A115A9171000831089 /* lwll.h in Headers */,
+				F97512A715A91B0700831089 /* bfs.h in Headers */,
+				F97512A815A91B0700831089 /* dfs.h in Headers */,
+				F97512A915A91B0700831089 /* search_base.h in Headers */,
+				F97512AB15A91B3C00831089 /* graph-property.h in Headers */,
+				F97512AD15A91C2B00831089 /* algos.h in Headers */,
+				F97512B415A91CE400831089 /* degree.h in Headers */,
+				F97512B615A91CE400831089 /* graph_gen.h in Headers */,
+				F97512B715A91CE400831089 /* transitive-clojure.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		F9470FF015A8CC1300602C3C /* graph-repl */ = {
@@ -85,6 +222,23 @@
 			productName = "graph-repl";
 			productReference = F9470FF115A8CC1300602C3C /* graph-repl */;
 			productType = "com.apple.product-type.tool";
+		};
+		F975126B15A8D2D600831089 /* graph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F975127615A8D2D600831089 /* Build configuration list for PBXNativeTarget "graph" */;
+			buildPhases = (
+				F975126815A8D2D600831089 /* Sources */,
+				F975126915A8D2D600831089 /* Frameworks */,
+				F975126A15A8D2D600831089 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = graph;
+			productName = graph;
+			productReference = F975126C15A8D2D600831089 /* graph.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
 
@@ -108,6 +262,7 @@
 			projectRoot = "";
 			targets = (
 				F9470FF015A8CC1300602C3C /* graph-repl */,
+				F975126B15A8D2D600831089 /* graph */,
 			);
 		};
 /* End PBXProject section */
@@ -121,6 +276,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F975126815A8D2D600831089 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F975128115A8D42800831089 /* testy.cpp in Sources */,
+				F975128C15A9113200831089 /* graph_impl.cpp in Sources */,
+				F975129215A9142F00831089 /* adjacency_matrix.cpp in Sources */,
+				F975129B15A9148000831089 /* graph_utils.cpp in Sources */,
+				F975129E15A916F300831089 /* adjacency_list.cpp in Sources */,
+				F97512B515A91CE400831089 /* graph_gen.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -129,6 +297,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -156,6 +326,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -185,6 +357,20 @@
 			};
 			name = Release;
 		};
+		F975127715A8D2D600831089 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F975127815A8D2D600831089 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -202,6 +388,15 @@
 			buildConfigurations = (
 				F9470FFC15A8CC1300602C3C /* Debug */,
 				F9470FFD15A8CC1300602C3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F975127615A8D2D600831089 /* Build configuration list for PBXNativeTarget "graph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F975127715A8D2D600831089 /* Debug */,
+				F975127815A8D2D600831089 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

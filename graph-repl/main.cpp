@@ -6,23 +6,12 @@
 //  Copyright (c) 2012 mohegan skunk works. All rights reserved.
 //
 
-//#include <iostream>
-
 
 #include <vector>
 #include <iostream>
 #include <bitset>
 #include <cstdlib>
-
-
 #include "graph.h"
-//#include "degree.h"
-//#include "graph_gen.h"
-//#include "algos.h"
-//#include "graph_search.h"
-//#include "transitive-clojure.h"
-
-//template <typename graph_t>
 
 int main (int argc, const char * argv[])
 {  
@@ -141,10 +130,9 @@ int main (int argc, const char * argv[])
       
       std::string dt = "/Users/fons/Dvlp/graphviz/tc.dot";  
       (*tc).graphviz(dt);
-
-      //sparse_graph_t wtc = warshall_transitive_closure(s10);
-      //std::string wts = "/Users/fons/Dvlp/graphviz/wtc.dot"; 
-      //wtc.graphviz(wts);
+      transitive_closure<sparse_graph_t, tc_warshall<simple_edge_t>> wtc(s10);
+      std::string wts = "/Users/fons/Dvlp/graphviz/wtc.dot"; 
+      (*wtc).graphviz(wts);
       //dfs.property<back_edge_t>(simple_edge_t(0,1, 1));
       
       //      dfs.property(0);

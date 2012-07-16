@@ -15,10 +15,7 @@
 
 int main (int argc, const char * argv[])
 {  
-      simple_edge_t e(1,2,1);
-      std::cerr << e << std::endl;
-      labeled_edge_t l("from", "to", 1);
-      std::cerr << l << std::endl;
+          
       //auto dir = graph_type_t::DIRECTED;
       adjacency_matrix a1(4);
       a1(0,2,1);

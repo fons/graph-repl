@@ -35,6 +35,14 @@
 		F97512B515A91CE400831089 /* graph_gen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97512B115A91CE400831089 /* graph_gen.cpp */; };
 		F97512B615A91CE400831089 /* graph_gen.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512B215A91CE400831089 /* graph_gen.h */; };
 		F97512B715A91CE400831089 /* transitive-clojure.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512B315A91CE400831089 /* transitive-clojure.h */; };
+		F9B1AEA915AB95A100DC93D4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AEA815AB95A100DC93D4 /* main.cpp */; };
+		F9B1AEAB15AB95A100DC93D4 /* unit_test.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */; };
+		F9B7FD8D15AB962B00B0D6F0 /* test-edges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B7FD8C15AB962B00B0D6F0 /* test-edges.cpp */; };
+		F9B7FD9115AB97A100B0D6F0 /* test-edges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B7FD8C15AB962B00B0D6F0 /* test-edges.cpp */; };
+		F9B7FD9315AC37A300B0D6F0 /* regression-test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B7FD9215AC37A300B0D6F0 /* regression-test.cpp */; };
+		F9B7FD9415AC37BF00B0D6F0 /* regression-test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B7FD9215AC37A300B0D6F0 /* regression-test.cpp */; };
+		F9B7FD9815AE863E00B0D6F0 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B7FD9715AE863E00B0D6F0 /* tests.cpp */; };
+		F9B7FD9915AE86C700B0D6F0 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B7FD9715AE863E00B0D6F0 /* tests.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +53,16 @@
 			dstSubfolderSpec = 0;
 			files = (
 				F9470FF815A8CC1300602C3C /* graph_repl.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F9B1AEA315AB95A100DC93D4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				F9B1AEAB15AB95A100DC93D4 /* unit_test.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -83,6 +101,15 @@
 		F97512B115A91CE400831089 /* graph_gen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_gen.cpp; sourceTree = "<group>"; };
 		F97512B215A91CE400831089 /* graph_gen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_gen.h; sourceTree = "<group>"; };
 		F97512B315A91CE400831089 /* transitive-clojure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "transitive-clojure.h"; sourceTree = "<group>"; };
+		F9B1AEA515AB95A100DC93D4 /* unit-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "unit-test"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9B1AEA815AB95A100DC93D4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = unit_test.1; sourceTree = "<group>"; };
+		F9B7FD8C15AB962B00B0D6F0 /* test-edges.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-edges.cpp"; sourceTree = "<group>"; };
+		F9B7FD9015AB973800B0D6F0 /* regression-test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "regression-test.h"; sourceTree = "<group>"; };
+		F9B7FD9215AC37A300B0D6F0 /* regression-test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "regression-test.cpp"; sourceTree = "<group>"; };
+		F9B7FD9615AE412400B0D6F0 /* tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tests.h; sourceTree = "<group>"; };
+		F9B7FD9715AE863E00B0D6F0 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		F9B7FD9B15B35C1500B0D6F0 /* assertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assertion.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +128,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F9B1AEA215AB95A100DC93D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -109,6 +143,7 @@
 			children = (
 				F9470FF415A8CC1300602C3C /* graph-repl */,
 				F975126D15A8D2D600831089 /* graph */,
+				F9B1AEA715AB95A100DC93D4 /* unit-test */,
 				F9470FF215A8CC1300602C3C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,6 +153,7 @@
 			children = (
 				F9470FF115A8CC1300602C3C /* graph-repl */,
 				F975126C15A8D2D600831089 /* graph.dylib */,
+				F9B1AEA515AB95A100DC93D4 /* unit-test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,6 +208,21 @@
 				F975126F15A8D2D600831089 /* graph-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F9B1AEA715AB95A100DC93D4 /* unit-test */ = {
+			isa = PBXGroup;
+			children = (
+				F9B7FD9B15B35C1500B0D6F0 /* assertion.h */,
+				F9B7FD9015AB973800B0D6F0 /* regression-test.h */,
+				F9B7FD9215AC37A300B0D6F0 /* regression-test.cpp */,
+				F9B1AEA815AB95A100DC93D4 /* main.cpp */,
+				F9B7FD9615AE412400B0D6F0 /* tests.h */,
+				F9B7FD9715AE863E00B0D6F0 /* tests.cpp */,
+				F9B7FD8C15AB962B00B0D6F0 /* test-edges.cpp */,
+				F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */,
+			);
+			path = "unit-test";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +291,23 @@
 			productReference = F975126C15A8D2D600831089 /* graph.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		F9B1AEA415AB95A100DC93D4 /* unit-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9B1AEAC15AB95A100DC93D4 /* Build configuration list for PBXNativeTarget "unit-test" */;
+			buildPhases = (
+				F9B1AEA115AB95A100DC93D4 /* Sources */,
+				F9B1AEA215AB95A100DC93D4 /* Frameworks */,
+				F9B1AEA315AB95A100DC93D4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "unit-test";
+			productName = "unit-test";
+			productReference = F9B1AEA515AB95A100DC93D4 /* unit-test */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -263,6 +331,7 @@
 			targets = (
 				F9470FF015A8CC1300602C3C /* graph-repl */,
 				F975126B15A8D2D600831089 /* graph */,
+				F9B1AEA415AB95A100DC93D4 /* unit-test */,
 			);
 		};
 /* End PBXProject section */
@@ -273,6 +342,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9470FF615A8CC1300602C3C /* main.cpp in Sources */,
+				F9B7FD8D15AB962B00B0D6F0 /* test-edges.cpp in Sources */,
+				F9B7FD9315AC37A300B0D6F0 /* regression-test.cpp in Sources */,
+				F9B7FD9815AE863E00B0D6F0 /* tests.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +358,17 @@
 				F975129B15A9148000831089 /* graph_utils.cpp in Sources */,
 				F975129E15A916F300831089 /* adjacency_list.cpp in Sources */,
 				F97512B515A91CE400831089 /* graph_gen.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9B1AEA115AB95A100DC93D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9B7FD9915AE86C700B0D6F0 /* tests.cpp in Sources */,
+				F9B7FD9415AC37BF00B0D6F0 /* regression-test.cpp in Sources */,
+				F9B7FD9115AB97A100B0D6F0 /* test-edges.cpp in Sources */,
+				F9B1AEA915AB95A100DC93D4 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +454,22 @@
 			};
 			name = Release;
 		};
+		F9B1AEAD15AB95A100DC93D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F9B1AEAE15AB95A100DC93D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -399,6 +498,16 @@
 				F975127815A8D2D600831089 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9B1AEAC15AB95A100DC93D4 /* Build configuration list for PBXNativeTarget "unit-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9B1AEAD15AB95A100DC93D4 /* Debug */,
+				F9B1AEAE15AB95A100DC93D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

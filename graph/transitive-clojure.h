@@ -91,8 +91,11 @@ private:
                               typename graph_base<edge_t>::vertex_generator vg3(T); 
                               while (!vg3.iter_done()) {
                                     auto t = vg3.yield();
-                                    if (T.has_edge(edge_t(i, t, 1))) {            
-                                          T.insert(edge_t(s, t, 1));
+                                    if (T.has_edge(edge_t(i, t, 1))) {
+                                          edge_t ne(s,t,1);
+                                          if (! T.has_edge(ne)) {
+                                                T.insert(ne);
+                                          }
                                     }
                               }
                         }

@@ -26,6 +26,10 @@ struct preorder_t : public retval_t<int> {
       
 };
 
+struct postorder_t : public retval_t<int> {
+      
+};
+
 struct parent_t : public retval_t<size_t> {
       
 };
@@ -40,7 +44,7 @@ struct articulation_t : public retval_t<int> {
 
 
 template <typename edge_t>
-struct bridges_t : public retval_t< std::vector<edge_t> > {
+struct bridges_t : public retval_t< std::set<edge_t> > {
       
 };
 

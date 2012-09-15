@@ -30,7 +30,7 @@ protected:
       typedef std::map<value_t, int>       cont_t;
       typedef std::map<value_t, value_t>   link_t;
       typedef std::map<value_t, color_t>   color_cont_t;
-      typedef std::vector<edge_t>          edge_cont_t;
+      typedef std::set<edge_t>             edge_cont_t;
       typedef std::set<value_t>            vertex_cont_t;
 
    
@@ -42,6 +42,9 @@ protected:
       };
       
 public :
+      template <typename edge_t_, typename property_t, typename retval_t>
+      friend retval_t property(search_base<edge_t_>& , typename edge_t_::label_value_type n);
+      
       search_base(graph_base<edge_t>& G) : G(G)
       {
             cont_init(order,       G, SENTINEL);
@@ -96,7 +99,7 @@ public :
             }
             return strm;
       }
-
+      
       template<typename prop_t=graph_property_t>
       typename prop_t::retval property(typename edge_t::label_value_type node) {            
             return get_val(type<prop_t>(), node);
@@ -110,8 +113,36 @@ public :
       typename prop_t::retval property() {            
             return get_val(type<prop_t>());
       }
-
-
+      
+      bool is_tree_edge(const edge_t& edge) {
+            auto pos = parent_link.find(edge.to);
+            if (G.has_edge(edge) && (pos != parent_link.end()) && (parent_link[edge.to] == edge.from)) {
+                  return true;
+            }
+            return false;
+      }
+      
+      bool is_back_edge(const edge_t& edge) {
+            return (G.has_edge(edge) && (!is_tree_edge(edge)) &&
+                    (preorder.at(edge.from) > preorder.at(edge.to)) && (postorder.at(edge.from) < postorder.at(edge.to)));
+      }
+      
+      bool is_down_edge(const edge_t& edge) {            
+            return (G.has_edge(edge) && (!is_tree_edge(edge)) &&
+                   (preorder.at(edge.from) < preorder.at(edge.to)) && (postorder.at(edge.from) > postorder.at(edge.to)));
+      }
+      
+      bool is_cross_edge(const edge_t& edge) {
+            return (G.has_edge(edge) && (!is_tree_edge(edge)) &&
+                    (preorder.at(edge.from) > preorder.at(edge.to)) && (postorder.at(edge.from) > postorder.at(edge.to)));
+      }
+      int post_order(const value_t& v)
+      {
+            if (postorder.find(v) == postorder.end()) {
+                  return -1;
+            }
+            return postorder[v];
+      }
 protected:
       
       // DATA SECTION
@@ -144,7 +175,7 @@ protected:
       }
                             
       static edge_cont_t& add_edge(edge_cont_t& edge_cont, const edge_t& e) {
-            edge_cont.push_back(e);
+            edge_cont.insert(e);
             return edge_cont;
       }
       
@@ -197,10 +228,12 @@ protected:
             return search_base<edge_t>::comp_count;
       }
       
-      
-      
       preorder_t::retval get_val(const type<preorder_t>& t, typename edge_t::label_value_type node) {
-            return search_base<edge_t>::order.at(node);
+            return search_base<edge_t>::preorder.at(node);
+      }
+      
+      postorder_t::retval get_val(const type<postorder_t>& t, typename edge_t::label_value_type node) {
+            return search_base<edge_t>::postorder.at(node);
       }
       
       void get_val(const type<graph_property_t>& val, typename edge_t::label_value_type node) {
@@ -212,11 +245,11 @@ protected:
       }
       
       bridge_t::retval get_val(const type<bridge_t>& t) {
-            return search_base<edge_t>::bridge_count;
+            return static_cast<bridge_t::retval>(search_base<edge_t>::bridges.size());
       }
       
       articulation_t::retval get_val(const type<articulation_t>& t) {
-            return search_base<edge_t>::articulation_count;
+            return static_cast<articulation_t::retval>(search_base<edge_t>::artics.size());
       }
       
       cycle_t::retval get_val(const type<cycle_t>& t) {
@@ -239,18 +272,7 @@ protected:
             return parent_link.at(node);
       }
       
-      bool is_back_edge(const edge_t& edge) {
-            return (preorder.at(edge.from) > preorder.at(edge.to)) && (postorder.at(edge.from) < postorder.at(edge.to));
-      }
-
-      bool is_down_edge(const edge_t& edge) {
-            return (preorder.at(edge.from) < preorder.at(edge.to)) && (postorder.at(edge.from) > postorder.at(edge.to));
-      }
-
-      bool is_cross_edge(const edge_t& edge) {
-            return (preorder.at(edge.from) > preorder.at(edge.to)) && (postorder.at(edge.from) > postorder.at(edge.to));
-      }
-
+    
 };
 
 template<typename edge_t>
@@ -259,5 +281,17 @@ std::ostream& operator<< (std::ostream &strm, search_base<edge_t>& g)
       return g.pretty_print(strm);      
 }
 
+
+template<typename edge_t, typename property_t, typename retval_t= typename property_t::retval>
+retval_t property (search_base<edge_t>& g, typename edge_t::label_value_type node)
+{
+      return g.get_val(typename search_base<edge_t>::template type<property_t>(), node);
+}
+
+template<typename edge_t, typename property_t>
+typename property_t::retval property (search_base<edge_t>& g)
+{
+      return typename property_t::retval();
+}
 
 #endif

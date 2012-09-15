@@ -21,6 +21,10 @@
 template <typename container_t, typename edge_t> 
 class graph_impl : public graph_base <edge_t> {
 public:
+      typedef container_t                       container_value_type;
+      typedef edge_t                            edge_value_type;
+      typedef typename edge_t::label_value_type label_value_type;
+
       explicit graph_impl(size_t size) : m(size), is_directed_flg(graph_type_t::UNDIRECTED){}
       explicit graph_impl(size_t size, graph_type_t is_directed) : m(size), is_directed_flg(is_directed){}
 
@@ -64,7 +68,6 @@ private:
                   return it == that_it;
             }
             virtual const edge_t deref() {
-                  std::pair<size_t, size_t> loc        = it();
                   typename container_t::edge_tuple_t w = *it;
                   return edge_t(std::get<0>(w), std::get<1>(w), std::get<2>(w));
             }
@@ -78,25 +81,63 @@ private:
       
       container_t m; //needs to be initialized BEFORE the iterators !!            
                      //bool is_digraph; 
-      size_t ecnt          = 0;      
+      size_t ecnt          = 0;
+      std::set<typename edge_t::label_value_type> vertices;
       graph_type_t is_directed_flg = graph_type_t::UNDIRECTED;
       
       std::set<typename edge_t::label_value_type> list_root;
+
+      bool has_self_loop(typename edge_t::label_value_type v) {
+            return ! (list_root.find(v) == list_root.end());
+      }
       
-      virtual size_t E_impl() const  { return ecnt;}  
-      virtual size_t V_impl() const  { return m.max_size();}
+      bool list_root_insert(typename edge_t::label_value_type v)
+      {
+            if (! has_self_loop(v)) {
+                  list_root.insert(v);
+                  return true;
+            }
+            return false;
+      }
+      void add_self_loop(const edge_t& edge)
+      {
+            if (list_root_insert(edge.from) ) {
+                  m(edge.from, edge.from, 1);
+            }
+
+            if (list_root_insert(edge.to)) {
+                  m(edge.to, edge.to, 1);
+            }
+      }
+                                                            
+      void mark_self_loop (const edge_t& edge) {
+            list_root_insert(edge.from);
+            list_root_insert(edge.to);
+      }
+      
+      virtual size_t E_impl() const  { return ecnt + list_root.size();}
+      virtual size_t V_impl() const  { return vertices.size();}
       
       virtual void insert_impl(const edge_t& edge) {
-            if (is_directed_impl() && (list_root.find(edge.from) == list_root.end())) {
-                  m(edge.from, edge.from, 1); 
-                  list_root.insert(edge.from);
-                  //ecnt++;
+            // add loopback for directed graphs
+            if (is_directed_impl() && edge.is_self_loop() && has_self_loop(edge.from)) {
+                  return;
             }
             ecnt++;
+            vertices.insert(edge.from);
+            vertices.insert(edge.to);
             m(edge.from, edge.to, edge.weight);
-            if (! is_directed_impl()) {
-                  //ecnt++;
-                  m(edge.to, edge.from, edge.weight);//invisible edge
+            if (is_directed_impl()) {
+                  if (edge.from != edge.to) {
+                        add_self_loop(edge);
+                  }
+                  else {
+                        mark_self_loop(edge);
+                  }
+            }
+            else {
+                  //invisible edge for undirected graphs
+                  m(edge.to, edge.from, edge.weight);
             }
       }
       
@@ -109,8 +150,13 @@ private:
             }
       }
       
-      virtual bool has_edge_impl(const edge_t& edge) {
-            return container_t::null_weight != m(edge.from, edge.to);
+      virtual bool has_edge_impl(const edge_t& edge) const {
+            return container_t::null_weight != const_cast<graph_impl*>(this)->m(edge.from, edge.to);
+            //return edge.weight == const_cast<graph_impl*>(this)->m(edge.from, edge.to);
+      }
+      //
+      virtual edge_t edge_impl(const label_value_type& f, const label_value_type& t) const {
+            return edge_t(f, t,const_cast<graph_impl*>(this)->m(f, t));
       }
       
       virtual typename graph_base<edge_t>::iterator_base& begin_impl()   {            

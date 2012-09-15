@@ -12,6 +12,14 @@
 #include <map>
 #include <iomanip>
 #include "assertion.h"
+#include "prompt.h"
+#include "trace.h"
+
+enum class return_t {
+      SUCCESS,
+      FAILURE,
+      NOT_IMPLEMENTED
+};
 
 typedef std::pair<int, std::string> (*Func) (std::ostream&, int, const char*[]);
 typedef std::tuple<std::string, int,std::string>   test_stack_el_t;
@@ -29,16 +37,16 @@ static std::ostream& coll(std::ostream& strm, const T& el, int w)
 
 static std::ostream& header(std::ostream& strm, const std::string& c1, const std::string& c2, const std::string& c3)
 {
-      coll(strm, c1, 20);
-      coll(strm, c2, 20);
-      coll(strm, c3, 20);
+      coll(strm, c1, 30);
+      coll(strm, c2, 15);
+      coll(strm, c3, 30);
       return strm << std::endl;
 }
 
 static std::ostream& show(std::ostream& strm, const test_stack_el_t& el) {
-      coll(strm, std::get<0>(el), 20); 
-      coll(strm, std::get<1>(el), 20); 
-      coll(strm, std::get<2>(el), 30);
+      coll(strm, std::get<0>(el), 30);
+      coll(strm, std::get<1>(el), 15);
+      coll(strm, std::get<2>(el), 40);
       strm << std::endl;
       return strm;
 }
@@ -162,7 +170,7 @@ struct def <0>
             strm << std::string(60, '+') << std::endl << std::endl;
 
             header(strm, "test case", "return code", "return message");
-            header(strm, "--------------", "---------------", "--------------------");
+            header(strm, "--------------", "-----------", "--------------------------->>");
             for (auto& el : stack) {
                   show(strm, el); 
                   score_board = add_score(score_board, el);
@@ -206,18 +214,19 @@ private :
             for (auto& el : score_board) {
                   strm << std::endl << "the following tests have return code : " << el.first << std::endl << std::endl;
                   strm << std::string(5, ' ');
-                  coll(strm, "test case", 25);
-                  coll(strm, "return message", 30);
+                  coll(strm, "test case", 45);
+                  coll(strm, "return message", 45);
                   strm << std::endl;
                   strm << std::string(5, ' ');
-                  coll(strm, std::string(24, '-'), 25);
-                  coll(strm, std::string(30, '-'), 30); 
+                  coll(strm, std::string(24, '-'), 45);
+                  coll(strm, std::string(30, '-'), 45);
                   strm << std::endl;
-                  strm << std::string(5, ' ');
+                  
                   for (auto& fn : el.second) {
+                        strm << std::string(5, ' ');
                         //strm << "   *) "; 
-                        coll(strm, fn.first,  25);
-                        coll(strm, fn.second, 30);
+                        coll(strm, fn.first,  45);
+                        coll(strm, fn.second, 45);
                         strm << std::endl;
                   }
             }
@@ -233,8 +242,13 @@ template <int n> size_t       def<n>::refcount   = 0;
 
 #define REGISTER_TEST(X) def<max_tests> __ ## X ## __(#X, X); \
 
+
+
 extern void run_tests(std::ostream& strm, int argc, const char* argv[]);
 extern void run_tests(int argc, const char *argv[]);
 extern void run_tests();
+extern std::pair<int, std::string> simple_prompt(std::ostream& strm);
+extern std::pair<int, std::string> simple_return(return_t state);
 
+#define DONE simple_return(return_t::SUCCESS)
 #endif

@@ -7,17 +7,26 @@
 //
 
 #include <iostream>
-//#include "regression-test.h"
+
 #include "tests.h"
 
-//def<max_tests> P("test_case_1", test_case_1);
 
 int main (int argc, const char * argv[])
 {
-      float r =78;
-      float b = 0;
-      std::cerr << r/b << std::endl;
-      run_tests();
+      
+      try {
+            //test_weighted_graph(std::cerr, argc, argv);
+            test_edge_ptr(std::cerr, argc, argv);
+            //test_kosaraju(std::cerr, argc, argv);
+            //test_tarjan(std::cerr, argc, argv);
+            //test_gabow(std::cerr, argc, argv);
+            //test_transitive_closure_kernel_dag(std::cerr, argc, argv);
+            //test_transitive_closure_dag(std::cerr, argc, argv);
+            //run_tests(std::cerr, argc, argv);
+      }
+      catch(const std::exception& e) {
+            std::cerr << "caught exception : " << e.what() << std::endl;
+      }
       
       return 0;
 }

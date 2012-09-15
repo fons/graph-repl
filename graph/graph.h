@@ -9,7 +9,7 @@
 #ifndef graph_repl_graph_h
 #define graph_repl_graph_h
 
-
+#include "stack.h"
 #include "edge.h"
 typedef edge_t<size_t, double>       simple_edge_t;
 typedef edge_t<std::string, double>  labeled_edge_t;
@@ -27,9 +27,24 @@ typedef graph_impl<adjacency_list_t, simple_edge_t>   sparse_graph_t;
 typedef dfs<simple_edge_t> simple_dfs;
 
 #include "graph_gen.h"
-
+#include "dag.h"
+#include "strong-components.h"
 #include "transitive-clojure.h"
 typedef transitive_closure<sparse_graph_t> sparse_tc_t;
 typedef transitive_closure<dense_graph_t>  dense_tc_t;
+
+#include "degree.h"
+typedef degree<simple_edge_t> Degree;
+
+#include "simple-path.h"
+typedef simple_path<simple_edge_t> simple_edge_path_t;
+typedef paths<simple_edge_t>       simple_path_t;
+
+
+
+
+#include "topological-sort.h"
+
+
 
 #endif

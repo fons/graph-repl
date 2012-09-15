@@ -105,6 +105,101 @@ private:
     }
 };
 
+//-------
+
+template <typename edge_t>
+struct tc_dag {
+public:
+      explicit tc_dag(graph_base<edge_t>& G) : G(G){}
+      explicit tc_dag (graph_base<edge_t>& G, graph_base<edge_t>& T) : G(G), T(T){
+            init();
+      }
+      void operator()(graph_base<edge_t>& T) {
+            init();
+      }
+private:
+      graph_base<edge_t>& G;
+      graph_base<edge_t>& T;
+      typedef std::map<typename edge_t::label_value_type, size_t> cont_t;
+      cont_t pre;
+      size_t cnt = 0;
+      bool visited (typename edge_t::label_value_type val) const
+      {
+            return (pre.find(val) != pre.end());
+      }
+      void init ()
+      {
+            typename graph_base<edge_t>::vertex_generator v(G);
+            while (! v.iter_done()) {
+                  auto val = v.yield();
+                  if (!visited(val)) {
+                        tcr (val);
+                  }
+            }
+      }
+
+      void tcr (typename edge_t::label_value_type w)
+      {
+            pre[w] = cnt++;
+            typename graph_base<edge_t>::adjacency_generator adj(G, w);
+            while (! adj.iter_done()) {
+                  auto t = adj.yield();
+                  // edge t is reachable from w
+                  T.insert(edge_t(w, t, 1));
+                  if (visited(t) && (pre[t] > pre[w])) continue; // ignore back and cross edges
+                  if (!visited(t)) tcr(t);
+                  typename  graph_base<edge_t>::vertex_generator vit(T);
+                  while (!vit.iter_done()) {
+                        auto i = vit.yield();
+                        if (T.has_edge(edge_t(t,i, 1)) && ! T.has_edge(edge_t(w,i,1))) T.insert(edge_t(w,i,1));
+                  }
+                  
+            }
+      }
+};
+
+template<typename edge_t>
+struct tc_kernel_dag {
+
+      explicit tc_kernel_dag(graph_base<edge_t>& G) : G(G){
+            init(G);
+      }
+      
+      bool operator()(const edge_t& edge) const {
+            return kernel_tc->has_edge(edge_t(sc->id(edge.from), sc->id(edge.to), 1));
+      }
+      
+      std::ostream& pp(std::ostream& strm)
+      {
+            sc->pp(strm);
+            strm << std::endl;
+            return strm;
+      }
+
+private :
+      typedef std::unique_ptr<strong_components<edge_t>> sc_ptr_t;
+      typedef std::unique_ptr<graph_impl<adjacency_matrix_t, edge_t>> dg_ptr_t;
+      graph_base<edge_t>& G;
+      sc_ptr_t sc;
+      dg_ptr_t kernel_tc;
+      void init (graph_base<edge_t>& G)
+      {
+            sc.reset(new strong_components<edge_t>(G));
+            graph_impl<adjacency_matrix_t, edge_t> kernel(G.V(),direction(G));
+            typename graph_base<edge_t>::vertex_generator vg(G);
+            while (! vg.iter_done()) {
+                  auto f = vg.yield();
+                  typename graph_base<edge_t>::adjacency_generator adj(G, f);
+                  while (!adj.iter_done()) {
+                        auto t = adj.yield();
+                        kernel.insert(edge_t(sc->id(f),sc->id(t),1));
+                  }
+            }
+            kernel_tc.reset(new graph_impl<adjacency_matrix_t, edge_t>(kernel.V(), direction(kernel)));
+            is_dag<edge_t> is_dag(kernel);            
+            tc_warshall<edge_t> dag_tc(kernel, *kernel_tc);
+      }
+};
 
 //provides a way to get at the transitive closure;
 //captures the tc and provides a type for it (type wrapper)
@@ -115,7 +210,7 @@ public:
       
       transitive_closure(graph_base<typename graph_t::edge_value_type>& G) : T(G.V(), direction(G)), algo(G,T) {}
                  
-      bool operator()(const typename graph_t::edge_value_type& e) {
+      bool operator()(const typename graph_t::edge_value_type& e) const {
             return T.has_edge(e);  
       }
 

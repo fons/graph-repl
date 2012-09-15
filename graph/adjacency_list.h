@@ -20,7 +20,7 @@
 class adjacency_list {
 public:  
       typedef double edge_weight_t; 
-      static const edge_weight_t null_weight = edge_weight_t();
+      constexpr static const edge_weight_t null_weight = edge_weight_t();
 
       typedef std::pair<size_t, edge_weight_t> weighted_edge_t;
       typedef std::tuple<size_t, size_t, edge_weight_t> edge_tuple_t;
@@ -45,7 +45,7 @@ public:
       }
       
       //need const references/iterators
-      edge_weight_t operator()(size_t from, size_t to) {
+      edge_weight_t operator()(size_t from, size_t to)  {
             if (! check(from, to)) return edge_weight_t();
             lwll<weighted_edge_t>& l = lst[from]; 
             for (lwll<weighted_edge_t>::iterator it = l.begin(); it != l.end(); it++) {                  
@@ -117,10 +117,14 @@ public:
                   return s.it_to == lst.lst[s.it_from].begin();   
             }
 
-            bool coll_end() {
-                  if (!(s.it_from < lst.size())) return true; 
-                  return s.it_to == lst.lst[s.it_from].end();
-            }
+//            bool coll_end() {
+//                  std::cerr << "s.it_from : " << s.it_from << " ";
+//                  std::cerr << "lst.size() : " << lst.size() << " ";
+//                  std::cerr << "deref : " << *(s.it_to) << " ";
+//                  std::cerr << std::endl;
+//                  if (!(s.it_from < lst.size())) return true; 
+//                  return s.it_to == lst.lst[s.it_from].end();//this will never be true
+//            }
             
       private: 
             adjacency_list& lst;

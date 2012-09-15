@@ -84,8 +84,62 @@ struct edge_t {
             
             return edges;
       }
+      
+      bool operator==(const edge_t& e) const
+      {
+            return (from == e.from) && (to == e.to) && (weight == e.weight);
+      }
+      
+      bool operator!=(const edge_t& e) const
+      {
+            return ! (*this == e);
+      }
+      
+      bool operator<(const edge_t& e) const
+      {
+            if (*this == e) return false;
+            return (from < e.from) || (to < e.to) || (weight < e.weight);
+      }
+      
+      bool operator<=(const edge_t& e) const
+      {
+            if (*this == e) return true;
+            return *this < e;
+      }
+      
+      bool operator>(const edge_t& e) const
+      {
+            if (*this == e) return false;
+            return !(*this < e);
+
+      }
+      
+      bool operator>=(const edge_t& e) const
+      {
+            if (*this == e) return true;
+            return !(*this < e);
+            
+      }
+      bool is_self_loop() const
+      {
+            return to == from;
+      }
+      edge_t reverse() {
+            return edge_t(to, from, weight);
+      }
 };
 
+template<typename label_t, typename weight_t>
+edge_t<label_t, weight_t> reverse(const edge_t<label_t, weight_t>& e)
+{
+      return edge_t<label_t, weight_t>(e.to, e.from, e.weight);
+}
+
+template<typename label_t, typename weight_t>
+bool operator<(const edge_t<label_t, weight_t>& lhs, const edge_t<label_t, weight_t>& rhs)
+{
+      return lhs.operator<(rhs); // be aware of recursionå
+}
 
 template<typename label_t, typename weight_t>
 std::ostream& operator<< (std::ostream &stream, const edge_t<label_t, weight_t> &edge)

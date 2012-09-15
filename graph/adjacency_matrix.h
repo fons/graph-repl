@@ -22,7 +22,7 @@ class adjacency_matrix {
       
 public:
       typedef double edge_weight_t;
-      static const edge_weight_t null_weight = edge_weight_t();
+      constexpr static const edge_weight_t null_weight = edge_weight_t();
       typedef std::tuple<size_t, size_t, edge_weight_t> edge_tuple_t;
       
       explicit adjacency_matrix(size_t size) : msize(size){init(msize);}

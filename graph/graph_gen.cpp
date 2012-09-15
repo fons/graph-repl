@@ -22,9 +22,14 @@ size_t random_number(size_t max)
       return di(dre);     
 }
 typedef std::pair<size_t,size_t> point_t;
-static size_t m_dist(const point_t& l, const point_t& r)
+
+static size_t safediff(size_t a, size_t b)
 {
-      return (abs(l.first - r.first) + abs(l.second - r.second));
+      return (a > b) ? a - b : b - a;
+}
+static size_t m_dist(const point_t& l, const point_t& r)
+{      
+      return (safediff(l.first, r.first) + safediff(l.second, r.second));
 }
 
 std::vector <simple_edge_t> random_plane_edges(size_t R, size_t N)

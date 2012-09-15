@@ -12,8 +12,8 @@
 #include "tests.h"
 
 #include "assertion.h"
-REGISTER_TEST(test_case_1);
-REGISTER_TEST(divide_by_zero);
+//REGISTER_TEST(test_case_1);
+//REGISTER_TEST(divide_by_zero);
 
 std::pair<int, std::string> test_case_1(std::ostream& strm, int argc, const char *argv[])
 {

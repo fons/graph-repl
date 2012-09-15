@@ -73,6 +73,7 @@ class graph_base
 
 public:
       typedef edge_t edge_value_type;
+      typedef typename edge_t::label_value_type label_t;
       static std::ostream& serialize (std::ostream& strm, graph_base<edge_t>& g);
       static std::ostream& graphviz (std::ostream& strm, graph_base<edge_t>& g);
       void serialize (const std::string& fn) { 
@@ -87,7 +88,10 @@ public:
       void   insert (const   edge_t& edge) { return insert_impl(edge);}
       void   insert (const std::vector<edge_t>& edges) {return insert_impl(edges);}
       void   remove (const   edge_t& edge) { return remove_impl(edge);}
-      bool   has_edge (const edge_t& edge) { return has_edge_impl(edge);}
+      bool   has_edge (const edge_t& edge) const { return has_edge_impl(edge);}
+      edge_t edge(const label_t& f , const label_t& t) const {
+            return edge_impl(f,t);
+      };
       bool   is_directed() const { return is_directed_impl();}
       class iterator_base {
       public:
@@ -188,11 +192,12 @@ private:
             }
       }
       virtual void remove_impl(const edge_t& edge)                   = 0;      
-      virtual bool has_edge_impl(const edge_t& edge)                 = 0;      
+      virtual bool has_edge_impl(const edge_t& edge)   const         = 0;
       virtual iterator_base& begin_impl()                            = 0;
       virtual iterator_base& end_impl()                              = 0;
       virtual std::ostream& pretty_print_impl(std::ostream& strm)    = 0;
       virtual bool is_directed_impl() const                          = 0;
+      virtual edge_t edge_impl(const label_t& f , const label_t& t) const = 0;
       //typedef std::ostream& Func* (std::ostream& , graph_base<edge_t>&);
       typedef std::ostream& (*Func)(std::ostream& , graph_base<edge_t>&);
       struct close_file {

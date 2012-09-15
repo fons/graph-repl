@@ -92,7 +92,6 @@ template <typename edge_t>
 std::ostream& operator<<(std::ostream& strm, const degree<edge_t>& d) {
       return d.pp(strm);
 }
-typedef degree<simple_edge_t> Degree;
 //typedef typename std::map<typename edge_t::label_value_type, size_t> degree_distribution_t;
 
 template <typename edge_t>

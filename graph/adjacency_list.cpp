@@ -8,17 +8,21 @@
 
 #include <iostream>
 #include "adjacency_list.h"
-extern std::ostream& operator<<(std::ostream& strm, adjacency_list& lst) {
+std::ostream& operator<<(std::ostream& strm, adjacency_list& lst) {
       strm << "{" << std::endl;
-      
+      bool open_bracket = false;
       for (adjacency_list::iterator it = lst.begin(); it != lst.end(); it++) {
             if (it.coll_start()) {
+                  if (open_bracket) {
+                         strm << ")"<<std::endl;
+                  }
+                  open_bracket = true;
                   strm << "(";
             }
-            strm << *it << ",";
-            if (it.coll_end()) {
-                  strm << ")"<<std::endl;
-            }
+            strm << *it << ",";            
+      }
+      if (open_bracket) {
+            strm << ")"<<std::endl;
       }
       strm << "}";
       return strm;

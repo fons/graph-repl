@@ -67,10 +67,12 @@ private:
                         if (search_base<edge_t>::low.at(w) > search_base<edge_t>::low.at(t)) {
                               search_base<edge_t>::low[w] = search_base<edge_t>::low.at(t); 
                         }
+                        
                         if (search_base<edge_t>::low.at(t) == search_base<edge_t>::order.at(t)) {
                               search_base<edge_t>::bridge_count++;
                               search_base<edge_t>::add_edge(search_base<edge_t>::bridges, edge_t(w,t,1));
                         }
+                        
                         if (search_base<edge_t>::low.at(t) >= search_base<edge_t>::order.at(w)) {
                               search_base<edge_t>::articulation_count++;
                               search_base<edge_t>::add_vertex(search_base<edge_t>::artics, w);
@@ -112,8 +114,6 @@ private:
             }
             F(*ofile, *this);            
       }
-      
-      
       
 };
 
@@ -179,6 +179,6 @@ std::ostream& dfs<edge_t>::graphviz (std::ostream& strm, dfs<edge_t>& g)
 
 
 
-
+ 
 
 #endif

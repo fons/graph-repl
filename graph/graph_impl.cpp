@@ -10,8 +10,7 @@
 #include <iostream>
 #include <algorithm>
 
-#include "graph_impl.h"
-
+#include "proto.h"
 
 bool parse_directed(std::istream& i)
 {

@@ -13,43 +13,40 @@
 /* The classes below are exported */
 #pragma GCC visibility push(default)
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <set>
 
-template<typename edge_t>
+
+template<typename edge_t, typename traits=edge_trait_t<edge_t>>
 struct edge_compare {
       bool operator() (const edge_t& lhs, const edge_t& rhs) {
-            if (lhs.from == rhs.from) {
-                  return lhs.to < rhs.to;
+            if (traits::from(lhs) == traits::from(rhs)) {
+                  return traits::to(lhs) < traits::to(rhs);
             }
-            return lhs.from < rhs.from;
+            return traits::from(lhs) < traits::from(rhs);
       }
 };
 
 
-template <typename edge_t>
+template <typename edge_t, typename traits=edge_trait_t<edge_t>>
 class graph_base
 {
       class generator_base {
       protected:
             struct construct_filter {
-                  virtual std::vector<typename edge_t::label_value_type>& operator()(std::vector<typename edge_t::label_value_type>& cont, const edge_t& e) = 0;
+                  virtual std::vector<typename traits::label_value_type>& operator()(std::vector<typename traits::label_value_type>& cont, const edge_t& e) = 0;
             };
             struct id : public construct_filter {
-                  std::vector<typename edge_t::label_value_type>& operator()(std::vector<typename edge_t::label_value_type>& cont, const edge_t& e) {
+                  std::vector<typename traits::label_value_type>& operator()(std::vector<typename traits::label_value_type>& cont, const edge_t& e) {
                         return cont;
                   }
             };
       public:
             generator_base(graph_base& G) {id ident; construct(G, ident);}
             generator_base(graph_base& G, construct_filter&& f) {construct(G,f);}
-            typename edge_t::label_value_type yield() {
+            typename traits::label_value_type yield() {
                   if (it == vert.end()) {
                         it = vert.begin();
                   }
-                  typename edge_t::label_value_type v = *it;
+                  typename traits::label_value_type v = *it;
                   ++it;
                   return v;
             }
@@ -60,8 +57,8 @@ class graph_base
             generator_base(const generator_base& ){}
             generator_base& operator=(const generator_base&) {}
             
-            std::vector<typename edge_t::label_value_type> vert;
-            typename std::vector<typename edge_t::label_value_type>::iterator it;
+            std::vector<typename traits::label_value_type> vert;
+            typename std::vector<typename traits::label_value_type>::iterator it;
             
             void construct(graph_base& G, construct_filter& f) {
                   for (typename graph_base<edge_t>::iterator it = G.begin(); it != G.end(); it++) {                                    
@@ -73,9 +70,12 @@ class graph_base
 
 public:
       typedef edge_t edge_value_type;
-      typedef typename edge_t::label_value_type label_t;
-      static std::ostream& serialize (std::ostream& strm, graph_base<edge_t>& g);
-      static std::ostream& graphviz (std::ostream& strm, graph_base<edge_t>& g);
+      typedef typename traits::label_value_type label_t;
+      typedef typename traits::value_type       value_type
+      ;
+      
+      static std::ostream& serialize (std::ostream& strm, graph_base<edge_t,traits>& g);
+      static std::ostream& graphviz (std::ostream& strm, graph_base<edge_t, traits>& g);
       void serialize (const std::string& fn) { 
             with_open_file(fn, serialize);
       }
@@ -89,7 +89,7 @@ public:
       void   insert (const std::vector<edge_t>& edges) {return insert_impl(edges);}
       void   remove (const   edge_t& edge) { return remove_impl(edge);}
       bool   has_edge (const edge_t& edge) const { return has_edge_impl(edge);}
-      edge_t edge(const label_t& f , const label_t& t) const {
+      value_type edge(const label_t& f , const label_t& t) const {
             return edge_impl(f,t);
       };
       bool   is_directed() const { return is_directed_impl();}
@@ -97,7 +97,7 @@ public:
       public:
             bool operator==(const iterator_base& that) { return equal_to(that);}
             bool operator!=(const iterator_base& that) { return !(*this == that);}
-            const edge_t operator*() { return deref();}
+            const value_type operator*() { return deref();}
             void  operator++() {increment();}
             void  operator++(int) {increment();}            
       private:  
@@ -145,39 +145,37 @@ public:
       class adjacency_generator : public generator_base {
             class adjacent_to_edge : public generator_base::construct_filter {
             public :
-                  adjacent_to_edge(typename edge_t::label_value_type& v) : v(v){}
-                  std::vector<typename edge_t::label_value_type>& operator()(std::vector<typename edge_t::label_value_type>& cont, const edge_t& e)  {
-                        if (v == e.from) {
-                              cont.push_back(e.to);
+                  adjacent_to_edge(label_t& v) : v(v){}
+                  std::vector<label_t>& operator()(std::vector<label_t>& cont, const edge_t& e)  {
+                        if (v == traits::from(e)) {
+                              cont.push_back(traits::to(e));
                         }
                         return cont;
                   }
             private:
-                  typename edge_t::label_value_type& v;
+                  label_t& v;
             };
       public:
-            adjacency_generator(graph_base& G, typename edge_t::label_value_type v) : generator_base(G, adjacent_to_edge(v)) {}
+            adjacency_generator(graph_base& G, label_t v) : generator_base(G, adjacent_to_edge(v)) {}
             
       };
       class vertex_generator : public generator_base {
             class unique : public generator_base::construct_filter {
                   public :
-                  std::vector<typename edge_t::label_value_type>& operator()(std::vector<typename edge_t::label_value_type>& cont, const edge_t& e) {
-                        cont = add_uniq(cont, e.from);
-                        cont = add_uniq(cont, e.to);
+                  std::vector<label_t>& operator()(std::vector<label_t>& cont, const edge_t& e) {
+                        cont = add_uniq(cont, traits::from(e));
+                        cont = add_uniq(cont, traits::to(e));
                         return cont;
                   }
             private:
-                  std::vector<typename edge_t::label_value_type>& add_uniq(std::vector<typename edge_t::label_value_type>& cont ,
-                                                                           typename edge_t::label_value_type v) {
-                             
+                  std::vector<label_t>& add_uniq(std::vector<label_t>& cont, label_t v) {
                         auto ret = S.insert(v);
                         if (ret.second) {
                               cont.push_back(v);
                         }
                         return cont;
                   }
-                  std::set<typename edge_t::label_value_type> S;
+                  std::set<label_t> S;
             };
       public:
             vertex_generator(graph_base& G) : generator_base(G, unique()){}
@@ -224,8 +222,8 @@ std::ostream& operator<< (std::ostream &strm, graph_base<edge_t>& g)
       return g.pretty_print(strm);      
 }
 
-template<typename edge_t> std::ostream& 
-graph_base<edge_t>::serialize (std::ostream& strm, graph_base<edge_t>& g)
+template<typename edge_t, typename traits> std::ostream&
+graph_base<edge_t,traits>::serialize (std::ostream& strm, graph_base<edge_t, traits>& g)
 {
       std::set<edge_t, edge_compare<edge_t>> vis;
       size_t count = 0;
@@ -253,10 +251,10 @@ graph_base<edge_t>::serialize (std::ostream& strm, graph_base<edge_t>& g)
       return strm;
 }
 
-template<typename edge_t> std::ostream& 
-graph_base<edge_t>::graphviz (std::ostream& strm, graph_base<edge_t>& g)
+template<typename edge_t, typename traits> std::ostream&
+graph_base<edge_t,traits>::graphviz (std::ostream& strm, graph_base<edge_t, traits>& g)
 {
-      std::set<edge_t, edge_compare<edge_t>> vis;
+      std::set<edge_t, edge_compare<typename traits::value_type>> vis;
       size_t count = 0;
 
       if (g.is_directed()) {
@@ -271,14 +269,14 @@ graph_base<edge_t>::graphviz (std::ostream& strm, graph_base<edge_t>& g)
       for (typename graph_base<edge_t>::iterator it = g.begin(); it != g.end(); it++) {            
             if (! g.is_directed()) {
                   if (vis.find (*it) == vis.end() ) {
-                        edge_t::graphviz(strm, *it, g.is_directed());
+                        traits::edge_type::graphviz(strm, traits::deref(*it), g.is_directed());
                         strm << std::endl;
-                        vis.insert(edge_t((*it).to, (*it).from, (*it).weight));
+                        vis.insert(traits::make_edge(traits::to(*it), traits::from(*it), traits::weight(*it)));
                   }
             }
             else {
-                  if ((*it).from != (*it).to) {
-                        edge_t::graphviz(strm, *it, g.is_directed());
+                  if (traits::from(*it) != traits::to(*it)) {
+                        traits::edge_type::edge_t::graphviz(strm, traits::deref(*it), g.is_directed());
                   }
                   strm << std::endl;
             }

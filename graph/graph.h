@@ -9,16 +9,27 @@
 #ifndef graph_repl_graph_h
 #define graph_repl_graph_h
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <set>
+
+#include "proto.h"
 #include "stack.h"
+
 #include "edge.h"
+
 typedef edge_t<size_t, double>       simple_edge_t;
 typedef edge_t<std::string, double>  labeled_edge_t;
+
+#include "edge-traits.h"
+
 
 #include "adjacency_matrix.h"
 #include "adjacency_list.h"
 
 #include "graph-type.h"
-
+#include "graph_base.h"
 #include "graph_impl.h"
 typedef graph_impl<adjacency_matrix_t, simple_edge_t> dense_graph_t;
 typedef graph_impl<adjacency_list_t, simple_edge_t>   sparse_graph_t;
@@ -41,10 +52,8 @@ typedef simple_path<simple_edge_t> simple_edge_path_t;
 typedef paths<simple_edge_t>       simple_path_t;
 
 
-
-
 #include "topological-sort.h"
-
+#include "minimum-spanning-tree.h"
 
 
 #endif

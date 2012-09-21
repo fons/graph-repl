@@ -54,6 +54,8 @@ extern std::pair<int, std::string> test_transitive_closure_kernel_dag(std::ostre
 extern std::pair<int, std::string> test_transitive_closure_dag(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_weighted_graph(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_edge_ptr(std::ostream& strm,int argc, const char *argv[]);
-
+extern std::pair<int, std::string> test_graph_edge_naked_ptr(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_graph_edge_shared_ptr(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_mst_dense_prim(std::ostream& strm,int argc, const char *argv[]);
 
 #endif

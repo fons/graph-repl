@@ -16,14 +16,15 @@
 
 template <typename label_t, typename weight_t>
 struct edge_t {
-      edge_t(const label_t& from = label_t(), const label_t& to = label_t(), const weight_t& weight = weight_t()) : from(from), 
+      explicit edge_t(const label_t& from = label_t(), const label_t& to = label_t(), const weight_t& weight = weight_t()) : from(from),
             to(to), weight(weight){}
       label_t  from;
       label_t  to;
       weight_t weight;
       
-      typedef label_t label_value_type;
-      
+      typedef label_t  label_value_type;
+      typedef weight_t weight_value_type;
+
       static std::vector<edge_t<label_t, weight_t> > from_string(const std::string& s)
       {            
             std::vector<std::string> splits = split(s, "() ");
@@ -138,7 +139,7 @@ edge_t<label_t, weight_t> reverse(const edge_t<label_t, weight_t>& e)
 template<typename label_t, typename weight_t>
 bool operator<(const edge_t<label_t, weight_t>& lhs, const edge_t<label_t, weight_t>& rhs)
 {
-      return lhs.operator<(rhs); // be aware of recursionå
+      return lhs.operator<(rhs); // be aware of recursion 
 }
 
 template<typename label_t, typename weight_t>

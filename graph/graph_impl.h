@@ -14,17 +14,18 @@
 #include <vector>
 #include <set>
 
-#include "graph-type.h"
-#include "graph_base.h"
+//#include "graph-type.h"
+//#include "graph_base.h"
 
 
-template <typename container_t, typename edge_t> 
+template <typename container_t, typename edge_t, typename traits=edge_trait_t<edge_t>>
 class graph_impl : public graph_base <edge_t> {
 public:
       typedef container_t                       container_value_type;
       typedef edge_t                            edge_value_type;
-      typedef typename edge_t::label_value_type label_value_type;
-
+      typedef typename traits::label_value_type label_value_type;
+      typedef typename traits::value_type       value_type;
+      
       explicit graph_impl(size_t size) : m(size), is_directed_flg(graph_type_t::UNDIRECTED){}
       explicit graph_impl(size_t size, graph_type_t is_directed) : m(size), is_directed_flg(is_directed){}
 
@@ -69,7 +70,7 @@ private:
             }
             virtual const edge_t deref() {
                   typename container_t::edge_tuple_t w = *it;
-                  return edge_t(std::get<0>(w), std::get<1>(w), std::get<2>(w));
+                  return traits::make_edge(std::get<0>(w), std::get<1>(w), std::get<2>(w));
             }
             virtual void increment() {            
                   it++;
@@ -82,16 +83,16 @@ private:
       container_t m; //needs to be initialized BEFORE the iterators !!            
                      //bool is_digraph; 
       size_t ecnt          = 0;
-      std::set<typename edge_t::label_value_type> vertices;
+      std::set<label_value_type> vertices;
       graph_type_t is_directed_flg = graph_type_t::UNDIRECTED;
       
-      std::set<typename edge_t::label_value_type> list_root;
+      std::set<label_value_type> list_root;
 
-      bool has_self_loop(typename edge_t::label_value_type v) {
+      bool has_self_loop(label_value_type v) {
             return ! (list_root.find(v) == list_root.end());
       }
       
-      bool list_root_insert(typename edge_t::label_value_type v)
+      bool list_root_insert(label_value_type v)
       {
             if (! has_self_loop(v)) {
                   list_root.insert(v);
@@ -101,18 +102,18 @@ private:
       }
       void add_self_loop(const edge_t& edge)
       {
-            if (list_root_insert(edge.from) ) {
-                  m(edge.from, edge.from, 1);
+            if (list_root_insert(traits::from(edge)) ) {
+                  m(traits::from(edge), traits::from(edge), 1);
             }
 
-            if (list_root_insert(edge.to)) {
-                  m(edge.to, edge.to, 1);
+            if (list_root_insert(traits::to(edge))) {
+                  m(traits::to(edge), traits::to(edge), 1);
             }
       }
                                                             
       void mark_self_loop (const edge_t& edge) {
-            list_root_insert(edge.from);
-            list_root_insert(edge.to);
+            list_root_insert(traits::from(edge));
+            list_root_insert(traits::to(edge));
       }
       
       virtual size_t E_impl() const  { return ecnt + list_root.size();}
@@ -120,15 +121,15 @@ private:
       
       virtual void insert_impl(const edge_t& edge) {
             // add loopback for directed graphs
-            if (is_directed_impl() && edge.is_self_loop() && has_self_loop(edge.from)) {
+            if (is_directed_impl() && traits::deref(edge).is_self_loop() && has_self_loop(traits::from(edge))) {
                   return;
             }
             ecnt++;
-            vertices.insert(edge.from);
-            vertices.insert(edge.to);
-            m(edge.from, edge.to, edge.weight);
+            vertices.insert(traits::from(edge));
+            vertices.insert(traits::to(edge));
+            m(traits::from(edge), traits::to(edge), traits::weight(edge));
             if (is_directed_impl()) {
-                  if (edge.from != edge.to) {
+                  if (traits::from(edge) != traits::to(edge)) {
                         add_self_loop(edge);
                   }
                   else {
@@ -137,26 +138,26 @@ private:
             }
             else {
                   //invisible edge for undirected graphs
-                  m(edge.to, edge.from, edge.weight);
+                  m(traits::to(edge), traits::from(edge), traits::weight(edge));
             }
       }
       
       virtual void remove_impl(const edge_t& edge)  {
             if (ecnt > 0) ecnt--;
-            m.rm(edge.from, edge.to);
+            m.rm(traits::from(edge), traits::to(edge));
             if (! is_directed_impl()) {
                   if (ecnt > 0) ecnt--;
-                  m.rm(edge.to, edge.from);
+                  m.rm(traits::to(edge), traits::from(edge));
             }
       }
       
       virtual bool has_edge_impl(const edge_t& edge) const {
-            return container_t::null_weight != const_cast<graph_impl*>(this)->m(edge.from, edge.to);
+            return container_t::null_weight != const_cast<graph_impl*>(this)->m(traits::from(edge), traits::to(edge));
             //return edge.weight == const_cast<graph_impl*>(this)->m(edge.from, edge.to);
       }
       //
-      virtual edge_t edge_impl(const label_value_type& f, const label_value_type& t) const {
-            return edge_t(f, t,const_cast<graph_impl*>(this)->m(f, t));
+      virtual value_type edge_impl(const label_value_type& f, const label_value_type& t) const {
+            return traits::make_edge(f, t,const_cast<graph_impl*>(this)->m(f, t));
       }
       
       virtual typename graph_base<edge_t>::iterator_base& begin_impl()   {            
@@ -177,8 +178,8 @@ private:
 };
 
 
-template<typename container_t, typename edge_t> 
-std::ostream& graph_impl<container_t,edge_t>::pretty_print_impl(std::ostream& strm) 
+template<typename container_t, typename edge_t, typename traits>
+std::ostream& graph_impl<container_t,edge_t,traits>::pretty_print_impl(std::ostream& strm)
 {
       typename container_t::edge_tuple_t start = typename container_t::edge_tuple_t();      
       auto lf = std::get<0>(start) + m.size();
@@ -187,6 +188,7 @@ std::ostream& graph_impl<container_t,edge_t>::pretty_print_impl(std::ostream& st
             auto from   = std::get<0>(t);
             auto to     = std::get<1>(t);
             auto weight = std::get<2>(t);
+            
             if (lf != from) {
                   strm << std::endl << from << " : ";                  
             }
@@ -200,12 +202,9 @@ std::ostream& graph_impl<container_t,edge_t>::pretty_print_impl(std::ostream& st
       return strm;
 }
 
-extern std::ostream& dump_stream(std::ostream& o, std::istream& i); 
-extern bool   parse_directed(std::istream& i);
-extern size_t parse_size(std::istream& i);
 
-template<typename container_t, typename edge_t> 
-graph_impl<container_t, edge_t> graph_impl<container_t,edge_t>::deserialize (std::istream& i)
+template<typename container_t, typename edge_t, typename traits>
+graph_impl<container_t, edge_t, traits> graph_impl<container_t,edge_t,traits>::deserialize (std::istream& i)
 {
       bool   directed = parse_directed(i);
       size_t count    = parse_size(i);      
@@ -223,9 +222,11 @@ graph_t reverse(graph_t& G)
       
       for (typename graph_t::iterator it = G.begin(); it != G.end(); it++) {            
             auto edge = *it;
-            R.insert(typename graph_t::edge_value_type(edge.to, edge.from, edge.weight));
-      }      
-      
+            R.insert(typename graph_t::edge_value_type(edge_trait_t<typename graph_t::edge_value_type>::to(edge),
+                                                       edge_trait_t<typename graph_t::edge_value_type>::from(edge),
+                                                       edge_trait_t<typename graph_t::edge_value_type>::weight(edge)));
+            
+      }
       return R;
 }
 

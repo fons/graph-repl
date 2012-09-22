@@ -13,35 +13,38 @@
 template <typename edge_t, typename traits=edge_trait_t<edge_t>>
 struct mst_prim {
       
-      mst_prim (graph_base<edge_t, traits>& G) :G(G),S(mst) {
+      mst_prim (graph_base<edge_t, traits>& G) :G(G) {
             init(G);
       }
 
       std::ostream& pp(std::ostream& strm) {
-            strm << " " << std::endl;
-            typename graph_base<edge_t>::vertex_generator vg(G);
-            while (!vg.iter_done()) {
-                  auto v = vg.yield();
-                  //strm << v << ":";
-                  auto e = mst[v];
-                  //strm << e << std::endl;
-                  if (traits::weight(e) == 0) continue;
-                  strm << traits::deref(e) << std::endl;
+            for (auto& val : mst) {
+                  strm << val << std::endl;
             }
-            
+                  
             return strm;
       }
-
+      
+      graph_base<edge_t>& operator()(graph_base<edge_t>& T) {
+            for (auto& e : mst) {
+                  T.insert(e);
+            }
+            return T;
+      }
+      
+      std::vector<edge_t> operator()() {
+            return mst;
+      }
 private:
       
       typedef typename std::map<typename traits::label_value_type, edge_t> edge_cont_t;
       typedef typename std::map<typename traits::label_value_type, double> value_cont_t;
       typedef typename traits::label_value_type                            label_t;      
-      edge_cont_t mst;
+      //edge_cont_t mst;
       graph_base<edge_t, traits>& G;
-
+      std::vector<edge_t> mst;
       struct state {
-            state(edge_cont_t& mst) : mst_c(mst){}
+            state() {}
             
             bool mst(const label_t& l, const edge_t& e) {
                   if (traits::weight(e) == 0) return false;
@@ -80,7 +83,20 @@ private:
                   if (! v.first) return false;
                   return mst(l, v.second);
             }
-            
+
+            std::vector<edge_t>& mst(graph_base<edge_t>&G, std::vector<edge_t>& v_mst) {
+                  typename graph_base<edge_t>::vertex_generator vg(G);
+                  while (!vg.iter_done()) {
+                        auto v = vg.yield();
+                        //strm << v << ":";
+                        auto e = mst_c[v];
+                        //strm << e << std::endl;
+                        if (traits::weight(e) == 0) continue;
+                        v_mst.push_back(e);
+                  }
+                  return v_mst;
+            }
+
             
             private :
             template<typename C, typename T>
@@ -90,7 +106,6 @@ private:
                   c[w] = e;
                   return true;
             }
-           
             template <typename C>
             std::pair<bool, typename C::mapped_type> peek(C& c, const label_t& l) {
                   auto it = c.find(l);
@@ -100,8 +115,8 @@ private:
                   return std::make_pair(false, typename C::mapped_type());
             }
             
-            edge_cont_t& mst_c;
-            edge_cont_t fr;
+            edge_cont_t  mst_c;
+            edge_cont_t  fr;
             value_cont_t wt;
       };
       
@@ -115,10 +130,10 @@ private:
             return v.second;
       }
 
-      state S;
+      
       void init(graph_base<edge_t, traits>& G)
       {
-            
+            state S;
             typename graph_base<edge_t>::vertex_generator vg(G);
             typename traits::label_value_type v;
             typename traits::label_value_type min;
@@ -156,6 +171,7 @@ private:
                   }
                   
             }// end of outer loop
+            mst = S.mst(G,mst);
       }// end of init
 };
 

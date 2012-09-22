@@ -33,6 +33,25 @@ std::pair<int, std::string> test_mst_dense_prim(std::ostream& strm,int argc, con
       
       mst_prim<simple_edge_t> P(s10);
       P.pp(strm);
+      sparse_graph_t t10(15, graph_type_t::UNDIRECTED);
+      P(t10);
+      std::string dt = "/Users/fons/Dvlp/graphviz/dense_prim_mst.dot";
+      t10.graphviz(dt);
+      ASSERT(s10.V() == t10.V());
+      ASSERT(s10.E() >= t10.E());
+      std::set<simple_edge_t> expected = {simple_edge_t(0,7,0.31),
+            simple_edge_t(3,5,0.18),
+            simple_edge_t(7,6,0.25),
+            simple_edge_t(0,2,0.29),
+            simple_edge_t(7,1,0.21),
+            simple_edge_t(4,3,0.34),
+            simple_edge_t(7,4,0.46)};
+      std::vector<simple_edge_t> mst = P();
+      ASSERT(expected.size() == mst.size());
+      for (auto& ee : expected) {
+            strm << ee << " in mst" << std::endl;
+            ASSERT(mst.end() != find(mst.begin(), mst.end(), ee));
+      }
       strm<< "DONE" <<std::endl;
       return DONE;
 }

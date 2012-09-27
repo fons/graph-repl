@@ -13,7 +13,7 @@
 template <typename edge_t, typename traits=edge_trait_t<edge_t>>
 struct mst_prim {
       
-      mst_prim (graph_base<edge_t, traits>& G) :G(G) {
+      explicit mst_prim (graph_base<edge_t, traits>& G)  {
             init(G);
       }
 
@@ -40,8 +40,7 @@ private:
       typedef typename std::map<typename traits::label_value_type, edge_t> edge_cont_t;
       typedef typename std::map<typename traits::label_value_type, double> value_cont_t;
       typedef typename traits::label_value_type                            label_t;      
-      //edge_cont_t mst;
-      graph_base<edge_t, traits>& G;
+      
       std::vector<edge_t> mst;
       struct state {
             state() {}
@@ -174,5 +173,178 @@ private:
             mst = S.mst(G,mst);
       }// end of init
 };
+
+
+template <typename edge_t, typename traits=edge_trait_t<edge_t>>
+struct mst_prim_pfs {
+      
+     explicit mst_prim_pfs (graph_base<edge_t, traits>& G) {
+            init(G);
+      }
+      
+      std::ostream& pp(std::ostream& strm) {
+            for (auto& val : mst) {
+                  strm << val << std::endl;
+            }
+            
+            return strm;
+      }
+      
+      graph_base<edge_t>& operator()(graph_base<edge_t>& T) {
+            for (auto& e : mst) {
+                  T.insert(e);
+            }
+            return T;
+      }
+      
+      std::vector<edge_t> operator()() {
+            return mst;
+      }
+private:
+      
+      typedef typename std::map<typename traits::label_value_type, edge_t> edge_cont_t;
+      typedef typename std::map<typename traits::label_value_type, double> value_cont_t;
+      typedef typename traits::label_value_type                            label_t;
+      typedef typename traits::weight_value_type                           weight_t;
+      std::vector<edge_t> mst;
+
+      struct state {
+            state(int N) : pq(N, wt){}
+            void clear()
+            {
+                  pq.clear();
+            }
+            void pq_insert (const label_t& l) {
+                  pq.insert(l);
+            }
+            
+            bool pq_empty() const
+            {
+                  return pq.empty();
+            }
+            label_t pq_getmin()
+            {
+                  return pq.getmin();
+            }
+            ////
+            bool mst(const label_t& l, const edge_t& e) {
+                  if (traits::weight(e) == 0) return false;
+                  return push(mst_c, l, e);
+            }
+            
+            std::pair<bool, edge_t> mst (label_t l) {
+                  auto v = peek(mst_c, l);
+                  if (traits::weight(v.second) == 0) return std::make_pair(false, edge_t(0,0,0));
+                  return v;
+            }
+            
+            bool fringe(const label_t& l, const edge_t& e) {
+                  return push(fr, l, e);
+            }
+            
+            std::pair<bool,edge_t> fringe(const label_t& l) {
+                  auto v = peek(fr, l);
+                  if (traits::weight(v.second) == 0) return std::make_pair(false, edge_t(0,0,0));
+                  return v;
+            }
+            
+            
+            bool weight (const label_t& l, double w) {
+                  return push(wt, l, w);
+            }
+            
+            std::pair<bool, double> weight (const label_t&l ) {
+                  auto v = peek(wt, l);
+                  if (v.second == 0) return std::make_pair(false, 0);
+                  return v;
+            }
+            
+            bool fringe_to_mst (const label_t& l) {
+                  auto v = fringe(l);
+                  if (! v.first) return false;
+                  return mst(l, v.second);
+            }
+            
+            std::vector<edge_t>& mst(graph_base<edge_t>&G, std::vector<edge_t>& v_mst) {
+                  typename graph_base<edge_t>::vertex_generator vg(G);
+                  while (!vg.iter_done()) {
+                        auto v = vg.yield();
+                        //strm << v << ":";
+                        auto e = mst_c[v];
+                        //strm << e << std::endl;
+                        if (traits::weight(e) == 0) continue;
+                        v_mst.push_back(e);
+                  }
+                  return v_mst;
+            }
+            
+            
+            private :
+            template<typename C, typename T>
+            bool push (C& c, const label_t& w, const T& e)
+            {
+                  
+                  c[w] = e;
+                  return true;
+            }
+            template <typename C>
+            std::pair<bool, typename C::mapped_type> peek(C& c, const label_t& l) {
+                  auto it = c.find(l);
+                  if (it != c.end()) {
+                        return std::make_pair(true, it->second);
+                  }
+                  return std::make_pair(false, typename C::mapped_type());
+            }
+            priority_queue<label_t, weight_t> pq;
+            edge_cont_t  mst_c;
+            edge_cont_t  fr;
+            value_cont_t wt;
+      };
+      
+      template <typename T>
+      bool valid(const std::pair<bool, T>& v) {
+            return v.first;
+      }
+      
+      template <typename T>
+      T value(const std::pair<bool, T>& v) {
+            return v.second;
+      }
+      
+      
+      void init(graph_base<edge_t, traits>& G)
+      {
+            state S(G.V());
+            typename graph_base<edge_t>::vertex_generator vg(G);
+            while (!vg.iter_done()) {
+                  auto v = vg.yield();
+                  auto m = S.mst(v);
+                  if (valid(S.mst(v))) continue;
+                  pfs(G,S,v);
+            }
+      }
+      
+      void pfs(graph_base<edge_t>& G, state& S, label_t s)
+      {
+//            S.clear();
+//            S.pq_insert(s);
+//            while (! S.pq_empty()) {
+//                  label_t v = S.pq_getmin();
+//                  S.fringe_to_mst(v);
+//                  typename graph_base<edge_t>::adjacency_generator vg(G, v);
+//                  while (! vg.iter_done()) {
+//                        auto e = vg.yield();
+//                        double P = traits::weight(e);
+//                        label_t w = traits::to(e);
+//                        auto wfr  = S.fringe(w);
+//                        if (!valid(wfr)) {
+//                              S.wt(
+//                        }
+//                  }
+//                  
+//            }
+      }// end of pfs
+};
+
 
 #endif

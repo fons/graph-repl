@@ -57,5 +57,11 @@ extern std::pair<int, std::string> test_edge_ptr(std::ostream& strm,int argc, co
 extern std::pair<int, std::string> test_graph_edge_naked_ptr(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_graph_edge_shared_ptr(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_mst_dense_prim(std::ostream& strm,int argc, const char *argv[]);
-
+extern std::pair<int, std::string> test_priority_queue_base_1(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_priority_queue_base_2(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_priority_queue_1(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_priority_queue_2(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_priority_queue_kv_1(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_priority_queue_kv_2(std::ostream& strm,int argc, const char *argv[]);
 #endif
+

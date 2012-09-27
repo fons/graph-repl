@@ -58,6 +58,7 @@
 		F97512B715A91CE400831089 /* transitive-clojure.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512B315A91CE400831089 /* transitive-clojure.h */; };
 		F97BBCB916050BD400A04B4A /* graph-edge-pointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97BBCB716050BD400A04B4A /* graph-edge-pointer.cpp */; };
 		F97BBCBD16092DBA00A04B4A /* minimum-spanning-tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97BBCBB16092DBA00A04B4A /* minimum-spanning-tree.cpp */; };
+		F9A76D6B160FAFB8007ED856 /* test-priority-queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9A76D69160FAFB8007ED856 /* test-priority-queue.cpp */; };
 		F9B1AEA915AB95A100DC93D4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AEA815AB95A100DC93D4 /* main.cpp */; };
 		F9B1AEAB15AB95A100DC93D4 /* unit_test.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */; };
 		F9B7FD8D15AB962B00B0D6F0 /* test-edges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B7FD8C15AB962B00B0D6F0 /* test-edges.cpp */; };
@@ -154,6 +155,8 @@
 		F97BBCB716050BD400A04B4A /* graph-edge-pointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "graph-edge-pointer.cpp"; sourceTree = "<group>"; };
 		F97BBCBA1607E47700A04B4A /* minimum-spanning-tree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "minimum-spanning-tree.h"; sourceTree = "<group>"; };
 		F97BBCBB16092DBA00A04B4A /* minimum-spanning-tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "minimum-spanning-tree.cpp"; sourceTree = "<group>"; };
+		F9A76D67160E684A007ED856 /* priority-queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "priority-queue.h"; sourceTree = "<group>"; };
+		F9A76D69160FAFB8007ED856 /* test-priority-queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-priority-queue.cpp"; sourceTree = "<group>"; };
 		F9B1AEA515AB95A100DC93D4 /* unit-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "unit-test"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9B1AEA815AB95A100DC93D4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = unit_test.1; sourceTree = "<group>"; };
@@ -250,6 +253,7 @@
 				F975129A15A9148000831089 /* graph_utils.cpp */,
 				F975129615A9146100831089 /* tuple.h */,
 				F9402E8C15F2A610009E268C /* stack.h */,
+				F9A76D67160E684A007ED856 /* priority-queue.h */,
 				F975129115A9142F00831089 /* adjacency_matrix.h */,
 				F975129015A9142F00831089 /* adjacency_matrix.cpp */,
 				F975128E15A9124000831089 /* graph-type.h */,
@@ -287,6 +291,7 @@
 				F9B7FD9615AE412400B0D6F0 /* tests.h */,
 				F9B7FD9715AE863E00B0D6F0 /* tests.cpp */,
 				F9402E8D15F3F1D9009E268C /* test-stack.cpp */,
+				F9A76D69160FAFB8007ED856 /* test-priority-queue.cpp */,
 				F9B7FD8C15AB962B00B0D6F0 /* test-edges.cpp */,
 				F9402E9816001AA3009E268C /* edge-pointer.cpp */,
 				F97BBCB716050BD400A04B4A /* graph-edge-pointer.cpp */,
@@ -475,6 +480,7 @@
 				F9402E9A16001AA4009E268C /* edge-pointer.cpp in Sources */,
 				F97BBCB916050BD400A04B4A /* graph-edge-pointer.cpp in Sources */,
 				F97BBCBD16092DBA00A04B4A /* minimum-spanning-tree.cpp in Sources */,
+				F9A76D6B160FAFB8007ED856 /* test-priority-queue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

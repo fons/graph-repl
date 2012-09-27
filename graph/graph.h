@@ -13,10 +13,11 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <map>
 
 #include "proto.h"
 #include "stack.h"
-
+#include "priority-queue.h"
 #include "edge.h"
 
 typedef edge_t<size_t, double>       simple_edge_t;

@@ -13,6 +13,7 @@ REGISTER_TEST(test_priority_queue_base_2);
 REGISTER_TEST(test_priority_queue_1);
 REGISTER_TEST(test_priority_queue_2);
 REGISTER_TEST(test_priority_queue_kv_1);
+REGISTER_TEST(test_priority_queue_kv_2);
 
 std::pair<int, std::string> test_priority_queue_base_1(std::ostream& strm,int argc, const char *argv[])
 {
@@ -282,6 +283,96 @@ std::pair<int, std::string> test_priority_queue_kv_1(std::ostream& strm,int argc
       ASSERT(min == 56);
       ASSERT(pq[min] == 0.010);
       
+      return DONE;
+}
+
+std::pair<int, std::string> test_priority_queue_kv_2(std::ostream& strm,int argc, const char *argv[])
+{
+      
+      priority_queue_kv<typename simple_edge_t::label_value_type, double> pq(25);
+      std::vector<typename simple_edge_t::label_value_type> w = {20,21,45,33,1,4,56,78,3,2,90,34,25, 99, 81, 23};
+      std::vector<double> P                                   = {0.20, 0.21, 0.45, 0.33,0.1,0.040,0.56,0.78,0.03,0.02,0.90,0.34,0.25,0.99, 0.81, 0.23};
+      ASSERT(w.size() == P.size());
+      
+      
+      for( size_t i = 0; i < P.size(); i++) {
+            pq.push_back(P.at(i));
+            pq.insert(w.at(i));
+      }
+      double old_min_value = -1;
+      
+      while (! pq.empty()) {
+            auto min = pq.getmin();
+            double min_value = pq[min];
+            strm << min <<  " :: " << min_value << std::endl;
+            if (old_min_value > -1) {
+                  //strm << " old : " << old_min_value << " : " << min_value << std::endl;
+                  ASSERT(old_min_value < min_value);
+            }
+            old_min_value = min_value;
+      }
+      
+      for (size_t i = 0; i < w.size(); i++) {
+            pq.insert(w.at(i));
+      }
+      
+      
+      old_min_value = -1;
+      
+      pq[81] = 0.009;
+      pq.lower(81);
+      
+      pq[23] = 0.002;
+      pq.lower(23);
+      
+      pq[56] = 0.99111;
+      
+      pq.lower(56);
+      strm << "-------------------------------------------" << std::endl;
+      while (! pq.empty()) {
+            auto min = pq.getmin();
+            double min_value = pq[min];
+            strm << min << " : " << min_value << std::endl;
+            if (old_min_value > -1) {
+                  ASSERT(old_min_value < min_value);
+            }
+            old_min_value = min_value;
+      }
+      
+      
+      return DONE;
+}
+
+std::pair<int, std::string> test_priority_queue_kv_3(std::ostream& strm,int argc, const char *argv[])
+{
+      
+      priority_queue_kv<typename simple_edge_t::label_value_type, double> pq(25);
+      std::vector<typename simple_edge_t::label_value_type> w = {7,5,6,2,1};
+      std::vector<double> P                                   = {0.31,0.60,0.51,0.29,0.32};
+      pq.insert(0);
+      pq.push_back(10000);
+      ASSERT(! pq.empty());
+      auto v = pq.getmin();
+      ASSERT(v == 0 && pq[v] == 10000);
+      
+      for( size_t i = 0; i < P.size(); i++) {
+            pq.push_back(P.at(i));
+            pq.insert(w.at(i));
+      }
+//      double old_min_value = -1;
+//      
+//      while (! pq.empty()) {
+//            auto min = pq.getmin();
+//            double min_value = pq[min];
+//            strm << min <<  " :: " << min_value << std::endl;
+//            if (old_min_value > -1) {
+//                  //strm << " old : " << old_min_value << " : " << min_value << std::endl;
+//                  ASSERT(old_min_value < min_value);
+//            }
+//            old_min_value = min_value;
+//      }
+      strm << pq << std::endl;
+      strm << "----------------------------------------" << std::endl;
       return DONE;
 }
 

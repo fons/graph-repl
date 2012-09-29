@@ -29,24 +29,25 @@ struct edge_compare {
 template <typename edge_t, typename traits=edge_trait_t<edge_t>>
 class graph_base
 {
+      template<typename elem_t>
       class generator_base {
       protected:
             struct construct_filter {
-                  virtual std::vector<typename traits::label_value_type>& operator()(std::vector<typename traits::label_value_type>& cont, const edge_t& e) = 0;
+                  virtual std::vector<elem_t>& operator()(std::vector<elem_t>& cont, const edge_t& e) = 0;
             };
             struct id : public construct_filter {
-                  std::vector<typename traits::label_value_type>& operator()(std::vector<typename traits::label_value_type>& cont, const edge_t& e) {
+                  std::vector<elem_t>& operator()(std::vector<elem_t>& cont, const edge_t& e) {
                         return cont;
                   }
             };
       public:
             generator_base(graph_base& G) {id ident; construct(G, ident);}
             generator_base(graph_base& G, construct_filter&& f) {construct(G,f);}
-            typename traits::label_value_type yield() {
+            elem_t yield() {
                   if (it == vert.end()) {
                         it = vert.begin();
                   }
-                  typename traits::label_value_type v = *it;
+                  elem_t v = *it;
                   ++it;
                   return v;
             }
@@ -57,8 +58,8 @@ class graph_base
             generator_base(const generator_base& ){}
             generator_base& operator=(const generator_base&) {}
             
-            std::vector<typename traits::label_value_type> vert;
-            typename std::vector<typename traits::label_value_type>::iterator it;
+            std::vector<elem_t> vert;
+            typename std::vector<elem_t>::iterator it;
             
             void construct(graph_base& G, construct_filter& f) {
                   for (typename graph_base<edge_t>::iterator it = G.begin(); it != G.end(); it++) {                                    
@@ -142,8 +143,8 @@ public:
       ///------------------------------------------------------------------------
             
             
-      class adjacency_generator : public generator_base {
-            class adjacent_to_edge : public generator_base::construct_filter {
+      class adjacency_generator : public generator_base<label_t> {
+            class adjacent_to_edge : public generator_base<label_t>::construct_filter {
             public :
                   adjacent_to_edge(label_t& v) : v(v){}
                   std::vector<label_t>& operator()(std::vector<label_t>& cont, const edge_t& e)  {
@@ -156,11 +157,29 @@ public:
                   label_t& v;
             };
       public:
-            adjacency_generator(graph_base& G, label_t v) : generator_base(G, adjacent_to_edge(v)) {}
+            adjacency_generator(graph_base& G, label_t v) : generator_base<label_t>(G, adjacent_to_edge(v)) {}
             
       };
-      class vertex_generator : public generator_base {
-            class unique : public generator_base::construct_filter {
+      class adjacency_edge_generator : public generator_base<edge_t> {
+            class adjacent_to_edge : public generator_base<edge_t>::construct_filter {
+                  public :
+                  adjacent_to_edge(label_t& v) : v(v){}
+                  std::vector<edge_t>& operator()(std::vector<edge_t>& cont, const edge_t& e)  {
+                        if (v == traits::from(e)) {
+                              cont.push_back(e);
+                        }
+                        return cont;
+                  }
+            private:
+                  label_t& v;
+            };
+      public:
+            adjacency_edge_generator(graph_base& G, label_t v) : generator_base<edge_t>(G, adjacent_to_edge(v)) {}
+            
+      };
+
+      class vertex_generator : public generator_base<label_t> {
+            class unique : public generator_base<label_t>::construct_filter {
                   public :
                   std::vector<label_t>& operator()(std::vector<label_t>& cont, const edge_t& e) {
                         cont = add_uniq(cont, traits::from(e));
@@ -178,7 +197,7 @@ public:
                   std::set<label_t> S;
             };
       public:
-            vertex_generator(graph_base& G) : generator_base(G, unique()){}
+            vertex_generator(graph_base& G) : generator_base<label_t>(G, unique()){}
       };
 private:
       virtual size_t E_impl() const                                  = 0;      

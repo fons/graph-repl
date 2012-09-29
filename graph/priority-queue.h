@@ -23,7 +23,7 @@ struct priority_queue_t
 template <typename key_t>
 class priority_queue_base : public priority_queue_t<int, key_t>{
 public :
-      explicit priority_queue_base(int NN, const std::vector<key_t>& a, int d=3) : a(a), pq(NN+1,0), qp(NN+1, 0), N(0), d(d) {}
+      explicit priority_queue_base(size_t NN, const std::vector<key_t>& a, int d=3) : a(a), pq(NN+1,0), qp(NN+1, 0), N(0), d(d) {}
       
       bool empty() const {return N == 0;}
       
@@ -125,7 +125,7 @@ template<typename elem_t, typename key_t>
 class priority_queue : public priority_queue_t<elem_t, key_t>{
 
 public:
-      explicit priority_queue(int NN, const std::vector<key_t>& a, int d=3) : Q(new priority_queue_base<key_t> (NN,a,d)),I(0),Rm(NN + 1,elem_t()) {}
+      explicit priority_queue(size_t NN, const std::vector<key_t>& a, int d=3) : Q(new priority_queue_base<key_t> (NN,a,d)),I(0),Rm(NN + 1,elem_t()) {}
       
       bool empty() const { return Q->empty();}
       
@@ -204,13 +204,13 @@ template<typename elem_t, typename key_t>
 class priority_queue_kv : public priority_queue_t<elem_t, key_t>{
       
 public:
-      explicit priority_queue_kv(int NN, int d=3) : Q(new priority_queue_base<key_t> (NN,a,d)),I(0),Rm(NN + 1,elem_t()) {}
+      explicit priority_queue_kv(size_t NN, int d=3) : Q(NN,a,d),I(0),Rm(NN + 1,elem_t()) {}
       
-      bool empty() const { return Q->empty();}
+      bool empty() const { return Q.empty();}
       
       void insert (const elem_t& e)
       {
-            Q->insert(get_index(e));
+            Q.insert(get_index(e));
       }
       
       void push_back(const key_t v)
@@ -224,12 +224,15 @@ public:
       
       elem_t getmin ()
       {
-            return get_revindex(Q->getmin());
+            if (a.size() == 0 && M.size() == 1) {
+                  return M.begin()->first;
+            }
+            return get_revindex(Q.getmin());
       }
       
       void lower (const elem_t& e)
       {
-            Q->lower(get_index(e));
+            Q.lower(get_index(e));
       }
       std::ostream& pp(std::ostream& strm) const
       {
@@ -245,13 +248,13 @@ public:
                   if (count >= I) break;
                   
             }
-            Q->pp(strm);
+            Q.pp(strm);
             return strm;
       }
       
       void clear()
       {
-            Q->clear();
+            Q.clear();
             M.clear();
             Rm.clear();
             I = zero;
@@ -259,7 +262,7 @@ public:
       
 private:
             typedef int index_t;
-            std::unique_ptr<priority_queue_base<key_t>> Q;
+            priority_queue_base<key_t> Q;
             std::map<elem_t, int> M;
             std::vector<elem_t> Rm;
             std::vector<key_t>  a;

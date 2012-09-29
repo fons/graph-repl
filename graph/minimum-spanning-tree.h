@@ -211,7 +211,6 @@ private:
       std::vector<edge_t> mst_e;
       edge_cont_t  fr;
       edge_cont_t  mst_c;
-      std::vector<weight_t> weights;
       
       template<typename C, typename T>
       bool push (C& c, const label_t& w, const T& e)
@@ -286,9 +285,9 @@ private:
       
       void pfs(graph_base<edge_t>& G, label_t start)
       {
-            priority_queue<label_t, weight_t> pq(G.V(), weights);
+            priority_queue_kv<label_t, weight_t> pq(G.V());
             pq.insert(start);
-            weights.push_back(0);
+            pq.push_back(0);
             while (! pq.empty()) {
                   label_t v = pq.getmin();
                   fringe_to_mst(v);
@@ -302,11 +301,11 @@ private:
                         if (!valid(wfr)) {
                               fringe(w, e);
                               //order of these two operations is important
-                              weights.push_back(P);
+                              pq.push_back(P);
                               pq.insert(w);
                         }
-                        else if (!valid(mst(w)) && (P < weights.at(pq(w)))) {
-                              weights[w] = P;
+                        else if (!valid(mst(w)) && (P < pq[w])) {
+                              pq[w] = P;
                               pq.lower(w);
                               fringe(w, e);
                         }

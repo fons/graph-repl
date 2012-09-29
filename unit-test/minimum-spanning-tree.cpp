@@ -10,6 +10,7 @@
 
 
 REGISTER_TEST(test_mst_dense_prim);
+REGISTER_TEST(test_mst_prim_pfs);
 
 std::pair<int, std::string> test_mst_dense_prim(std::ostream& strm,int argc, const char *argv[])
 {

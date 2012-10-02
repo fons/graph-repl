@@ -56,7 +56,7 @@ public:
            
 private:
       graph_base<edge_t> &G;
-      std::map<Value, bool> visited;
+      std::unordered_map<Value, bool> visited;
       std::vector<Value> paths_coll;
       bool  search (Value& from, Value& to) {
             paths_coll.push_back(from);

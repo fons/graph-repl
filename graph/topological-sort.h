@@ -15,7 +15,7 @@
 
 template<typename edge_t>
 struct topological_sort_base {
-      typedef std::map<typename edge_t::label_value_type, size_t> topological_sort_t;
+      typedef std::unordered_map<typename edge_t::label_value_type, size_t> topological_sort_t;
       
       topological_sort_t operator()() const
       {
@@ -108,7 +108,7 @@ public:
       }
       
 private:
-      typedef std::map<typename edge_t::label_value_type, size_t> cont_t;
+      typedef std::unordered_map<typename edge_t::label_value_type, size_t> cont_t;
       typedef std::deque<typename edge_t::label_value_type> queue_t;
       
       cont_t  indegree;

@@ -33,7 +33,10 @@ struct edge_trait_t {
       static value_type make_edge(const label_value_type& f, const label_value_type& t, const weight_value_type& w) {
             return edge_t(f,t,w);
       }
+      static const size_t salt;
 };
+
+template<typename edge_t> const size_t edge_trait_t<edge_t>::salt = 0xeface1;
 
 template<typename edge_t>
 struct edge_trait_t <edge_t*> {
@@ -61,8 +64,10 @@ struct edge_trait_t <edge_t*> {
       static value_type make_edge(const label_value_type& f, const label_value_type& t, const weight_value_type& w) {
             return new edge_t(f,t,w);
       }
-
+      static const size_t salt;
 };
+
+template<typename edge_t> const size_t edge_trait_t<edge_t*>::salt = 0xbab0face;
 
 template<typename edge_t>
 struct edge_trait_t <std::shared_ptr<edge_t>> {
@@ -90,9 +95,10 @@ struct edge_trait_t <std::shared_ptr<edge_t>> {
       static value_type make_edge(const label_value_type& f, const label_value_type& t, const weight_value_type& w) {
             return std::shared_ptr<edge_t>(new edge_t(f,t,w));
       }
-
+      static const size_t salt;
 };
 
+template<typename edge_t> const size_t edge_trait_t<std::shared_ptr<edge_t>>::salt = 0xaaface0;
 
 
 #endif

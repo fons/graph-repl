@@ -14,19 +14,19 @@
 #include "graph_base.h"
 
 
-template<typename edge_t>
+template<typename edge_t, typename traits=edge_trait_t<edge_t>>
 struct degree {
 private:
-      typedef typename edge_t::label_value_type edge_value_t;
-      typedef std::vector<typename edge_t::label_value_type> cont_t;
-      typedef typename std::vector<typename edge_t::label_value_type>::iterator cont_iter_t;
+      
+      typedef typename traits::label_value_type    label_t;
+      typedef std::unordered_map<label_t, size_t>  cont_t;
+      typedef typename cont_t::iterator            cont_iter_t;
 public:      
-      degree(graph_base<edge_t>& g) :graph(g),deg(g.V(), typename edge_t::label_value_type()) {
+      degree(graph_base<edge_t>& g) :graph(g),deg() {
             construct();
       }
-      size_t operator[](size_t n) {
-            if (n > size) return 0;
-            return deg[n];
+      size_t operator[](label_t n) {
+            return deg.at(n);
       }
       std::ostream& pp(std::ostream& strm) const {
             size_t count = 0;
@@ -61,7 +61,8 @@ public:
             bool operator!=(const iterator_p& obj) {
                   return ! (*this == obj);
             }
-            edge_value_t operator*() {
+
+            typename cont_t::value_type operator*() {
                   return *it;
             }
             private :
@@ -81,9 +82,10 @@ private:
       graph_base<edge_t>& graph;
       void construct() {
             for (typename graph_base<edge_t>::iterator it = graph.begin(); it != graph.end(); it++) {
-                  deg[(*it).from]++;
+                  std::cerr << *it << " : " << traits::from(*it) << " : " << deg[traits::from(*it)] << std::endl;
+                  deg.at(traits::from(*it))++;
                   if (graph.is_directed()) {
-                        deg[(*it).to]++;
+                        deg.at((*it).to)++;
                   }
             }           
       }
@@ -94,11 +96,12 @@ std::ostream& operator<<(std::ostream& strm, const degree<edge_t>& d) {
 }
 //typedef typename std::map<typename edge_t::label_value_type, size_t> degree_distribution_t;
 
-template <typename edge_t>
+template <typename edge_t, typename traits=edge_trait_t<edge_t>>
 struct degree_distribution  {
 private :
+      typedef typename traits::label_value_type label_t;
       degree<edge_t>& D;
-      typename std::map<typename edge_t::label_value_type, size_t> cont_t;
+      typename std::unordered_map<label_t, size_t> cont_t;
 public :
       degree_distribution(degree<edge_t>& d) : D(d) {
             construct();
@@ -108,20 +111,17 @@ public :
       }
       std::ostream& pp(std::ostream& strm) const {
             strm << "degree : count" << std::endl;
-            for (auto it =M.begin() ;it != M.end(); it++) {
+            for (auto it = M.begin() ;it != M.end(); it++) {
                   strm << it->first << " : " <<  it->second << std::endl;
             }
             return strm;
       }
 
 private :
-      std::map<typename edge_t::label_value_type, size_t> M;
+      std::map<label_t, size_t> M;
       void construct() {
             for (auto it = D.begin(); it != D.end(); it++) {
-                  if (M.find(*it) == M.end() ) {
-                        M.insert(std::make_pair(*it, 0));
-                  }
-                  M[*it]++;
+                  M[it->first]++;
             }
       }
 };

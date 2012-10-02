@@ -67,6 +67,8 @@ std::pair<int, std::string> test_degree(std::ostream& strm,int argc, const char 
       s10.graphviz(dn);
             
       Degree deg(s10);
+      strm << deg << std::endl;
+      strm << deg[1] << std::endl;
       ASSERT(deg[0] == 4);
       ASSERT(deg[1] == 1);
       ASSERT(deg[2] == 1);

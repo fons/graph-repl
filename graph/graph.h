@@ -12,8 +12,11 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <queue>
 #include <set>
 #include <map>
+#include <unordered_map>
+#include <unordered_set>
 
 #include "proto.h"
 #include "stack.h"
@@ -24,7 +27,8 @@ typedef edge_t<size_t, double>       simple_edge_t;
 typedef edge_t<std::string, double>  labeled_edge_t;
 
 #include "edge-traits.h"
-
+#include "edge-assoc-array.h"
+#include "union-find.h"
 
 #include "adjacency_matrix.h"
 #include "adjacency_list.h"

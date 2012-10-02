@@ -30,6 +30,8 @@
 		F9470FF815A8CC1300602C3C /* graph_repl.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9470FF715A8CC1300602C3C /* graph_repl.1 */; };
 		F9590D1E15D34B610022D00C /* test-topological-sort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9590D1C15D34B610022D00C /* test-topological-sort.cpp */; };
 		F9590D2415D5C1670022D00C /* test-dfs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9590D2215D5C1670022D00C /* test-dfs.cpp */; };
+		F964321416179EC2007EAE1A /* test-assoc-array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F964321216179EC2007EAE1A /* test-assoc-array.cpp */; };
+		F9643218161885A1007EAE1A /* test-union-find.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9643216161885A0007EAE1A /* test-union-find.cpp */; };
 		F975127D15A8D3B700831089 /* graph.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F975126C15A8D2D600831089 /* graph.dylib */; };
 		F975127F15A8D3FD00831089 /* test.h in Headers */ = {isa = PBXBuildFile; fileRef = F975127E15A8D3FD00831089 /* test.h */; };
 		F975128115A8D42800831089 /* testy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F975128015A8D42800831089 /* testy.cpp */; };
@@ -121,6 +123,10 @@
 		F9590D2015D34DA30022D00C /* dag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dag.h; sourceTree = "<group>"; };
 		F9590D2115D46F7F0022D00C /* topological-sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "topological-sort.h"; sourceTree = "<group>"; };
 		F9590D2215D5C1670022D00C /* test-dfs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-dfs.cpp"; sourceTree = "<group>"; };
+		F964321016179EAE007EAE1A /* edge-assoc-array.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "edge-assoc-array.h"; sourceTree = "<group>"; };
+		F964321216179EC2007EAE1A /* test-assoc-array.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-assoc-array.cpp"; sourceTree = "<group>"; };
+		F9643215161882FC007EAE1A /* union-find.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "union-find.h"; sourceTree = "<group>"; };
+		F9643216161885A0007EAE1A /* test-union-find.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-union-find.cpp"; sourceTree = "<group>"; };
 		F975126C15A8D2D600831089 /* graph.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = graph.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		F975126F15A8D2D600831089 /* graph-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "graph-Prefix.pch"; sourceTree = "<group>"; };
 		F975127015A8D2D600831089 /* graphProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = graphProj.xcconfig; sourceTree = "<group>"; };
@@ -228,8 +234,10 @@
 			isa = PBXGroup;
 			children = (
 				F97BBCB61604CD4800A04B4A /* proto.h */,
+				F9643215161882FC007EAE1A /* union-find.h */,
 				F975128415A8D53500831089 /* edge.h */,
 				F97BBCB41604CBD100A04B4A /* edge-traits.h */,
+				F964321016179EAE007EAE1A /* edge-assoc-array.h */,
 				F975128215A8D4B700831089 /* graph.h */,
 				F975128715A9113200831089 /* graph_base.h */,
 				F97512B015A91CE400831089 /* degree.h */,
@@ -291,6 +299,8 @@
 				F9B7FD9615AE412400B0D6F0 /* tests.h */,
 				F9B7FD9715AE863E00B0D6F0 /* tests.cpp */,
 				F9402E8D15F3F1D9009E268C /* test-stack.cpp */,
+				F9643216161885A0007EAE1A /* test-union-find.cpp */,
+				F964321216179EC2007EAE1A /* test-assoc-array.cpp */,
 				F9A76D69160FAFB8007ED856 /* test-priority-queue.cpp */,
 				F9B7FD8C15AB962B00B0D6F0 /* test-edges.cpp */,
 				F9402E9816001AA3009E268C /* edge-pointer.cpp */,
@@ -481,6 +491,8 @@
 				F97BBCB916050BD400A04B4A /* graph-edge-pointer.cpp in Sources */,
 				F97BBCBD16092DBA00A04B4A /* minimum-spanning-tree.cpp in Sources */,
 				F9A76D6B160FAFB8007ED856 /* test-priority-queue.cpp in Sources */,
+				F964321416179EC2007EAE1A /* test-assoc-array.cpp in Sources */,
+				F9643218161885A1007EAE1A /* test-union-find.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

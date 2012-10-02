@@ -37,8 +37,8 @@ struct mst_prim {
       }
 private:
       
-      typedef typename std::map<typename traits::label_value_type, edge_t> edge_cont_t;
-      typedef typename std::map<typename traits::label_value_type, double> value_cont_t;
+      typedef typename std::unordered_map<typename traits::label_value_type, edge_t> edge_cont_t;
+      typedef typename std::unordered_map<typename traits::label_value_type, double> value_cont_t;
       typedef typename traits::label_value_type                            label_t;      
       
       std::vector<edge_t> mst;
@@ -202,8 +202,8 @@ struct mst_prim_pfs {
       }
 private:
       
-      typedef typename std::map<typename traits::label_value_type, edge_t> edge_cont_t;
-      typedef typename std::map<typename traits::label_value_type, double> value_cont_t;
+      typedef typename std::unordered_map<typename traits::label_value_type, edge_t> edge_cont_t;
+      typedef typename std::unordered_map<typename traits::label_value_type, double> value_cont_t;
       typedef typename traits::label_value_type                            label_t;
       typedef typename traits::weight_value_type                           weight_t;
 
@@ -314,5 +314,66 @@ private:
       }// end of pfs
 };
 
+template <typename edge_t, typename traits=edge_trait_t<edge_t>>
+struct mst_kruskal {
+      
+      explicit mst_kruskal (graph_base<edge_t, traits>& G) {
+            init(G);
+      }
+      
+      std::ostream& pp(std::ostream& strm) {
+            for (auto& val : mst_e) {
+                  strm << val << std::endl;
+            }
+            
+            return strm;
+      }
+      
+      graph_base<edge_t>& operator()(graph_base<edge_t>& T) {
+            for (auto& e : mst_e) {
+                  T.insert(e);
+            }
+            return T;
+      }
+      
+      std::vector<edge_t> operator()() {
+            return mst_e;
+      }
+private:
+      template <bool asc = false>
+      struct weight_order {
+            weight_order () {}
+            bool operator()(const edge_t& lhs, const edge_t& rhs) {
+                  if (asc) {
+                        return traits::weight(rhs) > traits::weight(lhs);
+                  }
+                  return traits::weight(rhs) < traits::weight(lhs);
+            }
+      private:
+      };
 
+      typedef std::vector<edge_t>                 edge_cont_t;
+      typedef typename traits::label_value_type   label_t;
+      typedef typename traits::weight_value_type  weight_t;
+      edge_cont_t mst_e;      
+      
+      void init (graph_base<edge_t, traits>& G)
+      {
+            union_find_t<label_t> uf;
+            std::priority_queue<simple_edge_t, std::vector<edge_t>, weight_order<>> pq;
+            graph_base<simple_edge_t>::edge_generator E(G);
+            while (! E.iter_done()) {
+                  pq.push(E.yield());
+            }
+            while (! pq.empty() && mst_e.size() < G.V()) {
+                  auto e = pq.top();
+                  pq.pop();
+                  if (! uf.connected(traits::from(e), traits::to(e))) {
+                        uf(traits::from(e), traits::to(e));
+                        mst_e.push_back(e);
+                  }
+            }
+           
+      }
+};
 #endif

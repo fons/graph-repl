@@ -177,6 +177,31 @@ public:
             adjacency_edge_generator(graph_base& G, label_t v) : generator_base<edge_t>(G, adjacent_to_edge(v)) {}
             
       };
+      
+      class edge_generator : public generator_base<edge_t> {
+            class edge_filter : public generator_base<edge_t>::construct_filter {
+                  public :
+                  edge_filter(bool is_directed) : is_directed(is_directed){}
+                  std::vector<edge_t>& operator()(std::vector<edge_t>& cont, const edge_t& e)  {
+                        if (is_directed) {
+                              cont.push_back(e);
+                              return cont;
+                        }
+                        if (vis.find(e) == vis.end()) {
+                              vis.insert(traits::make_edge(traits::to(e), traits::from(e), traits::weight(e)));
+                              cont.push_back(e);
+                        }
+                        return cont;
+                  }
+            private:
+                  bool& is_directed;
+                  std::set<edge_t, edge_compare<edge_t, traits>> vis;
+            };
+      public:
+            edge_generator(graph_base& G) : generator_base<edge_t>(G, edge_filter(G.is_directed())) {}
+            
+      };
+      
 
       class vertex_generator : public generator_base<label_t> {
             class unique : public generator_base<label_t>::construct_filter {
@@ -244,7 +269,7 @@ std::ostream& operator<< (std::ostream &strm, graph_base<edge_t>& g)
 template<typename edge_t, typename traits> std::ostream&
 graph_base<edge_t,traits>::serialize (std::ostream& strm, graph_base<edge_t, traits>& g)
 {
-      std::set<edge_t, edge_compare<edge_t>> vis;
+      std::set<edge_t, edge_compare<edge_t, traits>> vis;
       size_t count = 0;
       strm << "(directed ";
       if (g.is_directed()) {

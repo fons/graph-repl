@@ -27,9 +27,9 @@ protected:
       typedef int                               color_t;    
       typedef typename edge_t::label_value_type value_t;
       
-      typedef std::map<value_t, int>       cont_t;
-      typedef std::map<value_t, value_t>   link_t;
-      typedef std::map<value_t, color_t>   color_cont_t;
+      typedef std::unordered_map<value_t, int>       cont_t;
+      typedef std::unordered_map<value_t, value_t>   link_t;
+      typedef std::unordered_map<value_t, color_t>   color_cont_t;
       typedef std::set<edge_t>             edge_cont_t;
       typedef std::set<value_t>            vertex_cont_t;
 

@@ -65,6 +65,9 @@ extern std::pair<int, std::string> test_priority_queue_kv_1(std::ostream& strm,i
 extern std::pair<int, std::string> test_priority_queue_kv_2(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_priority_queue_kv_3(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_mst_prim_pfs(std::ostream& strm,int argc, const char *argv[]);
-std::pair<int, std::string> test_adjacency_edge_generator(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_adjacency_edge_generator(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_assoc_array(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_union_find(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_mst_kruskal(std::ostream& strm,int argc, const char *argv[]);
 #endif
 

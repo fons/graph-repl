@@ -86,7 +86,7 @@ private:
       std::set<label_value_type> vertices;
       graph_type_t is_directed_flg = graph_type_t::UNDIRECTED;
       
-      std::set<label_value_type> list_root;
+      std::unordered_set<label_value_type> list_root;
 
       bool has_self_loop(label_value_type v) {
             return ! (list_root.find(v) == list_root.end());

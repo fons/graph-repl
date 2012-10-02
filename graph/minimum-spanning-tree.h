@@ -376,4 +376,92 @@ private:
            
       }
 };
+
+template <typename edge_t, typename traits=edge_trait_t<edge_t>>
+struct mst_boruvka {
+      
+      explicit mst_boruvka(graph_base<edge_t, traits>& G) {
+            init(G);
+      }
+      
+      std::ostream& pp(std::ostream& strm) {
+            for (auto& val : mst_e) {
+                  strm << val << std::endl;
+            }
+            
+            return strm;
+      }
+      
+      graph_base<edge_t>& operator()(graph_base<edge_t>& T) {
+            for (auto& e : mst_e) {
+                  T.insert(e);
+            }
+            return T;
+      }
+      
+      std::vector<edge_t> operator()() {
+            return mst_e;
+      }
+private:
+      typedef typename traits::label_value_type   label_t;
+      typedef typename std::unordered_map<label_t, edge_t> edge_map_t;
+      typedef typename std::unordered_map<size_t, edge_t> edge_idx_t;
+      typedef std::vector<edge_t>  edge_arr_t;
+      edge_arr_t mst_e;
+      
+      edge_map_t add_to_nearest_neighbor_map(edge_map_t& map, const label_t l, const edge_t& e) {
+            bool found = (map.find(l) != map.end());
+            if (! found ) {
+                  map[l] = e;
+                  return map;
+            }
+            auto s = map.at(l);
+            if (traits::weight(e) < traits::weight(s)) {
+                  map[l] = e;
+            }
+            return map;
+      }
+      void init (graph_base<edge_t, traits>& G)
+      {
+            union_find_t<label_t> uf;
+            edge_idx_t a;
+            int count = 0;
+            graph_base<simple_edge_t>::edge_generator E(G);
+            while (! E.iter_done()) {
+                  a.insert(std::make_pair(count, E.yield()));
+                  count++;
+            }
+            int N = 0;
+            for (int E = a.size(); E != 0; E = N){
+                  edge_map_t b;
+                  int h = 0;
+                  
+                  for (h=0, N=0; h < E; h++) {
+                        auto e = a[h];
+                        auto i = uf.find(traits::from(e));
+                        auto j = uf.find(traits::to(e));
+                        if (i == j) continue;
+                        add_to_nearest_neighbor_map(b, i, e);
+                        add_to_nearest_neighbor_map(b, j, e);
+                        a[N] = e;
+                        N++;
+                  }
+                  graph_base<simple_edge_t>::vertex_generator V(G);
+                  while (! V.iter_done()) {
+                        auto h = V.yield();
+                        if (b.find(h) != b.end()) {
+                              auto e = b.at(h);
+                              auto i = traits::from(e);
+                              auto j = traits::to(e);
+                              if (! uf.connected(i, j)) {
+                                    uf(i,j);
+                                    mst_e.push_back(e);
+                              }
+                        }
+                  }
+            }
+                  
+      }
+};
+
 #endif

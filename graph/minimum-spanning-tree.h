@@ -464,4 +464,42 @@ private:
       }
 };
 
+template <typename edge_t, typename algo_t=mst_boruvka <edge_t, edge_trait_t<edge_t>>>
+class mst {
+      
+public:
+      
+      mst(graph_base<edge_t>& G) : algo(G) {}
+      
+      mst(const mst&) = delete;
+      void operator=(const mst&)   = delete;
+      
+      graph_base<edge_t>& operator()(graph_base<edge_t>& T) {
+            return algo(T);
+      }
+      
+      std::vector<edge_t> operator()() {
+            return algo();
+      }
+
+      
+      std::ostream& pp(std::ostream& strm) {
+            return algo.pp(strm);
+      }
+      
+private:
+      algo_t algo;
+};
+
+
+//template <typename edge_t>
+
+
+template<typename graph_t, typename algo_t>
+std::ostream& operator<<(std::ostream& strm, mst<graph_t, algo_t>& v)
+{
+      return v.pp(strm);
+}
+
+
 #endif

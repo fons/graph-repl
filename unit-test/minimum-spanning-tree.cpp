@@ -34,7 +34,7 @@ std::pair<int, std::string> test_mst_dense_prim(std::ostream& strm,int argc, con
       std::string dn = "/Users/fons/Dvlp/graphviz/dense_prim_graph.dot";
       s10.graphviz(dn);
       
-      mst_prim<simple_edge_t> P(s10);
+      mst<simple_edge_t, mst_prim<simple_edge_t>> P(s10);
       P.pp(strm);
       sparse_graph_t t10(15, graph_type_t::UNDIRECTED);
       P(t10);
@@ -79,7 +79,7 @@ std::pair<int, std::string> test_mst_prim_pfs(std::ostream& strm,int argc, const
       std::string dn = "/Users/fons/Dvlp/graphviz/mst_prim_pfs_graph.dot";
       s10.graphviz(dn);
       
-      mst_prim_pfs<simple_edge_t> P(s10);
+      mst<simple_edge_t, mst_prim_pfs<simple_edge_t>> P(s10);
       P.pp(strm);
       sparse_graph_t t10(15, graph_type_t::UNDIRECTED);
       P(t10);
@@ -124,7 +124,7 @@ std::pair<int, std::string> test_mst_kruskal(std::ostream& strm,int argc, const 
       std::string dn = "/Users/fons/Dvlp/graphviz/mst_kruskal_graph.dot";
       s10.graphviz(dn);
       
-      mst_kruskal<simple_edge_t> P(s10);
+      mst<simple_edge_t, mst_kruskal<simple_edge_t>> P(s10);
       P.pp(strm);
       
       sparse_graph_t t10(15, graph_type_t::UNDIRECTED);
@@ -177,7 +177,7 @@ std::pair<int, std::string> test_mst_boruvka(std::ostream& strm,int argc, const 
       std::string dn = "/Users/fons/Dvlp/graphviz/mst_boruvka_graph.dot";
       s10.graphviz(dn);
       
-      mst_boruvka<simple_edge_t> P(s10);
+      mst<simple_edge_t, mst_boruvka<simple_edge_t>> P(s10);
       P.pp(strm);
       
       sparse_graph_t t10(15, graph_type_t::UNDIRECTED);

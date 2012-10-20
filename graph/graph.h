@@ -59,6 +59,6 @@ typedef paths<simple_edge_t>       simple_path_t;
 
 #include "topological-sort.h"
 #include "minimum-spanning-tree.h"
-
+#include "single-source-shortest-paths.h"
 
 #endif

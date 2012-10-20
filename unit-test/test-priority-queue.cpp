@@ -375,5 +375,35 @@ std::pair<int, std::string> test_priority_queue_kv_3(std::ostream& strm,int argc
       strm << "----------------------------------------" << std::endl;
       return DONE;
 }
+struct TC {
+      TC() : val(-9999){}
+      TC (double v) : val(v){};
+      double val;
+};
 
+std::pair<int, std::string> test_priority_queue_alt1(std::ostream& strm,int argc, const char *argv[])
+{
+      priority_queue_stl<int, double> M;
+
+      M.insert(0, 0.75);
+      M.insert(1, 0.10);
+      M.insert(2, 0.25);
+      M.insert(3, 0.35);
+      M.insert(4, 0.48);
+      M.insert(5, 0.51);
+      M.insert(6, 0.678);
+      
+      M.update(2, 0.0009);
+      M.update(3,999);
+            
+      double val = -1;
+      while (! M.empty() ){
+            auto min = M.getmin();
+            strm << "min : " << min << std::endl;
+            ASSERT(min.second > val);
+            val = min.second;
+      }
+      strm << "-------- done ------------" << std::endl;
+      return DONE;
+}
 

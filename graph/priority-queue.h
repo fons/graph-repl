@@ -283,10 +283,90 @@ private:
                   return Rm.at(i);
             }
 };
+template <typename key_t, typename value_t>
+class priority_queue_stl {
+      typedef std::pair<key_t, value_t>           value_type;
+      typedef std::shared_ptr<value_type>               value_type_ptr;
+      typedef std::vector<value_type_ptr>               container_t;
+      typedef std::unordered_map<key_t, value_type_ptr> map_t;
+      struct sorter {
+            bool operator()(const value_type_ptr& l, const value_type_ptr& r) {
+                  return l->second > r->second;
+            }
+      };
+      
+      
+public:
+      priority_queue_stl() {}
+      priority_queue_stl(const priority_queue_stl& ) = delete;
+      void operator=(const priority_queue_stl& ) = delete;
+      ~priority_queue_stl() {}
+      
+      key_t insert(const key_t k, const value_t& v)
+      {
+            auto p = value_type_ptr (new value_type(k, v));
+            M[k]   = p;
+            L.push_back(p);
+            dirty  = true;
+            return k;
+      }
+      
+      value_t update(const key_t k, const value_t& v)
+      {
+            auto p = M[k];
+            auto o = p->second;
+            if (p->second != v) dirty = true;
+            p->second = v;
+            return o;
+      }
+      
+      value_type getmin()
+      {
+            lazy_heap();
+            pop_heap(L.begin(), L.end(), sorter());
+            auto e = *L.back();
+            L.pop_back();
+            M[e.first] = std::nullptr_t();
+            return e;
+      }
+      
+      const bool empty()
+      {
+            return L.empty();
+      }
+
+      std::ostream& pp(std::ostream& strm) const
+      {
+            lazy_heap();
+            for (auto& val : L) {
+                  strm << val << std::endl;
+            }
+            return strm;
+      }
+private:
+      container_t L;
+      map_t  M;
+      bool dirty = false;
+      void lazy_heap()
+      {
+            if (dirty) {
+                  std::make_heap(L.begin(), L.end(), sorter());
+                  dirty = false;
+            }
+            
+      }
+};
 
 template<typename elem_t, typename key_t>
 std::ostream& operator<<(std::ostream& strm, const priority_queue_t<elem_t, key_t>& pq)
 {
       return pq.pp(strm);
 }
+
+template<typename elem_t, typename key_t>
+std::ostream& operator<<(std::ostream& strm, const priority_queue_stl<elem_t, key_t>& pq)
+{
+      return pq.pp(strm);
+}
+
 #endif

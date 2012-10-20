@@ -70,5 +70,9 @@ extern std::pair<int, std::string> test_assoc_array(std::ostream& strm,int argc,
 extern std::pair<int, std::string> test_union_find(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_mst_kruskal(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_mst_boruvka(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_shortest_path_dijkstra_dense(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_priority_queue_alt1(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_shortest_path_dijkstra_pq(std::ostream& strm,int argc, const char *argv[]);
+
 #endif
 

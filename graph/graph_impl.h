@@ -129,12 +129,12 @@ private:
             vertices.insert(traits::to(edge));
             m(traits::from(edge), traits::to(edge), traits::weight(edge));
             if (is_directed_impl()) {
-                  if (traits::from(edge) != traits::to(edge)) {
-                        add_self_loop(edge);
-                  }
-                  else {
-                        mark_self_loop(edge);
-                  }
+//                  if (traits::from(edge) != traits::to(edge)) {
+//                        add_self_loop(edge);
+//                  }
+//                  else {
+//                        mark_self_loop(edge);
+//                  }
             }
             else {
                   //invisible edge for undirected graphs

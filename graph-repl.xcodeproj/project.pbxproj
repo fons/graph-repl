@@ -60,6 +60,7 @@
 		F97512B715A91CE400831089 /* transitive-clojure.h in Headers */ = {isa = PBXBuildFile; fileRef = F97512B315A91CE400831089 /* transitive-clojure.h */; };
 		F97BBCB916050BD400A04B4A /* graph-edge-pointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97BBCB716050BD400A04B4A /* graph-edge-pointer.cpp */; };
 		F97BBCBD16092DBA00A04B4A /* minimum-spanning-tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97BBCBB16092DBA00A04B4A /* minimum-spanning-tree.cpp */; };
+		F9986D3316238BB40092275C /* test-shortest-paths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9986D3116238BB40092275C /* test-shortest-paths.cpp */; };
 		F9A76D6B160FAFB8007ED856 /* test-priority-queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9A76D69160FAFB8007ED856 /* test-priority-queue.cpp */; };
 		F9B1AEA915AB95A100DC93D4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9B1AEA815AB95A100DC93D4 /* main.cpp */; };
 		F9B1AEAB15AB95A100DC93D4 /* unit_test.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */; };
@@ -161,6 +162,8 @@
 		F97BBCB716050BD400A04B4A /* graph-edge-pointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "graph-edge-pointer.cpp"; sourceTree = "<group>"; };
 		F97BBCBA1607E47700A04B4A /* minimum-spanning-tree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "minimum-spanning-tree.h"; sourceTree = "<group>"; };
 		F97BBCBB16092DBA00A04B4A /* minimum-spanning-tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "minimum-spanning-tree.cpp"; sourceTree = "<group>"; };
+		F9986D2F162388E40092275C /* single-source-shortest-paths.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "single-source-shortest-paths.h"; sourceTree = "<group>"; };
+		F9986D3116238BB40092275C /* test-shortest-paths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-shortest-paths.cpp"; sourceTree = "<group>"; };
 		F9A76D67160E684A007ED856 /* priority-queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "priority-queue.h"; sourceTree = "<group>"; };
 		F9A76D69160FAFB8007ED856 /* test-priority-queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-priority-queue.cpp"; sourceTree = "<group>"; };
 		F9B1AEA515AB95A100DC93D4 /* unit-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "unit-test"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +246,7 @@
 				F97512B015A91CE400831089 /* degree.h */,
 				F97512B215A91CE400831089 /* graph_gen.h */,
 				F97BBCBA1607E47700A04B4A /* minimum-spanning-tree.h */,
+				F9986D2F162388E40092275C /* single-source-shortest-paths.h */,
 				F9402E8B15EC3456009E268C /* strong-components.h */,
 				F97512B315A91CE400831089 /* transitive-clojure.h */,
 				F9590D2115D46F7F0022D00C /* topological-sort.h */,
@@ -319,6 +323,7 @@
 				F9590D1C15D34B610022D00C /* test-topological-sort.cpp */,
 				F9402E8815EC321F009E268C /* digraph-strong-components.cpp */,
 				F97BBCBB16092DBA00A04B4A /* minimum-spanning-tree.cpp */,
+				F9986D3116238BB40092275C /* test-shortest-paths.cpp */,
 				F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */,
 			);
 			path = "unit-test";
@@ -493,6 +498,7 @@
 				F9A76D6B160FAFB8007ED856 /* test-priority-queue.cpp in Sources */,
 				F964321416179EC2007EAE1A /* test-assoc-array.cpp in Sources */,
 				F9643218161885A1007EAE1A /* test-union-find.cpp in Sources */,
+				F9986D3316238BB40092275C /* test-shortest-paths.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

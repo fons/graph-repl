@@ -10,6 +10,7 @@
 #define graph_repl_graph_h
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <vector>
 #include <queue>
@@ -19,6 +20,7 @@
 #include <unordered_set>
 
 #include "proto.h"
+#include "format.h"
 #include "stack.h"
 #include "priority-queue.h"
 #include "edge.h"
@@ -56,9 +58,10 @@ typedef degree<simple_edge_t> Degree;
 typedef simple_path<simple_edge_t> simple_edge_path_t;
 typedef paths<simple_edge_t>       simple_path_t;
 
-
 #include "topological-sort.h"
 #include "minimum-spanning-tree.h"
 #include "single-source-shortest-paths.h"
+#include "all-pairs-shortest-path.h"
+#include "acyclic_shortest_path.h"
 
 #endif

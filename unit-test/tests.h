@@ -73,6 +73,11 @@ extern std::pair<int, std::string> test_mst_boruvka(std::ostream& strm,int argc,
 extern std::pair<int, std::string> test_shortest_path_dijkstra_dense(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_priority_queue_alt1(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_shortest_path_dijkstra_pq(std::ostream& strm,int argc, const char *argv[]);
-
+extern std::pair<int, std::string> test_all_pairs_shortest_path_dijkstra(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_all_pairs_shortest_path_floyd_warshall(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_shortest_path_bellman_ford(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_bellman_ford_negative_cycle(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_dag_longest_path(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_dag_shortest_path(std::ostream& strm,int argc, const char *argv[]);
 #endif
 

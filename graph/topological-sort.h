@@ -169,14 +169,16 @@ class topological_sort {
 public:
       typedef typename algo_t::topological_sort_t container_t;
       
-      topological_sort(graph_base<typename graph_t::edge_value_type>& G) : algo(new algo_t(G)) {}
-      
+      topological_sort(graph_base<typename graph_t::edge_value_type>& G) : algo(new algo_t(G)), V(G.V())
+      {
+            init(G);
+      }
       
       container_t operator()() const
       {
             return algo->operator()();
       }
-
+      
       size_t operator()(const typename graph_t::edge_value_type::label_value_type& v)
       {
             return algo->operator()(v);
@@ -186,11 +188,24 @@ public:
             return algo->pp(strm);
       }
       
+      std::vector<typename graph_t::label_value_type> order() const {
+            return V;
+      }
+      
       topological_sort(const topological_sort&) = delete;
       void operator=(const topological_sort&)   = delete;
 
 private:
       std::unique_ptr<topological_sort_base<typename graph_t::edge_value_type>> algo;
+      std::vector<typename graph_t::label_value_type> V;
+      
+      void init(graph_base<typename graph_t::edge_value_type>& G)
+      {
+            auto c = algo->operator()();
+            for (auto& v: c){
+                  V[v.second] = v.first;
+            }
+      }
 };
 
 

@@ -34,6 +34,11 @@ struct shortest_path_dijkstra_dense {
       std::vector<edge_t> operator()() {
             return mst;
       }
+      
+      bool negative_cycle() const {
+            throw("has_negative_cycle not implemented");
+      }
+      
 private:
       
       typedef typename std::unordered_map<typename traits::label_value_type, edge_t> edge_cont_t;
@@ -198,13 +203,14 @@ template <typename edge_t, typename traits=edge_trait_t<edge_t>>
 struct shortest_path_dijkstra_pq {
       private :
       
-      typedef typename traits::label_value_type            label_t;
+      typedef graph_base<edge_t, edge_trait_t<edge_t>>      graph_t;
+      typedef typename traits::label_value_type             label_t;
       typedef typename std::unordered_map<label_t, edge_t>  edge_cont_t;
       typedef typename std::unordered_map<label_t, label_t> label_cont_t;
       typedef typename std::unordered_map<label_t, double>  value_cont_t;
 
       public :
-      explicit shortest_path_dijkstra_pq (graph_base<edge_t, edge_trait_t<edge_t>>& G, const label_t& v) : start(v), G(G) {
+      explicit shortest_path_dijkstra_pq (graph_t& G, const label_t& v) : start(v), G(G) {
             init(G,v);
       }
       
@@ -238,6 +244,11 @@ struct shortest_path_dijkstra_pq {
             if (it == pred_c.end()) return std::make_pair(label_t(), false);
             return std::make_pair(it->second, true);
       }
+
+      bool negative_cycle() const {
+            throw("has_negative_cycle not implemented");
+      }
+
 private:
       const label_t& start;
       graph_base<edge_t, traits>& G;
@@ -245,7 +256,7 @@ private:
       edge_cont_t  mst;
       label_cont_t pred_c;
       
-      void init(graph_base<edge_t, traits>& G, const typename traits::label_value_type& start)
+      void init(graph_t& G, const label_t& start)
       {
             priority_queue_stl<label_t, double> PQ;
             typename graph_base<edge_t>::vertex_generator wg(G);
@@ -277,6 +288,106 @@ private:
             }
       }
 };
+
+template <typename edge_t, typename traits=edge_trait_t<edge_t>>
+struct shortest_path_bellman_ford {
+private :
+      
+      typedef graph_base<edge_t, edge_trait_t<edge_t>>       graph_t;
+      typedef typename traits::label_value_type              label_t;
+      typedef typename std::unordered_map<label_t, edge_t>   edge_cont_t;
+      typedef typename std::unordered_map<label_t, label_t>  label_cont_t;
+      typedef typename traits::weight_value_type             weight_t;
+      typedef typename std::unordered_map<label_t, weight_t> value_cont_t;
+      
+public :
+      explicit shortest_path_bellman_ford (graph_t& G, const label_t& v) : start(v), G(G) {
+            init(G,v);
+      }
+      shortest_path_bellman_ford(const shortest_path_bellman_ford&) = delete;
+      void operator=(shortest_path_bellman_ford&) = delete;
+      
+      std::ostream& pp(std::ostream& strm) const {
+            for (auto& v : mdist ) {
+                  strm << "node : " << v.first << " : distance " << v.second << std::endl;
+            }
+            stack<label_t> S;
+            for (auto& v : mpred) {
+                  if (S.empty()) {
+                        S.push(v.first);
+                  }
+                  if (v.first != S.top() ){
+                        S.push(v.first);
+                  }
+                  if (v.second != S.top()){
+                        S.push(v.second);
+                  }
+            }
+            size_t count = 0;
+            while (! S.empty()) {
+                  auto v = S.pop();
+                  strm << v;
+                  if (++count % 10 == 0) strm << std::endl;
+                  if (! S.empty()) strm << " -> ";
+            }
+            strm << std::endl;
+            return strm;
+      }
+      
+      typename std::pair<weight_t, bool> dist(const label_t& v)
+      {
+            auto it = mdist.find(v);
+            if (it == mdist.end()) return std::make_pair(typename traits::weight_value_type(), false);
+            return std::make_pair(it->second, true);
+      }
+      
+      std::pair<label_t,bool> pred(const label_t& v)
+      {
+            auto it = mpred.find(v);
+            if (it == mpred.end()) return std::make_pair(label_t(), false);
+            return std::make_pair(it->second, true);
+      }
+      
+      bool negative_cycle() const {
+            return has_negative_cycle;
+      }
+private:
+      const label_t& start;
+      value_cont_t mdist;
+      edge_cont_t  mst;
+      label_cont_t mpred;
+      bool         has_negative_cycle = false;
+      graph_base<edge_t, traits>& G;
+      void init(graph_t& G, const label_t& s) {
+            typename graph_t::vertex_generator vg(G);
+            while (!vg.iter_done()) {
+                  mdist[vg.yield()] = std::numeric_limits<double>::max();
+            }
+            mdist[s]      = weight_t();
+            bool relaxing = true;
+            auto counter   = G.V();
+            while (counter-- > 0 && relaxing) {
+                  relaxing = false;
+                  for (typename graph_t::iterator it = G.begin(); it != G.end(); it++) {
+                        auto e = *it;
+                        auto u = traits::from(e);
+                        auto v = traits::to(e);
+                        auto w = traits::weight(e);
+                        if (mdist[u] == std::numeric_limits<double>::max()) continue;
+                        auto newlen = mdist[u] + w;
+                        if (newlen < mdist[v]) {
+                              mdist[v] = newlen;
+                              mpred[v] = u;
+                              relaxing = true;
+                        }
+                        
+                  }
+            }
+            has_negative_cycle = relaxing;
+      }
+};
+
+//---------------------------------------------------------------------------------
 template <typename edge_t, typename algo_t=shortest_path_dijkstra_pq<edge_t, edge_trait_t<edge_t>>, typename traits=edge_trait_t<edge_t>>
 struct single_source_shortest_path
 {
@@ -284,6 +395,8 @@ struct single_source_shortest_path
       typedef typename traits::weight_value_type   weight_t;
 public :
       single_source_shortest_path(graph_base<edge_t, traits>& G, const typename traits::label_value_type& s) : G(G), algo(G,s) {}
+      single_source_shortest_path(const single_source_shortest_path& obj) = delete;
+      single_source_shortest_path& operator=(const single_source_shortest_path& obj) = delete;
       
       std::pair<weight_t, bool> dist(const label_t& v)
       {
@@ -314,7 +427,11 @@ public :
       std::ostream& pp(std::ostream& strm) const {
             return algo.pp(strm);
       }
-      
+
+      bool negative_cycle() const {
+            return algo.negative_cycle();
+      }
+
 private :
       graph_base<edge_t, traits>& G;
       algo_t algo;

@@ -1,0 +1,70 @@
+Tgraph-repl
+v4
+r1
+cCheck dependencies
+cCompileC build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/main.o /Users/fons/Repo/git.hub/graph-repl/graph-repl/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl normal x86_64
+
+N/Developer/SDKs/MacOSX10.7.sdk
+c000000004E7AD70B00000000000000EE
+t1316673291
+s238
+
+N/Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl
+t2
+s0
+
+N/Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl.dSYM
+t2
+s0
+
+N/Users/fons/Repo/git.hub/graph-repl/build/Release/graph.dylib
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/graph-repl.LinkFileList
+c000000004FF8EBC20000000000000071
+t1341713346
+s113
+
+N/Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/main.o
+t2
+s0
+
+N/Users/fons/Repo/git.hub/graph-repl/graph-repl/main.cpp
+c000000004FF8EA9500000000000021E7
+t1341713045
+s8679
+
+CCheck dependencies
+r0
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencieseeceea4223a9b541^9d65fe4223a9b541^---0#1#0#--18"Check dependencies36"9A120FFF-C673-4B01-A1EA-BAA65720A036-
+
+CCompileC build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/main.o /Users/fons/Repo/git.hub/graph-repl/graph-repl/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s363406147.013949
+e363406149.480244
+r1
+xCompileC
+xbuild/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/main.o
+x/Users/fons/Repo/git.hub/graph-repl/graph-repl/main.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection63"Compile /Users/fons/Repo/git.hub/graph-repl/graph-repl/main.cppcdcd034323a9b541^00017b4523a9b541^---0#0#0#-19%DVTDocumentLocation2@71"file://localhost/Users/fons/Repo/git.hub/graph-repl/graph-repl/main.cpp0000000000000000^1907"CompileC build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/main.o graph-repl/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/fons/Repo/git.hub/graph-repl    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c++0x -stdlib=libc++ -Wno-trigraphs -fpascal-strings -Os -Wmissing-prototypes -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -Wc++0x-extensions -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -fvisibility=hidden -fvisibility-inlines-hidden -Wno-sign-conversion -iquote /Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/graph-repl-generated-files.hmap -I/Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/graph-repl-own-target-headers.hmap -I/Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/graph-repl-all-target-headers.hmap -iquote /Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/graph-repl-project-headers.hmap -I/Users/fons/Repo/git.hub/graph-repl/build/Release/include -I/Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/DerivedSources/x86_64 -I/Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/DerivedSources -F/Users/fons/Repo/git.hub/graph-repl/build/Release -MMD -MT dependencies -MF /Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/main.d -c /Users/fons/Repo/git.hub/graph-repl/graph-repl/main.cpp -o /Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/main.o36"E245BBB4-2F59-48EF-B642-992377B7607B-
+
+CGenerateDSYMFile /Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl.dSYM /Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl
+r0
+
+CLd /Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl normal x86_64
+s363406149.487854
+e363406149.498955
+r0
+xLd
+x/Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl
+xnormal
+xx86_64
+oclang: error: no such file or directory: '/Users/fons/Repo/git.hub/graph-repl/build/Release/graph.dylib'
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection65"Link /Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl05fa7c4523a9b541^76c27f4523a9b541^-59"Command /Developer/usr/bin/clang++ failed with exit code 11(21%IDEActivityLogMessage2@58"Command /Developer/usr/bin/clang++ failed with exit code 1-363406149#18446744073709551615#0#-2#--30"Apple Mach-O Linker (ld) Error--0#0#0#--622"Ld build/Release/graph-repl normal x86_64    cd /Users/fons/Repo/git.hub/graph-repl    setenv MACOSX_DEPLOYMENT_TARGET 10.7    /Developer/usr/bin/clang++ -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.7.sdk -L/Users/fons/Repo/git.hub/graph-repl/build/Release -F/Users/fons/Repo/git.hub/graph-repl/build/Release -filelist /Users/fons/Repo/git.hub/graph-repl/build/graph-repl.build/Release/graph-repl.build/Objects-normal/x86_64/graph-repl.LinkFileList -mmacosx-version-min=10.7 -stdlib=libc++ /Users/fons/Repo/git.hub/graph-repl/build/Release/graph.dylib -o /Users/fons/Repo/git.hub/graph-repl/build/Release/graph-repl36"EF741A02-EC50-48C7-8F3D-B4B61066B74D-
+

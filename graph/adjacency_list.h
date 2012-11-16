@@ -16,11 +16,11 @@
 #include "graph_utils.h"
 #include "lwll.h"
 #include "tuple.h"
-//template <typename T = double>
+template <typename T = double>
 class adjacency_list {
 public:  
-      typedef double edge_weight_t;
-      constexpr static const edge_weight_t null_weight = edge_weight_t();
+      typedef T edge_weight_t;
+      static const edge_weight_t null_weight; 
 
       typedef std::pair<size_t, edge_weight_t> weighted_edge_t;
       typedef std::tuple<size_t, size_t, edge_weight_t> edge_tuple_t;
@@ -59,7 +59,7 @@ public:
       void rm(size_t from, size_t to) {
             lwll<weighted_edge_t>& l = lst[from];
             edge_weight_t w = edge_weight_t();
-            for (lwll< weighted_edge_t>::iterator it = l.begin(); it != l.end(); it++) {
+            for (typename lwll< weighted_edge_t>::iterator it = l.begin(); it != l.end(); it++) {
                   if ((*it).first == to) {
                         w = (*it).second;
                         break;
@@ -102,7 +102,7 @@ public:
 
             adjacency_list::edge_tuple_t operator*() {
                   if (finished()) return edge_tuple_t();                  
-                  lwll<adjacency_list::weighted_edge_t>::iterator it = s.it_to;
+                  typename lwll<adjacency_list::weighted_edge_t>::iterator it = s.it_to;
                   lwll<weighted_edge_t>& lnxt = lst.lst[s.it_from];
                   if (s.it_to == lnxt.end()) return edge_tuple_t();
                   return edge_tuple_t(s.it_from, (*it).first, (*it).second);
@@ -229,7 +229,29 @@ private:
       }
 
 };
-typedef adjacency_list adjacency_list_t;
-std::ostream& operator<<(std::ostream& strm, adjacency_list& lst);
 
+
+template<typename T> const T adjacency_list<T>::null_weight = T();
+typedef adjacency_list<double> adjacency_list_t;
+
+template<typename T>
+std::ostream& operator<<(std::ostream& strm, adjacency_list<T>& lst) {
+      strm << "{" << std::endl;
+      bool open_bracket = false;
+      for (typename adjacency_list<T>::iterator it = lst.begin(); it != lst.end(); it++) {
+            if (it.coll_start()) {
+                  if (open_bracket) {
+                        strm << ")"<<std::endl;
+                  }
+                  open_bracket = true;
+                  strm << "(";
+            }
+            strm << *it << ",";
+      }
+      if (open_bracket) {
+            strm << ")"<<std::endl;
+      }
+      strm << "}";
+      return strm;
+      }
 #endif

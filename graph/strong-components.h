@@ -11,10 +11,10 @@
 
 #include <memory>
 
-template<typename edge_t>
+template<typename edge_t, typename traits_t=edge_trait_t<edge_t>>
 struct component_kosaraju
 {
-      explicit component_kosaraju(graph_base<edge_t>& G) : R(new graph_impl<adjacency_list, edge_t>(G.V(), direction(G))) {
+      explicit component_kosaraju(graph_base<edge_t>& G) : R(new graph_impl<adjacency_list_t,edge_t>(G.V(), direction(G))) {
             _reverse_(G);
             init(G, *R);
       }

@@ -12,7 +12,7 @@ REGISTER_TEST(test_capacity_flow_graph);
 
 typedef capacity_flow_t<long>                 simple_capacity_flow_t;
 typedef edge_t<long, simple_capacity_flow_t>  simple_flow_edge_t;
-typedef graph_impl<adjacency_list_t, simple_flow_edge_t>   flow_graph_t;
+typedef graph_impl<adjacency_list<simple_capacity_flow_t>, simple_flow_edge_t>   flow_graph_t;
 
 std::pair<int, std::string> test_capacity_flow(std::ostream& strm,int argc, const char *argv[])
 {

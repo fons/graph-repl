@@ -28,6 +28,13 @@
 typedef edge_t<size_t, double>       simple_edge_t;
 typedef edge_t<std::string, double>  labeled_edge_t;
 
+template<typename l, typename r>
+std::ostream& operator<<(std::ostream& strm, const std::pair<l,r>& p)
+{
+ return strm << "[" << p.first << "," << p.second << "]";
+
+}
+      
 #include "edge-traits.h"
 #include "edge-assoc-array.h"
 #include "union-find.h"

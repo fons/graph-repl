@@ -19,12 +19,12 @@ public :
       T capacity() const {
             return v_capacity;
       }
-      T& flow (const T& v) {
+      T flow (const T& v) {
             auto s = flow();
             v_flow = v;
             return s;
       }
-      T& capacity(const T& v){
+      T capacity(const T& v){
             auto s = capacity();
             v_capacity = v;
             return s;

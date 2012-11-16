@@ -194,7 +194,7 @@ public:
                         return cont;
                   }
             private:
-                  bool& is_directed;
+                  bool is_directed;
                   std::set<edge_t, edge_compare<edge_t, traits>> vis;
             };
       public:

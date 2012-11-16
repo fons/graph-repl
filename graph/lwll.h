@@ -9,10 +9,7 @@
 #ifndef graph_repl_lwll_h
 #define graph_repl_lwll_h
 
-template<typename l, typename r>
-std::ostream& operator<<(std::ostream& strm, const std::pair<l,r>& p){
-      return strm << "[" << p.first << "," << p.second << "]";
-}
+//light weight linked list..
 
 template<typename el_t>
 class lwll {

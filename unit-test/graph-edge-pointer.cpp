@@ -12,7 +12,7 @@ REGISTER_TEST(test_graph_edge_shared_ptr);
 
 std::pair<int, std::string> test_graph_edge_naked_ptr(std::ostream& strm,int argc, const char *argv[])
 {
-      graph_impl<adjacency_list, simple_edge_t*> s10(20, graph_type_t::UNDIRECTED);
+      graph_impl<adjacency_list_t, simple_edge_t*> s10(20, graph_type_t::UNDIRECTED);
       std::string mn = "/Users/fons/Dvlp/graphviz/graph_with_naked_pointers.dot";
       
       s10.insert(new simple_edge_t(0,1,1));//1
@@ -45,7 +45,7 @@ std::pair<int, std::string> test_graph_edge_naked_ptr(std::ostream& strm,int arg
       ASSERT(edge_trait_t<simple_edge_t*>::to(e)     == 4);
       ASSERT(edge_trait_t<simple_edge_t*>::weight(e) == 1);
 
-      graph_impl<adjacency_list, simple_edge_t*>::vertex_generator s(s10);
+      graph_impl<adjacency_list_t, simple_edge_t*>::vertex_generator s(s10);
       std::set<simple_edge_t::label_value_type> expected = {0,1,2,3,4,5,6,7,8};
       std::set<simple_edge_t::label_value_type> nodes;
       while (! s.iter_done() ) {
@@ -111,7 +111,7 @@ std::pair<int, std::string> test_graph_edge_naked_ptr(std::ostream& strm,int arg
 
 std::pair<int, std::string> test_graph_edge_shared_ptr(std::ostream& strm,int argc, const char *argv[])
 {
-      graph_impl<adjacency_list, std::shared_ptr<simple_edge_t>> s10(20, graph_type_t::UNDIRECTED);
+      graph_impl<adjacency_list_t, std::shared_ptr<simple_edge_t>> s10(20, graph_type_t::UNDIRECTED);
       std::string mn = "/Users/fons/Dvlp/graphviz/graph_with_naked_pointers.dot";
       
       s10.insert(std::shared_ptr<simple_edge_t>( new simple_edge_t(0,1,1)));//1
@@ -144,7 +144,7 @@ std::pair<int, std::string> test_graph_edge_shared_ptr(std::ostream& strm,int ar
       ASSERT(edge_trait_t<std::shared_ptr<simple_edge_t>>::to(e1)     == 4);
       ASSERT(edge_trait_t<std::shared_ptr<simple_edge_t>>::weight(e1) == 1);
       
-      graph_impl<adjacency_list, std::shared_ptr<simple_edge_t>>::vertex_generator s(s10);
+      graph_impl<adjacency_list_t, std::shared_ptr<simple_edge_t>>::vertex_generator s(s10);
       std::set<simple_edge_t::label_value_type> expected = {0,1,2,3,4,5,6,7,8};
       std::set<simple_edge_t::label_value_type> nodes;
       while (! s.iter_done() ) {

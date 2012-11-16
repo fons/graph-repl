@@ -26,6 +26,7 @@
 		F9402E8F15F3F1D9009E268C /* test-stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9402E8D15F3F1D9009E268C /* test-stack.cpp */; };
 		F9402E9215FFF9E4009E268C /* test-weighted-graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9402E9015FFF9E4009E268C /* test-weighted-graph.cpp */; };
 		F9402E9A16001AA4009E268C /* edge-pointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9402E9816001AA3009E268C /* edge-pointer.cpp */; };
+		F946E4FC16530B5E00726074 /* test-capacity-flow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F946E4FA16530B5D00726074 /* test-capacity-flow.cpp */; };
 		F9470FF615A8CC1300602C3C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9470FF515A8CC1300602C3C /* main.cpp */; };
 		F9470FF815A8CC1300602C3C /* graph_repl.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9470FF715A8CC1300602C3C /* graph_repl.1 */; };
 		F9590D1E15D34B610022D00C /* test-topological-sort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9590D1C15D34B610022D00C /* test-topological-sort.cpp */; };
@@ -119,6 +120,8 @@
 		F9402E8D15F3F1D9009E268C /* test-stack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-stack.cpp"; sourceTree = "<group>"; };
 		F9402E9015FFF9E4009E268C /* test-weighted-graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-weighted-graph.cpp"; sourceTree = "<group>"; };
 		F9402E9816001AA3009E268C /* edge-pointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "edge-pointer.cpp"; sourceTree = "<group>"; };
+		F946E4F8165300D600726074 /* flow-capacity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "flow-capacity.h"; sourceTree = "<group>"; };
+		F946E4FA16530B5D00726074 /* test-capacity-flow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-capacity-flow.cpp"; sourceTree = "<group>"; };
 		F9470FF115A8CC1300602C3C /* graph-repl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "graph-repl"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9470FF515A8CC1300602C3C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F9470FF715A8CC1300602C3C /* graph_repl.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = graph_repl.1; sourceTree = "<group>"; };
@@ -247,6 +250,7 @@
 				F97BBCB61604CD4800A04B4A /* proto.h */,
 				F96FC70016470EBF00F8A3A4 /* format.h */,
 				F9643215161882FC007EAE1A /* union-find.h */,
+				F946E4F8165300D600726074 /* flow-capacity.h */,
 				F975128415A8D53500831089 /* edge.h */,
 				F97BBCB41604CBD100A04B4A /* edge-traits.h */,
 				F964321016179EAE007EAE1A /* edge-assoc-array.h */,
@@ -338,6 +342,7 @@
 				F9986D3116238BB40092275C /* test-shortest-paths.cpp */,
 				F9986D3516333EE90092275C /* test-all-pairs-shortest-path.cpp */,
 				F96FC6FD16445B2C00F8A3A4 /* test-acyclic-shortest-path.cpp */,
+				F946E4FA16530B5D00726074 /* test-capacity-flow.cpp */,
 				F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */,
 			);
 			path = "unit-test";
@@ -515,6 +520,7 @@
 				F9986D3316238BB40092275C /* test-shortest-paths.cpp in Sources */,
 				F9986D3716333EE90092275C /* test-all-pairs-shortest-path.cpp in Sources */,
 				F96FC6FF16445B2C00F8A3A4 /* test-acyclic-shortest-path.cpp in Sources */,
+				F946E4FC16530B5E00726074 /* test-capacity-flow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

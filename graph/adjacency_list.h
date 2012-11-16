@@ -16,10 +16,10 @@
 #include "graph_utils.h"
 #include "lwll.h"
 #include "tuple.h"
-
+//template <typename T = double>
 class adjacency_list {
 public:  
-      typedef double edge_weight_t; 
+      typedef double edge_weight_t;
       constexpr static const edge_weight_t null_weight = edge_weight_t();
 
       typedef std::pair<size_t, edge_weight_t> weighted_edge_t;
@@ -48,7 +48,7 @@ public:
       edge_weight_t operator()(size_t from, size_t to)  {
             if (! check(from, to)) return edge_weight_t();
             lwll<weighted_edge_t>& l = lst[from]; 
-            for (lwll<weighted_edge_t>::iterator it = l.begin(); it != l.end(); it++) {                  
+            for (typename lwll<weighted_edge_t>::iterator it = l.begin(); it != l.end(); it++) {
                   if ((*it).first == to) {
                         return (*it).second;
                   }
@@ -131,8 +131,8 @@ public:
             
             typedef struct iterator_state {
                   iterator_state(size_t from) : it_from(from){}
-                  iterator_state(size_t f, lwll<adjacency_list::weighted_edge_t>::iterator& t): it_to(t), it_from(f) {}
-                  lwll<adjacency_list::weighted_edge_t>::iterator it_to;
+                  iterator_state(size_t f, typename lwll<adjacency_list::weighted_edge_t>::iterator& t): it_to(t), it_from(f) {}
+                  typename lwll<adjacency_list::weighted_edge_t>::iterator it_to;
                   size_t   it_from; 
                   bool operator==(const iterator_state& s) {                        
                         return (it_from == s.it_from) && (it_to == s.it_to);

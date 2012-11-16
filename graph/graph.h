@@ -64,4 +64,5 @@ typedef paths<simple_edge_t>       simple_path_t;
 #include "all-pairs-shortest-path.h"
 #include "acyclic_shortest_path.h"
 
+#include "flow-capacity.h"
 #endif

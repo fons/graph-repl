@@ -158,10 +158,16 @@ std::pair<int, std::string> test_adjacency_edge_generator(std::ostream& strm,int
       
       simple_edge_t::label_value_type node = 0;
       sparse_graph_t::adjacency_edge_generator s(s10, node);
-      std::set<simple_edge_t> expected = {simple_edge_t(0,1,1), simple_edge_t(0,2,1), simple_edge_t(0,6,1), simple_edge_t(0,5,1)};
+      std::set<simple_edge_t> expected = {simple_edge_t(0,1,1),simple_edge_t(0,2,1), simple_edge_t(0,6,1), simple_edge_t(0,5,1)};
+      // for undirected graphs you have an edge going both ways..
+      for (auto& v : expected) {
+            expected.insert (reverse (v));
+      }
       std::set<simple_edge_t> nodes;
       while (! s.iter_done() ) {
-            nodes.insert(s.yield());
+            auto e = s.yield();
+            strm << e << std::endl;
+            nodes.insert(e);
       }
       ASSERT_CONDITION("nodes expected adjacent to 0 in the graph", expected == nodes);
       return DONE;

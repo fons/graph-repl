@@ -432,7 +432,7 @@ private:
                   count++;
             }
             int N = 0;
-            for (int E = a.size(); E != 0; E = N){
+            for (int E = static_cast<int>(a.size()); E != 0; E = N){
                   edge_map_t b;
                   int h = 0;
                   

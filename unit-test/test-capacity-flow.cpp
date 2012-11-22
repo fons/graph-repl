@@ -10,36 +10,47 @@
 REGISTER_TEST(test_capacity_flow);
 REGISTER_TEST(test_capacity_flow_graph);
 
-typedef capacity_flow_t<long>                 simple_capacity_flow_t;
-typedef edge_t<long, simple_capacity_flow_t>  simple_flow_edge_t;
-typedef graph_impl<adjacency_list<simple_capacity_flow_t>, simple_flow_edge_t>   flow_graph_t;
 
 std::pair<int, std::string> test_capacity_flow(std::ostream& strm,int argc, const char *argv[])
 {
       simple_capacity_flow_t cap(1);
-      simple_capacity_flow_t ncap;
-      simple_flow_edge_t e(0, 1, simple_capacity_flow_t(100));
-      strm << e << std::endl;
-      ASSERT(cap != ncap);
-      auto w = edge_trait_t<simple_flow_edge_t>::weight(e);
-      strm << " weight : " << w << std::endl;
-      w.flow(23);
-      strm << " weight : " << w << std::endl;
-      ASSERT(w.flow() == 23);
-      ASSERT(w.capacity() == 100);
+      simple_capacity_flow_ptr_t cap_ptr = make_capacity_flow<long>(30);
+      strm << *cap_ptr << std::endl;
+      strm << cap << std::endl;
+      auto e = make_simple_flow_edge(0, 1, 67);
+      strm << edge_trait_t<simple_flow_edge_ptr_t>::deref(e) << std::endl;
+      strm << *e << std::endl;
+      e->weight->flow(23);
+      strm << *e << std::endl;
+      ASSERT(e->weight->flow() == 23);
+      try {
+            e->weight->flow(100);
+            ASSERT_CONDITION(1==2, "flow out-of-range-error is not thrown");
+      }
+      catch(const std::exception& e) {
+            std::cerr << "caught exception : " << e.what() << std::endl;
+      }
       return DONE;
 }
 
 std::pair<int, std::string> test_capacity_flow_graph(std::ostream& strm,int argc, const char *argv[])
 {
-//      flow_graph_t s10(10, graph_type_t::UNDIRECTED);
+      flow_graph_t s10(10, graph_type_t::DIRECTED);
 //      
-//      // fig 17.23 p 67
-//      s10.insert(simple_flow_edge_t(0,1, simple_capacity_flow_t(20)));
-//      
-//      
-//      std::string dn = "/Users/fons/Dvlp/graphviz/test_simple_path.dot";
-//      s10.graphviz(dn);
 
+      s10.insert(make_simple_flow_edge(0,1, 2));
+      s10.insert(make_simple_flow_edge(0,2, 3));
+      s10.insert(make_simple_flow_edge(1,3, 3));
+      s10.insert(make_simple_flow_edge(1,4, 1));
+      s10.insert(make_simple_flow_edge(2,3, 1));
+      s10.insert(make_simple_flow_edge(2,4, 1));
+      s10.insert(make_simple_flow_edge(3,5, 2));
+      s10.insert(make_simple_flow_edge(4,5, 3));
+      s10.edge(1,3)->weight->flow(2);
+      std::string dn = "/Users/fons/Dvlp/graphviz/test_simple_flow_capacity_graph.dot";
+      s10.graphviz(dn);
+//
+      ASSERT (s10.edge(1,3)->weight->flow() == 2);
+      ASSERT (s10.edge(1,3)->weight->capacity() == 3)
       return DONE;
 }

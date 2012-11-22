@@ -14,7 +14,9 @@
 int main (int argc, const char * argv[])
 {
       
-      test_capacity_flow_graph(std::cerr, argc, argv);
+      //test_capacity_flow(std::cerr, argc, argv);
+      //test_capacity_flow_graph(std::cerr, argc, argv);
+      test_check_flow(std::cerr, argc, argv);
       
       try {
             //run_tests(std::cerr, argc, argv);

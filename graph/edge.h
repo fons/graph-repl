@@ -9,12 +9,8 @@
 #ifndef graph_repl_edge_h
 #define graph_repl_edge_h
 
-#include <iostream>
-#include <bitset>
 
-#include "graph_utils.h"
-
-template <typename label_t, typename weight_t>
+template <typename label_t, typename weight_t, typename traits= weight_traits_t<weight_t>>
 struct edge_t {
       explicit edge_t(const label_t& from = label_t(), const label_t& to = label_t(), const weight_t& weight = weight_t()) : from(from),
             to(to), weight(weight){}
@@ -43,7 +39,14 @@ struct edge_t {
             }
             return edges;
       }
-
+      template <typename T> static bool is_unit(const T& ew)
+      {
+            return false;
+      }
+      static bool is_unit(const double& v)
+      {
+            return v == 1;
+      }
       static std::ostream& graphviz (std::ostream& strm, const edge_t<label_t, weight_t>& edge, bool directed_edge)
       {
             
@@ -56,9 +59,9 @@ struct edge_t {
             }
             strm << "n" << edge.to; 
             
-            if (edge.weight != 1) {
-                  strm << "[label= \"w:" << edge.weight << "\"]";  
-            } 
+            if (! is_unit(edge.weight)) {
+                  strm << "[label= \"w:" << traits::deref(edge.weight) << "\"]";
+            }
             strm << ";";            
             return strm;
             
@@ -66,7 +69,7 @@ struct edge_t {
       
       static std::ostream& serialize(std::ostream& strm, const edge_t<label_t, weight_t>& edge)
       {     
-            return strm << "(" << edge.from << " " << edge.to << " " << edge.weight << ")";
+            return strm << "(" << edge.from << " " << edge.to << " " << traits::deref(edge.weight) << ")";
       }
       
       static std::vector<edge_t<label_t, weight_t> > deserialize(std::istream& strm)
@@ -99,7 +102,7 @@ struct edge_t {
       bool operator<(const edge_t& e) const
       {
             if (*this == e) return false;
-            return (from < e.from) || (to < e.to) || (weight < e.weight);
+            return (from < e.from) || (to < e.to) || (traits::deref(weight) < traits::deref(e.weight));
       }
       
       bool operator<=(const edge_t& e) const
@@ -128,6 +131,10 @@ struct edge_t {
       edge_t reverse() {
             return edge_t(to, from, weight);
       }
+      
+      bool is_from (const label_t& v) const {
+            return from == v;
+      }
 };
 
 template<typename label_t, typename weight_t>
@@ -142,12 +149,12 @@ bool operator<(const edge_t<label_t, weight_t>& lhs, const edge_t<label_t, weigh
       return lhs.operator<(rhs); // be aware of recursion 
 }
 
-template<typename label_t, typename weight_t>
+template<typename label_t, typename weight_t, typename traits = weight_traits_t<weight_t>>
 std::ostream& operator<< (std::ostream &stream, const edge_t<label_t, weight_t> &edge)
 {
-      stream << "[" << edge.from << "," << edge.to << "," << edge.weight << "]"; 
+      stream << "[" << edge.from << "," << edge.to << "," << traits::deref(edge.weight) << "]";
       return stream;     
-      
+
 }
 
 

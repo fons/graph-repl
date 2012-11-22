@@ -18,11 +18,14 @@
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
+#include <memory>
 
 #include "proto.h"
 #include "format.h"
 #include "stack.h"
+#include "graph_utils.h"
 #include "priority-queue.h"
+#include "weight-traits.h"
 #include "edge.h"
 
 typedef edge_t<size_t, double>       simple_edge_t;
@@ -70,6 +73,10 @@ typedef paths<simple_edge_t>       simple_path_t;
 #include "single-source-shortest-paths.h"
 #include "all-pairs-shortest-path.h"
 #include "acyclic_shortest_path.h"
-
-#include "flow-capacity.h"
+      
+#include "capacity-flow.h"
+#include "flow-graph-util.h"
+#include "check-flow.h"
+      
+      
 #endif

@@ -12,7 +12,7 @@ REGISTER_TEST(test_priority_queue_base_1);
 REGISTER_TEST(test_priority_queue_base_2);
 REGISTER_TEST(test_priority_queue_1);
 REGISTER_TEST(test_priority_queue_2);
-REGISTER_TEST(test_priority_queue_kv_1);
+//REGISTER_TEST(test_priority_queue_kv_1);
 REGISTER_TEST(test_priority_queue_kv_2);
 
 std::pair<int, std::string> test_priority_queue_base_1(std::ostream& strm,int argc, const char *argv[])
@@ -266,7 +266,6 @@ std::pair<int, std::string> test_priority_queue_kv_1(std::ostream& strm,int argc
       
       pq.insert(10);
       pq.push_back(0.10);
-      
       
       auto min = pq.getmin();
       std::cerr << " min : " << min << " : " << pq[min] << std::endl;

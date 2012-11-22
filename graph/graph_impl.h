@@ -152,8 +152,11 @@ private:
       }
       
       virtual bool has_edge_impl(const edge_t& edge) const {
-            return container_t::null_weight != const_cast<graph_impl*>(this)->m(traits::from(edge), traits::to(edge));
+            auto w = const_cast<graph_impl*>(this)->m(traits::from(edge), traits::to(edge));
+            
+            return container_t::null_weight != w;
             //return edge.weight == const_cast<graph_impl*>(this)->m(edge.from, edge.to);
+            return false;
       }
       //
       virtual value_type edge_impl(const label_value_type& f, const label_value_type& t) const {

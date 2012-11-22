@@ -81,7 +81,7 @@ extern std::pair<int, std::string> test_dag_longest_path(std::ostream& strm,int 
 extern std::pair<int, std::string> test_dag_shortest_path(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_capacity_flow(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_capacity_flow_graph(std::ostream& strm,int argc, const char *argv[]);
-
+extern std::pair<int, std::string> test_check_flow(std::ostream& strm,int argc, const char *argv[]);
 
 #endif
 

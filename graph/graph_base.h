@@ -165,7 +165,7 @@ public:
                   public :
                   adjacent_to_edge(label_t& v) : v(v){}
                   std::vector<edge_t>& operator()(std::vector<edge_t>& cont, const edge_t& e)  {
-                        if (v == traits::from(e)) {
+                        if (v == traits::from(e) || v == traits::to(e)) {
                               cont.push_back(e);
                         }
                         return cont;

@@ -33,6 +33,11 @@ struct edge_trait_t {
       static value_type make_edge(const label_value_type& f, const label_value_type& t, const weight_value_type& w) {
             return edge_t(f,t,w);
       }
+      
+      static bool is_from(const edge_t& e, const label_value_type& v)  {
+            return e.is_from(v);
+      }
+      
       static const size_t salt;
 };
 
@@ -64,6 +69,11 @@ struct edge_trait_t <edge_t*> {
       static value_type make_edge(const label_value_type& f, const label_value_type& t, const weight_value_type& w) {
             return new edge_t(f,t,w);
       }
+
+      static bool is_from(const edge_t* e, const label_value_type& v) {
+            return e->is_from(v);
+      }
+
       static const size_t salt;
 };
 
@@ -95,6 +105,12 @@ struct edge_trait_t <std::shared_ptr<edge_t>> {
       static value_type make_edge(const label_value_type& f, const label_value_type& t, const weight_value_type& w) {
             return std::shared_ptr<edge_t>(new edge_t(f,t,w));
       }
+
+      static bool is_from(const std::shared_ptr<edge_t>& e, const label_value_type& v) {
+            return e->is_from(v);
+      }
+      
+
       static const size_t salt;
 };
 

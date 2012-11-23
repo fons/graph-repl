@@ -38,3 +38,9 @@ Where possible I've tried to use c++ std library algorithms. The c++ std library
 the ability to update the queue dynamically. I've provided an other implemention using the c++ std libraries heap algorithms. However those don't support fixups of the heap as new 
 elements are added. I've worked around this by rebuiling the heap any time a new element is added after an element has been popped. This does have a performance impact. 
 
+##### graphviz
+
+The unit tests generate 'dot' files which can be viewed with [graphviz](http://www.graphviz.org/). 
+The location of these files is defined by the TESTDIR environment variable or defaults to $HOME/Test/graph-repl/data.
+
+

@@ -15,7 +15,7 @@ REGISTER_TEST(test_gabow);
 std::pair<int, std::string> test_kosaraju(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/test_kosaraju.dot";
+      std::string fn = test_path("kosaraju_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -61,7 +61,7 @@ std::pair<int, std::string> test_kosaraju(std::ostream& strm,int argc, const cha
 std::pair<int, std::string> test_tarjan(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/test_tarjan.dot";
+      std::string fn = test_path("tarjan_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -105,7 +105,7 @@ std::pair<int, std::string> test_tarjan(std::ostream& strm,int argc, const char 
 std::pair<int, std::string> test_gabow(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/test_tarjan.dot";
+      std::string fn = test_path("gabow_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       

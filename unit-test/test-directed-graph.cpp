@@ -14,7 +14,7 @@ REGISTER_TEST(test_directed_graph_dfs);
 
 std::pair<int, std::string> test_directed_graph(std::ostream& strm,int argc, const char *argv[])
 {
-      std::string fn = "/Users/fons/Dvlp/graphviz/directed_graph.dot";
+      std::string fn = test_path("directed_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -77,7 +77,7 @@ std::pair<int, std::string> test_directed_graph(std::ostream& strm,int argc, con
 //reversing a directed graph
 std::pair<int, std::string> test_reverse_directed_graph(std::ostream& strm,int argc, const char *argv[])
 {
-      std::string fn = "/Users/fons/Dvlp/graphviz/reverse_directed_graph.dot";
+      std::string fn = test_path("reverse_directed_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -120,7 +120,7 @@ std::pair<int, std::string> test_reverse_directed_graph(std::ostream& strm,int a
 //dfs of a digraph
 std::pair<int, std::string> test_directed_graph_dfs(std::ostream& strm,int argc, const char *argv[])
 {
-      std::string fn = "/Users/fons/Dvlp/graphviz/directed_graph_dfs.dot";
+      std::string fn = test_path("directed_graph_dfs.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       

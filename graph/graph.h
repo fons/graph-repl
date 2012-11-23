@@ -19,6 +19,9 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <memory>
+#include <iterator>
+#include <sstream>
+
 
 #include "proto.h"
 #include "format.h"
@@ -27,6 +30,7 @@
 #include "priority-queue.h"
 #include "weight-traits.h"
 #include "edge.h"
+#include "tuple.h"
 
 typedef edge_t<size_t, double>       simple_edge_t;
 typedef edge_t<std::string, double>  labeled_edge_t;

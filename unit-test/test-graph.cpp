@@ -63,7 +63,7 @@ std::pair<int, std::string> test_degree(std::ostream& strm,int argc, const char 
       s10.insert(simple_edge_t(9,12,1));
       s10.insert(simple_edge_t(11,12,1));
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/degrees_graph.dot";
+      std::string dn = test_path("degrees_graph.dot");
       s10.graphviz(dn);
             
       Degree deg(s10);

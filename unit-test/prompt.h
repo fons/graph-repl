@@ -18,8 +18,8 @@ public:
       enum class response : char { SUCCESS, FAIL};
       prompt() : pr(">"){}
       prompt(const std::string& p) : pr(p){}
-      prompt(const prompt&)         = delete;
-      void operator=(const prompt&) = delete;
+      //prompt(const prompt&)
+      //void operator=(const prompt&) = delete;
       response_t operator()(std::ostream& strm, const std::string& msg);
       response_t operator()() {
             return operator()(std::cerr);

@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 mohegan skunk works. All rights reserved.
 //
 
-#include "adjacency_matrix.h"
-
+//#include "adjacency_matrix.h"
+#include "graph.h"
 
 std::ostream& operator<< (std::ostream &stream, adjacency_matrix_t &m)
 {

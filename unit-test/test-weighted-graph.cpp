@@ -27,7 +27,7 @@ std::pair<int, std::string> test_weighted_graph(std::ostream& strm,int argc, con
       s10.insert(simple_edge_t(7,1,0.21));//11
       s10.insert(simple_edge_t(4,3,0.34));//12
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/weighted_graph.dot";
+      std::string dn = test_path("weighted_graph.dot");
       s10.graphviz(dn);
 
       strm << "edges : " << s10.E() << std::endl;

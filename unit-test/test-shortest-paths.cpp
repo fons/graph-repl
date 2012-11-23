@@ -29,14 +29,14 @@ std::pair<int, std::string> test_shortest_path_dijkstra_dense(std::ostream& strm
       s10.insert(simple_edge_t(5,1,0.29));//11
       
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/dense_dijkstra_graph.dot";
+      std::string dn = test_path("dense_dijkstra_graph.dot");
       s10.graphviz(dn);
       
       single_source_shortest_path<simple_edge_t> SP(s10, 3);
       SP.pp(strm);
       sparse_graph_t t10(15, graph_type_t::DIRECTED);
       SP(t10);
-      std::string dt = "/Users/fons/Dvlp/graphviz/dense_dijkstra_shortest_path.dot";
+      std::string dt = test_path("dense_dijkstra_shortest_path.dot");
       t10.graphviz(dt);
       strm << "vertices : " << t10.V() << " : " << s10.V() << std::endl;
       ASSERT(t10.V() == s10.V());
@@ -64,14 +64,14 @@ std::pair<int, std::string> test_shortest_path_dijkstra_pq(std::ostream& strm,in
       s10.insert(simple_edge_t(2,3, 9));//8
       
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/pq_dijkstra_graph.dot";
+      std::string dn = test_path("pq_dijkstra_graph.dot");
       s10.graphviz(dn);
       
       single_source_shortest_path<simple_edge_t> SP(s10, 0);
       SP.pp(strm);
       sparse_graph_t t10(15, graph_type_t::DIRECTED);
       SP(t10);
-      std::string dt = "/Users/fons/Dvlp/graphviz/pq_dijkstra_shortest_path.dot";
+      std::string dt = test_path("pq_dijkstra_shortest_path.dot");
       t10.graphviz(dt);
       ASSERT(t10.V() == s10.V());
       ASSERT(SP.pred(4).first == 1);
@@ -96,14 +96,14 @@ std::pair<int, std::string> test_shortest_path_bellman_ford(std::ostream& strm,i
       s10.insert(simple_edge_t(2, 1, -3));//6
             
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/bellman_ford_graph.dot";
+      std::string dn = test_path("bellman_ford_graph.dot");
       s10.graphviz(dn);
       single_source_shortest_path<simple_edge_t, shortest_path_bellman_ford<simple_edge_t>> SP(s10, 0);
       SP.pp(strm);
 
       sparse_graph_t t10(15, graph_type_t::DIRECTED);
       SP(t10);
-      std::string dt = "/Users/fons/Dvlp/graphviz/bellman_ford_shortest_path.dot";
+      std::string dt = test_path("bellman_ford_shortest_path.dot");
       t10.graphviz(dt);
       ASSERT(t10.V() == s10.V());
       
@@ -127,7 +127,7 @@ std::pair<int, std::string> test_bellman_ford_negative_cycle(std::ostream& strm,
       s10.insert(simple_edge_t(2, 1, -3));//6
       
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/bellman_ford_negative_cycle_graph.dot";
+      std::string dn = test_path("bellman_ford_negative_cycle_graph.dot");
       s10.graphviz(dn);
       shortest_path_bellman_ford<simple_edge_t> SP(s10, 0);
       SP.pp(strm);

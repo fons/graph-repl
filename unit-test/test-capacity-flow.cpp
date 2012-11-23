@@ -47,7 +47,7 @@ std::pair<int, std::string> test_capacity_flow_graph(std::ostream& strm,int argc
       s10.insert(make_simple_flow_edge(3,5, 2));
       s10.insert(make_simple_flow_edge(4,5, 3));
       s10.edge(1,3)->weight->flow(2);
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_simple_flow_capacity_graph.dot";
+      std::string dn = test_path("simple_flow_capacity_graph.dot");
       s10.graphviz(dn);
 //
       ASSERT (s10.edge(1,3)->weight->flow() == 2);

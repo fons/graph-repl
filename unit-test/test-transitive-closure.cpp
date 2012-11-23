@@ -28,11 +28,11 @@ std::pair<int, std::string> test_transitive_closure(std::ostream& strm,int argc,
       s10.insert(simple_edge_t(3,4,1));
       s10.insert(simple_edge_t(3,2,1));
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_tc_graph.dot";
+      std::string dn = test_path("transitive_closure_graph.dot");
       s10.graphviz(dn);
       
       sparse_tc_t tc(s10);
-      std::string dt = "/Users/fons/Dvlp/graphviz/test_tc_graph_tc.dot";
+      std::string dt = test_path("transitive_closure_graph_tc.dot");
       (*tc).graphviz(dt);
 
       ASSERT(tc(simple_edge_t(1,2,1)));
@@ -68,11 +68,12 @@ std::pair<int, std::string> test_transitive_closure_warshall(std::ostream& strm,
       s10.insert(simple_edge_t(3,4,1));
       s10.insert(simple_edge_t(3,2,1));
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_tc_graph.dot";
+      std::string dn = test_path("transitive_closure_graph_warshall.dot");
       s10.graphviz(dn);
 
       transitive_closure<sparse_graph_t, tc_warshall<simple_edge_t>> tc(s10);
-      std::string wts = "/Users/fons/Dvlp/graphviz/test_tc_graph_tc_warshall.dot";
+      std::string wts = test_path("transitive_closure_graph_warshall_result.dot");
+
       (*tc).graphviz(wts);
 
       
@@ -96,7 +97,7 @@ std::pair<int, std::string> test_transitive_closure_warshall(std::ostream& strm,
 
 std::pair<int, std::string> test_transitive_closure_dag(std::ostream& strm,int argc, const char *argv[])
 {
-      std::string fn = "/Users/fons/Dvlp/graphviz/test_tc_dag_graph.dot";
+      std::string fn = test_path("transitive_closure_dag.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -123,7 +124,7 @@ std::pair<int, std::string> test_transitive_closure_dag(std::ostream& strm,int a
       
       s10.graphviz(fn);
       transitive_closure<sparse_graph_t, tc_dag<simple_edge_t>> tc(s10);
-      std::string wts = "/Users/fons/Dvlp/graphviz/test_tc_graph_tc_dag.dot";
+      std::string wts = test_path("transitive_closure_dag_results.dot");
       (*tc).graphviz(wts);
       ASSERT(tc(simple_edge_t(0,1,1)));
       ASSERT(tc(simple_edge_t(0,12,1)))
@@ -156,7 +157,7 @@ std::pair<int, std::string> test_transitive_closure_kernel_dag(std::ostream& str
       s10.insert(simple_edge_t(3,4,1));
       s10.insert(simple_edge_t(3,2,1));
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_tc_sc_graph.dot";
+      std::string dn = test_path("transitive_closure_kernel_dag.dot");
       s10.graphviz(dn);
       
       tc_kernel_dag<simple_edge_t> tc(s10);

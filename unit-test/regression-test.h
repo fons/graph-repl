@@ -249,6 +249,7 @@ extern void run_tests(int argc, const char *argv[]);
 extern void run_tests();
 extern std::pair<int, std::string> simple_prompt(std::ostream& strm);
 extern std::pair<int, std::string> simple_return(return_t state);
-
+extern std::string test_path();
+extern std::string test_path(const std::string& fn);
 #define DONE simple_return(return_t::SUCCESS)
 #endif

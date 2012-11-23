@@ -15,9 +15,9 @@
 
 int main (int argc, const char * argv[])
 {  
-          
+      std::cerr << "running main in graph-repl" << std::endl;
       //auto dir = graph_type_t::DIRECTED;
-#if 1
+#if 0
       std::string fn = "/Users/fons/Dvlp/graphviz/test.dot";  
       //std::string fn = "/tmp/test.txt";
       //std::ofstream ofile (fn);

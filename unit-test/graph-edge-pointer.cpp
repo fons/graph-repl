@@ -13,7 +13,7 @@ REGISTER_TEST(test_graph_edge_shared_ptr);
 std::pair<int, std::string> test_graph_edge_naked_ptr(std::ostream& strm,int argc, const char *argv[])
 {
       graph_impl<adjacency_list_t, simple_edge_t*> s10(20, graph_type_t::UNDIRECTED);
-      std::string mn = "/Users/fons/Dvlp/graphviz/graph_with_naked_pointers.dot";
+      std::string mn = test_path("graph_with_naked_pointers.dot");
       
       s10.insert(new simple_edge_t(0,1,1));//1
       s10.insert(new simple_edge_t(0,2,1));//2
@@ -112,7 +112,7 @@ std::pair<int, std::string> test_graph_edge_naked_ptr(std::ostream& strm,int arg
 std::pair<int, std::string> test_graph_edge_shared_ptr(std::ostream& strm,int argc, const char *argv[])
 {
       graph_impl<adjacency_list_t, std::shared_ptr<simple_edge_t>> s10(20, graph_type_t::UNDIRECTED);
-      std::string mn = "/Users/fons/Dvlp/graphviz/graph_with_naked_pointers.dot";
+      std::string mn = test_path("graph_with_shared_pointers.dot");
       
       s10.insert(std::shared_ptr<simple_edge_t>( new simple_edge_t(0,1,1)));//1
       s10.insert(std::shared_ptr<simple_edge_t>( new simple_edge_t(0,2,1)));//2

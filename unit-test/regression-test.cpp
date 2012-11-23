@@ -56,4 +56,23 @@ std::pair<int, std::string> simple_return(return_t state)
       
 }
 
+std::string test_path()
+{
+      const char* userdir = getenv("TESTDIR");
+      if (userdir) return std::string(userdir);
+      const char *home = getenv("HOME");
+      if (home) {
+            std::string dir("/Test/graph-repl/data/");
+            return std::string(home) + dir;
+      }
+      return std::string(".");
+}
+
+
+std::string test_path(const std::string& fn)
+{
+      return test_path() + fn;
+}
+
+
 

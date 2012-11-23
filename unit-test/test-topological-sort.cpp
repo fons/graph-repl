@@ -17,7 +17,7 @@ REGISTER_TEST(test_topological_sort_queue);
 std::pair<int, std::string> test_not_dag(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/not_dag_graph.dot";
+      std::string fn = test_path("not_dag_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -37,7 +37,7 @@ std::pair<int, std::string> test_not_dag(std::ostream& strm,int argc, const char
 std::pair<int, std::string> test_dag(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/dag_graph.dot";
+      std::string fn = test_path("dag_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -70,7 +70,7 @@ std::pair<int, std::string> test_dag(std::ostream& strm,int argc, const char *ar
 std::pair<int, std::string> test_reverse_topological_sort_dfs(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/reverse_topological_sort_dfs_graph.dot";
+      std::string fn = test_path("reverse_topological_sort_dfs_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -111,7 +111,7 @@ std::pair<int, std::string> test_reverse_topological_sort_dfs(std::ostream& strm
 std::pair<int, std::string> test_topological_sort_dfs(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/topological_sort_dfs_graph.dot";
+      std::string fn = test_path("topological_sort_dfs_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       
@@ -155,7 +155,7 @@ std::pair<int, std::string> test_topological_sort_dfs(std::ostream& strm,int arg
 std::pair<int, std::string> test_topological_sort_queue(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string fn = "/Users/fons/Dvlp/graphviz/topological_sort_queue_graph.dot";
+      std::string fn = test_path("topological_sort_queue_graph.dot");
       size_t size = 50;
       sparse_graph_t s10(size, graph_type_t::DIRECTED);
       

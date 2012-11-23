@@ -27,7 +27,7 @@ std::pair<int, std::string> test_all_pairs_shortest_path_dijkstra(std::ostream& 
       s10.insert(simple_edge_t(5,1,0.29));//11
       
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/all_pairs_shortest_path_dijkstra_graph.dot";
+      std::string dn = test_path("all_pairs_shortest_path_dijkstra_graph.dot");
       s10.graphviz(dn);
       
       all_pairs_shortest_path_dijkstra<simple_edge_t> AP(s10);
@@ -68,7 +68,7 @@ std::pair<int, std::string> test_all_pairs_shortest_path_floyd_warshall(std::ost
       s10.insert(simple_edge_t(5,1,0.29));//11
       
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/all_pairs_shortest_path_floyd_warshall_graph.dot";
+      std::string dn = test_path("all_pairs_shortest_path_floyd_warshall_graph.dot");
       s10.graphviz(dn);
       
       all_pairs_shortest_path_floyd_warshall<simple_edge_t> AP(s10);

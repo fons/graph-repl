@@ -74,7 +74,7 @@ std::pair<int, std::string> test_check_flow(std::ostream& strm,int argc, const c
       ASSERT(flow_ok );
       f = fc.flow(0);
       ASSERT(f ==2);
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_check_flow_graph.dot";
+      std::string dn = test_path("test_check_flow_graph.dot");
       s10.graphviz(dn);
 
       return DONE;

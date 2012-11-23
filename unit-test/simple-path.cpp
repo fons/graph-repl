@@ -34,7 +34,7 @@ std::pair<int, std::string> test_simple_path(std::ostream& strm,int argc, const 
       s10.insert(simple_edge_t(9,12,1));
       s10.insert(simple_edge_t(11,12,1));
 
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_simple_path.dot";
+      std::string dn = test_path("simple_path.dot");
       s10.graphviz(dn);
       simple_edge_path_t sp(s10);
       simple_path_t p = sp(0, 5);

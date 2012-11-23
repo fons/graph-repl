@@ -30,17 +30,17 @@ std::pair<int, std::string> test_undirected_dfs(std::ostream& strm,int argc, con
       s10.insert(simple_edge_t(4,3,1));//8
       s10.insert(simple_edge_t(3,5,1));//9
       s10.insert(simple_edge_t(4,5,1));//10
-      std::string dn = "/Users/fons/Dvlp/graphviz/undirected_dfs_graph.dot";
+      std::string dn = test_path("undirected_dfs_graph.dot");
       s10.graphviz(dn);
       simple_dfs dfs(s10);
       dfs();
       std::cerr << dfs << std::endl;
-      std::string df = "/Users/fons/Dvlp/graphviz/undirected_dfs_dfs.dot";
+      std::string df = test_path("undirected_dfs_dfs.dot");
       // p 98 fig 18.9
       dfs.graphviz(df);
 
       return simple_prompt(strm);
-      
+      //return DONE;
 }
 
 std::pair<int, std::string> test_components(std::ostream& strm,int argc, const char *argv[])
@@ -64,14 +64,14 @@ std::pair<int, std::string> test_components(std::ostream& strm,int argc, const c
       s10.insert(simple_edge_t(9,12,1));
       s10.insert(simple_edge_t(11,12,1));
      
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_components_graph.dot";
+      std::string dn = test_path("test_components_graph.dot");
       s10.graphviz(dn);
       simple_dfs dfs(s10);
       TRACE;
       dfs();
       TRACE;
       std::cerr << dfs << std::endl;
-      std::string df = "/Users/fons/Dvlp/graphviz/test_components_dfs.dot";
+      std::string df = test_path("test_components_dfs.dot");
       dfs.graphviz(df);
       dfs.property(0);
       ASSERT_CONDITION("edge 0 in component 0", dfs.property<component_t>(0) == 0);
@@ -108,13 +108,13 @@ std::pair<int, std::string> test_edge_seperability(std::ostream& strm,int argc, 
       s10.insert(simple_edge_t(4,11,1));
       s10.insert(simple_edge_t(9,11,1));
       s10.insert(simple_edge_t(11,12,1));
-      std::string dn = "/Users/fons/Dvlp/graphviz/edge_seperability_graph.dot";
+      std::string dn = test_path("edge_seperability_graph.dot");
       s10.graphviz(dn);
 
       simple_dfs dfs(s10);
       dfs();
       std::cerr << dfs << std::endl;
-      std::string df = "/Users/fons/Dvlp/graphviz/edge_seperability_dfs.dot";
+      std::string df = test_path("edge_seperability_dfs.dot");
       dfs.graphviz(df);
       dfs.property(0);
       auto val = dfs.property<component_t>(0);

@@ -32,12 +32,12 @@ std::pair<int, std::string> test_bipartite(std::ostream& strm,int argc, const ch
       s10.insert(simple_edge_t(3,4,1));
       s10.insert(simple_edge_t(4,5,1));
 
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_bipartite.dot";
+      std::string dn = test_path("bipartite_graph.dot");
       s10.graphviz(dn);
       simple_dfs dfs(s10);
       dfs();
       std::cerr << dfs << std::endl;
-      std::string df = "/Users/fons/Dvlp/graphviz/test_bipartite_dfs.dot";
+      std::string df = test_path("bipartite_graph_dfs.dot");
       dfs.graphviz(df);
       std::cerr << "bipartite  : " << dfs.property<bipartite_t>() << std::endl;
       ASSERT(dfs.property<bipartite_t>() == 1);
@@ -67,12 +67,12 @@ std::pair<int, std::string> test_bipartite_negative(std::ostream& strm,int argc,
       s10.insert(simple_edge_t(3,4,1));
       s10.insert(simple_edge_t(4,5,1));
       
-      std::string dn = "/Users/fons/Dvlp/graphviz/test_bipartite_negative.dot";
+      std::string dn = test_path("bipartite_graph_negative.dot");
       s10.graphviz(dn);
       simple_dfs dfs(s10);
       dfs();
       std::cerr << dfs << std::endl;
-      std::string df = "/Users/fons/Dvlp/graphviz/test_bipartite_negative_dfs.dot";
+      std::string df = test_path("bipartite_graph_negative_dfs.dot");
       dfs.graphviz(df);
       std::cerr << "bipartite  : " << dfs.property<bipartite_t>() << std::endl;
       ASSERT(dfs.property<bipartite_t>() == 0);

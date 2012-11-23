@@ -15,21 +15,21 @@ REGISTER_TEST(test_directed_random_graph);
 std::pair<int, std::string> test_undirected_random_graph(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string mn = "/Users/fons/Dvlp/graphviz/undirected_random_graph.dot";
+      std::string mn = test_path("undirected_random_graph.dot");
       double fill    = 0.20;
       size_t size    = 50;
       sparse_graph_t s12(size);
       s12 = manhattan_neighbor_graph(size * fill, s12);
       s12.graphviz(mn);
 
-      return simple_prompt(strm);
-      
+      //return simple_prompt(strm);
+      return DONE;
 }
 
 std::pair<int, std::string> test_directed_random_graph(std::ostream& strm,int argc, const char *argv[])
 {
       
-      std::string mn = "/Users/fons/Dvlp/graphviz/directed_random_graph.dot";
+      std::string mn = test_path("directed_random_graph.dot");
       double fill    = 0.20;
       size_t size    = 50;
       sparse_graph_t s12(size, graph_type_t::DIRECTED);
@@ -37,5 +37,5 @@ std::pair<int, std::string> test_directed_random_graph(std::ostream& strm,int ar
       s12.graphviz(mn);
       
       return simple_prompt(strm);
-      
+      //return DONE;
 }

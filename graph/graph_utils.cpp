@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 mohegan skunk works. All rights reserved.
 //
 
-#include "graph_utils.h"
+#include "graph.h"
 
 
 std::vector<std::string> split(const std::string& buff, const std::string& spliton)
@@ -35,4 +35,13 @@ double string_to_double( const std::string& s )
             return 0;
       return x;
 } 
+
+std::string graphdir()
+{
+      const char* userdir = getenv("GRAPHDIR");
+      if (userdir) return std::string(userdir);
+      const char *home = getenv("HOME");
+      if (home) return std::string(home);
+      return std::string(".");
+}
 

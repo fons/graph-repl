@@ -286,8 +286,8 @@
 				F975129D15A916F300831089 /* adjacency_list.h */,
 				F975129C15A916F300831089 /* adjacency_list.cpp */,
 				F975129415A9146100831089 /* graph_utils.h */,
-				F9590D2015D34DA30022D00C /* dag.h */,
 				F975129A15A9148000831089 /* graph_utils.cpp */,
+				F9590D2015D34DA30022D00C /* dag.h */,
 				F975129615A9146100831089 /* tuple.h */,
 				F9A4F9BE165AF8ED00AE58C0 /* check-flow.h */,
 				F9402E8C15F2A610009E268C /* stack.h */,
@@ -320,8 +320,8 @@
 			isa = PBXGroup;
 			children = (
 				F932AD8215C2010800722457 /* prompt.h */,
-				F932AD9215C89ADD00722457 /* trace.h */,
 				F932AD8415C2CC5600722457 /* prompt.cpp */,
+				F932AD9215C89ADD00722457 /* trace.h */,
 				F92AE5FD15C062A9000CAE75 /* interactive.h */,
 				F92AE5FE15C0632D000CAE75 /* interactive.cpp */,
 				F9B7FD9B15B35C1500B0D6F0 /* assertion.h */,

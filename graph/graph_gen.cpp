@@ -6,13 +6,8 @@
 //  Copyright (c) 2012 mohegan skunk works. All rights reserved.
 //
 
-#include <iostream>
-#include "graph.h"
-#include "graph_gen.h"
 
-#include <random>
-#include <vector>
-#include <map>
+#include "graph.h"
 
 size_t random_number(size_t max)
 {

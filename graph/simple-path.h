@@ -9,13 +9,6 @@
 #ifndef graph_repl_simple_path_h
 #define graph_repl_simple_path_h
 
-#include <vector>
-#include <map>
-#include <deque>
-
-#include "graph_base.h"
-#include "degree.h"
-#include "edge.h"
 
 template<typename edge_t>
 struct paths {

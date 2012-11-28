@@ -23,3 +23,8 @@ bool change_flow(flow_graph_t& F, size_t from, size_t to, long flow)
       e->weight->flow(flow);
       return true;
 }
+
+std::ostream& operator<<(std::ostream& strm, const flow_edge& fe) {
+      return fe.pp(strm) ;
+}
+

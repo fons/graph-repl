@@ -20,14 +20,14 @@ struct weight_traits_t
 
 };
 
-template <typename weight_t>
-struct weight_traits_t<std::shared_ptr<weight_t>>
-{
-      typedef weight_t value_type;
-      
-      static const weight_t& deref(const std::shared_ptr<weight_t>& e) {
-            return *e;
-      }
-};
+//template <typename weight_t>
+//struct weight_traits_t<std::shared_ptr<weight_t>>
+//{
+//      typedef weight_t value_type;
+//      
+//      static const weight_t& deref(const std::shared_ptr<weight_t>& e) {
+//            return *e;
+//      }
+//};
 
 #endif

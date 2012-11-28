@@ -13,9 +13,9 @@
 
 int main (int argc, const char * argv[])
 {
-      
+      test_augmenting_paths_maxflow(std::cerr, argc, argv);
       try {
-            run_tests(std::cerr, argc, argv);
+            //run_tests(std::cerr, argc, argv);
       }
       catch(const std::exception& e) {
             std::cerr << "caught exception : " << e.what() << std::endl;

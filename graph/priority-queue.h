@@ -285,7 +285,7 @@ private:
 };
 template <typename key_t, typename value_t>
 class priority_queue_stl {
-      typedef std::pair<key_t, value_t>           value_type;
+      typedef std::pair<key_t, value_t>                 value_type;
       typedef std::shared_ptr<value_type>               value_type_ptr;
       typedef std::vector<value_type_ptr>               container_t;
       typedef std::unordered_map<key_t, value_type_ptr> map_t;
@@ -337,9 +337,10 @@ public:
 
       std::ostream& pp(std::ostream& strm) const
       {
-            lazy_heap();
+            //lazy_heap();
             for (auto& val : L) {
-                  strm << val << std::endl;
+                  value_type v = *val;
+                  strm << "[" << v.first << " : " << v.second << "]" << std::endl;
             }
             return strm;
       }

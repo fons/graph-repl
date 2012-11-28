@@ -21,10 +21,11 @@
 template <typename container_t, typename edge_t, typename traits=edge_trait_t<edge_t>>
 class graph_impl : public graph_base <edge_t> {
 public:
-      typedef container_t                       container_value_type;
-      typedef edge_t                            edge_value_type;
-      typedef typename traits::label_value_type label_value_type;
-      typedef typename traits::value_type       value_type;
+      typedef container_t                        container_value_type;
+      typedef edge_t                             edge_value_type;
+      typedef typename traits::label_value_type  label_value_type;
+      typedef typename traits::value_type        value_type;
+      typedef typename traits::weight_value_type weight_value_type;
       
       explicit graph_impl(size_t size) : m(size), is_directed_flg(graph_type_t::UNDIRECTED){}
       explicit graph_impl(size_t size, graph_type_t is_directed) : m(size), is_directed_flg(is_directed){}

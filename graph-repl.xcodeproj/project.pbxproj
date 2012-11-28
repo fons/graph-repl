@@ -29,14 +29,13 @@
 		F946E4FC16530B5E00726074 /* test-capacity-flow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F946E4FA16530B5D00726074 /* test-capacity-flow.cpp */; };
 		F9470FF615A8CC1300602C3C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9470FF515A8CC1300602C3C /* main.cpp */; };
 		F9470FF815A8CC1300602C3C /* graph_repl.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9470FF715A8CC1300602C3C /* graph_repl.1 */; };
+		F9525DCC166435E900197CFB /* test-max-flow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9525DCA166435E900197CFB /* test-max-flow.cpp */; };
 		F9590D1E15D34B610022D00C /* test-topological-sort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9590D1C15D34B610022D00C /* test-topological-sort.cpp */; };
 		F9590D2415D5C1670022D00C /* test-dfs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9590D2215D5C1670022D00C /* test-dfs.cpp */; };
 		F964321416179EC2007EAE1A /* test-assoc-array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F964321216179EC2007EAE1A /* test-assoc-array.cpp */; };
 		F9643218161885A1007EAE1A /* test-union-find.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9643216161885A0007EAE1A /* test-union-find.cpp */; };
 		F96FC6FF16445B2C00F8A3A4 /* test-acyclic-shortest-path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FC6FD16445B2C00F8A3A4 /* test-acyclic-shortest-path.cpp */; };
 		F975127D15A8D3B700831089 /* graph.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F975126C15A8D2D600831089 /* graph.dylib */; };
-		F975127F15A8D3FD00831089 /* test.h in Headers */ = {isa = PBXBuildFile; fileRef = F975127E15A8D3FD00831089 /* test.h */; };
-		F975128115A8D42800831089 /* testy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F975128015A8D42800831089 /* testy.cpp */; };
 		F975128315A8D4B700831089 /* graph.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128215A8D4B700831089 /* graph.h */; };
 		F975128515A8D53500831089 /* edge.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128415A8D53500831089 /* edge.h */; };
 		F975128B15A9113200831089 /* graph_base.h in Headers */ = {isa = PBXBuildFile; fileRef = F975128715A9113200831089 /* graph_base.h */; };
@@ -128,6 +127,8 @@
 		F9470FF115A8CC1300602C3C /* graph-repl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "graph-repl"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9470FF515A8CC1300602C3C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F9470FF715A8CC1300602C3C /* graph_repl.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = graph_repl.1; sourceTree = "<group>"; };
+		F9525DC81664346B00197CFB /* maxflow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = maxflow.h; sourceTree = "<group>"; };
+		F9525DCA166435E900197CFB /* test-max-flow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-max-flow.cpp"; sourceTree = "<group>"; };
 		F9590D1C15D34B610022D00C /* test-topological-sort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-topological-sort.cpp"; sourceTree = "<group>"; };
 		F9590D2015D34DA30022D00C /* dag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dag.h; sourceTree = "<group>"; };
 		F9590D2115D46F7F0022D00C /* topological-sort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "topological-sort.h"; sourceTree = "<group>"; };
@@ -144,8 +145,6 @@
 		F975126F15A8D2D600831089 /* graph-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "graph-Prefix.pch"; sourceTree = "<group>"; };
 		F975127015A8D2D600831089 /* graphProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = graphProj.xcconfig; sourceTree = "<group>"; };
 		F975127115A8D2D600831089 /* graphTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = graphTarget.xcconfig; sourceTree = "<group>"; };
-		F975127E15A8D3FD00831089 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		F975128015A8D42800831089 /* testy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testy.cpp; sourceTree = "<group>"; };
 		F975128215A8D4B700831089 /* graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph.h; sourceTree = "<group>"; };
 		F975128415A8D53500831089 /* edge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = edge.h; sourceTree = "<group>"; };
 		F975128715A9113200831089 /* graph_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_base.h; sourceTree = "<group>"; };
@@ -299,8 +298,7 @@
 				F975128815A9113200831089 /* graph_impl.cpp */,
 				F9A4F9C6165E767A00AE58C0 /* flow-graph-util.cpp */,
 				F9A4F9C7165E767A00AE58C0 /* flow-graph-util.h */,
-				F975127E15A8D3FD00831089 /* test.h */,
-				F975128015A8D42800831089 /* testy.cpp */,
+				F9525DC81664346B00197CFB /* maxflow.h */,
 				F975127015A8D2D600831089 /* graphProj.xcconfig */,
 				F975127115A8D2D600831089 /* graphTarget.xcconfig */,
 				F975126E15A8D2D600831089 /* Supporting Files */,
@@ -356,6 +354,7 @@
 				F96FC6FD16445B2C00F8A3A4 /* test-acyclic-shortest-path.cpp */,
 				F946E4FA16530B5D00726074 /* test-capacity-flow.cpp */,
 				F9A4F9C3165AFCAD00AE58C0 /* test-check-flow.cpp */,
+				F9525DCA166435E900197CFB /* test-max-flow.cpp */,
 				F9B1AEAA15AB95A100DC93D4 /* unit_test.1 */,
 			);
 			path = "unit-test";
@@ -368,7 +367,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F975127F15A8D3FD00831089 /* test.h in Headers */,
 				F975128315A8D4B700831089 /* graph.h in Headers */,
 				F975128515A8D53500831089 /* edge.h in Headers */,
 				F975128B15A9113200831089 /* graph_base.h in Headers */,
@@ -492,7 +490,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F975128115A8D42800831089 /* testy.cpp in Sources */,
 				F975128C15A9113200831089 /* graph_impl.cpp in Sources */,
 				F975129215A9142F00831089 /* adjacency_matrix.cpp in Sources */,
 				F975129B15A9148000831089 /* graph_utils.cpp in Sources */,
@@ -537,6 +534,7 @@
 				F96FC6FF16445B2C00F8A3A4 /* test-acyclic-shortest-path.cpp in Sources */,
 				F946E4FC16530B5E00726074 /* test-capacity-flow.cpp in Sources */,
 				F9A4F9C4165AFCAD00AE58C0 /* test-check-flow.cpp in Sources */,
+				F9525DCC166435E900197CFB /* test-max-flow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

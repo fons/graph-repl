@@ -8,33 +8,40 @@
 
 #include "tests.h"
 REGISTER_TEST(test_check_flow);
+REGISTER_TEST(test_flow_edge);
 
-//simple_flow_edge_ptr_t( new simple_flow_edge_t(0,1, simple_capacity_flow_t(3)))
-template<typename edge_t, typename traits=edge_trait_t<edge_t>>
-struct flow_graph_wrapper
+std::pair<int, std::string> test_flow_edge(std::ostream& strm,int argc, const char *argv[])
 {
-      flow_graph_wrapper(graph_base<edge_t>& G) : G(G){};
-      graph_base<edge_t>& G;
-      graph_base<edge_t>& operator*() {
-            return G;
-      }
-      
-      graph_base<edge_t>* operator->() {
-            return &G;
-      }
-      
-      void flow(const typename traits::label_value_type& from,
-                const typename traits::label_value_type& to,
-                const typename traits::weight_value_type::flow_value_type& v) {
-            
-            auto e = G.edge(from, to);
-            e->weight.flow(v);
-            e = G.edge(from, to);
-            //std::cerr << edge_trait_t<simple_flow_edge_ptr_t>::deref(e) << std::endl;
-            
-      }
-};
+      auto e = make_simple_flow_edge(0, 1, 20);
+      strm << *e << std::endl;
+      flow_edge fe(e);
+      fe.addflowRto(1, 12);
+      strm << fe << std::endl;
+      strm << "residual flow to 0 " << fe.capRto(0) << std::endl;
+      strm << "residual flow to 1 " << fe.capRto(1) << std::endl;
 
+      flow_graph_t s10(10, graph_type_t::DIRECTED);
+      s10.insert(make_simple_flow_edge(0, 1, 30));
+      s10.insert(make_simple_flow_edge(0,2, 3));
+      s10.insert(make_simple_flow_edge(1,3, 3));
+      s10.insert(make_simple_flow_edge(1,4, 1));
+      s10.insert(make_simple_flow_edge(2,3, 1));
+      flow_edge fe2(s10.edge(1,3));
+      fe2.addflowRto(1, 1);
+      auto e2 = s10.edge(1,3);
+      strm << fe2 << std::endl;
+      strm << *e2 << std::endl;
+      strm << "------------------------------" <<std::endl;
+      std::vector<flow_edge> ve;
+      
+      for (flow_graph_t::iterator it = s10.begin(); it != s10.end(); it++) {
+            ve.push_back(flow_edge(*it));
+      }
+      for (auto& v: ve){
+            strm << v << std::endl;
+      }
+      return DONE;
+}
 
 std::pair<int, std::string> test_check_flow(std::ostream& strm,int argc, const char *argv[])
 {

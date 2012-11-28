@@ -9,6 +9,8 @@
 #ifndef graph_repl_graph_h
 #define graph_repl_graph_h
 
+#include <random>
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -54,6 +56,7 @@ std::ostream& operator<<(std::ostream& strm, const std::pair<l,r>& p)
 #include "graph_impl.h"
 typedef graph_impl<adjacency_matrix_t, simple_edge_t> dense_graph_t;
 typedef graph_impl<adjacency_list_t, simple_edge_t>   sparse_graph_t;
+#include "graph_gen.h"
 
 #include "dfs.h"
 typedef dfs<simple_edge_t> simple_dfs;
@@ -82,5 +85,6 @@ typedef paths<simple_edge_t>       simple_path_t;
 #include "flow-graph-util.h"
 #include "check-flow.h"
       
+#include "maxflow.h"
       
 #endif

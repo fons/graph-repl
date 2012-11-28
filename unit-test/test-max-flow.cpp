@@ -59,22 +59,6 @@ std::pair<int, std::string> test_augmenting_paths_dfs(std::ostream& strm,int arg
       
       return DONE;
 }
-static void augment (std::unordered_map<size_t, flow_edge>& st, const size_t& s, const size_t& t)
-{
-      auto mincap = st[t].capRto(t);
-      std::cerr << "start with d : " << mincap << std::endl;
-      for (size_t v = ST(st, t); v != s; v = ST(st, v)) {
-            auto rcap = st[v].capRto(v);
-            if ( rcap < mincap) {
-                  mincap = rcap;
-            }
-      }
-      st[t].addflowRto(t, mincap);
-      for (size_t v = ST(st, t); v != s; v = ST(st, v)) {
-            st[v].addflowRto(v,mincap);
-      }
-}
-
 std::pair<int, std::string> test_augmenting_paths_maxflow(std::ostream& strm,int argc, const char *argv[])
 {
       flow_graph_t s10(10, graph_type_t::DIRECTED);

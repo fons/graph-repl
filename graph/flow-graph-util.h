@@ -32,6 +32,9 @@ struct weight_traits_t<std::shared_ptr<simple_capacity_flow_t>>
       static const simple_capacity_flow_t& deref(const std::shared_ptr<simple_capacity_flow_t>& e) {
             return *e;
       }
+      static simple_capacity_flow_ptr_t make_weight(long w) {
+            return simple_capacity_flow_ptr_t(new simple_capacity_flow_t(w));
+      }
 };
 
 extern simple_flow_edge_ptr_t make_simple_flow_edge(const size_t& from, const size_t& to, const long& capacity);

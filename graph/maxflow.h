@@ -82,7 +82,7 @@ private :
       
       typedef typename weight_traits_t<weight_t>::value_type flow_t;
       typedef typename std::unordered_map<label_t, flow_edge> edge_cont_t;
-      typedef typename std::unordered_map<label_t, flow_t>    flow_cont_t;
+      
 public :
       augmenting_paths_maxflow(graph_t& G, const label_t& s, const label_t& t) : s(s), t(t), G(G)
       {

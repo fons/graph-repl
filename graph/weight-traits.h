@@ -16,7 +16,9 @@ struct weight_traits_t
       static const weight_t& deref(const weight_t& w) {
             return w;
       }
-      
+      static value_type make_weight (const weight_t& w) {
+            return w;
+      }
 
 };
 

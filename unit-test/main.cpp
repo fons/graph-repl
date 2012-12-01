@@ -13,7 +13,7 @@
 
 int main (int argc, const char * argv[])
 {
-      test_augmenting_paths_maxflow(std::cerr, argc, argv);
+      test_preflow_push(std::cerr, argc, argv);
       try {
             //run_tests(std::cerr, argc, argv);
       }

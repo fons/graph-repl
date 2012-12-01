@@ -28,6 +28,7 @@
 #include "proto.h"
 #include "format.h"
 #include "stack.h"
+#include "queue.h"
 #include "graph_utils.h"
 #include "priority-queue.h"
 #include "weight-traits.h"
@@ -60,7 +61,9 @@ typedef graph_impl<adjacency_list_t, simple_edge_t>   sparse_graph_t;
 
 #include "dfs.h"
 typedef dfs<simple_edge_t> simple_dfs;
-
+#include "bfs.h"
+typedef bfs<simple_edge_t> simple_bfs;
+      
 #include "graph_gen.h"
 #include "dag.h"
 #include "strong-components.h"
@@ -86,5 +89,5 @@ typedef paths<simple_edge_t>       simple_path_t;
 #include "check-flow.h"
       
 #include "maxflow.h"
-      
+#include "preflow-push-maxflow.h"
 #endif

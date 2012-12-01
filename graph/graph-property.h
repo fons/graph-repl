@@ -43,13 +43,13 @@ struct articulation_t : public retval_t<int> {
 };
 
 
-template <typename edge_t>
+template <typename edge_t, typename traits = edge_trait_t<edge_t>>
 struct bridges_t : public retval_t< std::set<edge_t> > {
       
 };
 
-template <typename edge_t>
-struct artics_t : public retval_t< std::set<typename edge_t::label_value_type> > {
+template <typename edge_t, typename traits= edge_trait_t<edge_t>>
+struct artics_t : public retval_t< std::set<typename traits::label_value_type> > {
       
 };
 

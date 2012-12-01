@@ -37,7 +37,7 @@ std::pair<int, std::string> test_dfs_property(std::ostream& strm,int argc, const
       s10.insert(simple_edge_t(11,12,1));//21
       
       simple_dfs dfs(s10);
-
+      dfs();
       ASSERT( (dfs.property<postorder_t>(3) ==  property<simple_edge_t, postorder_t>(dfs, 3)));
       ASSERT( (dfs.property<preorder_t>(3) ==  property<simple_edge_t, preorder_t>(dfs, 3)));
       return DONE;

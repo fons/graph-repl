@@ -21,7 +21,8 @@ struct priority_queue_t
 };
 
 template <typename key_t>
-class priority_queue_base : public priority_queue_t<int, key_t>{
+class priority_queue_base : public priority_queue_t<int, key_t>
+{
 public :
       explicit priority_queue_base(size_t NN, const std::vector<key_t>& a, int d=3) : a(a), pq(NN+1,0), qp(NN+1, 0), N(0), d(d) {}
       

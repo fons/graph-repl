@@ -45,6 +45,7 @@ extern std::pair<int, std::string> test_not_dag(std::ostream& strm,int argc, con
 extern std::pair<int, std::string> test_dag(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_reverse_topological_sort_dfs(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_dfs_property(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_bfs(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_topological_sort_dfs(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_topological_sort_queue(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_kosaraju(std::ostream& strm,int argc, const char *argv[]);
@@ -85,7 +86,9 @@ extern std::pair<int, std::string> test_check_flow(std::ostream& strm,int argc, 
 extern std::pair<int, std::string> test_flow_edge(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_augmenting_paths_maxflow(std::ostream& strm,int argc, const char *argv[]);
 extern std::pair<int, std::string> test_augmenting_paths_dfs(std::ostream& strm,int argc, const char *argv[]);
-
+extern std::pair<int, std::string> test_queue(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_preflow_push(std::ostream& strm,int argc, const char *argv[]);
+extern std::pair<int, std::string> test_init_preflow_push(std::ostream& strm,int argc, const char *argv[]);
 
 #endif
 

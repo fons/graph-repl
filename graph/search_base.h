@@ -21,11 +21,11 @@
 #include "graph-property.h"
 #include "graph_impl.h"
 
-template <typename edge_t>
+template <typename edge_t, typename traits=edge_trait_t<edge_t>>
 class search_base {
-protected:
+public:
       typedef int                               color_t;    
-      typedef typename edge_t::label_value_type value_t;
+      typedef typename traits::label_value_type value_t;
       
       typedef std::unordered_map<value_t, int>       cont_t;
       typedef std::unordered_map<value_t, value_t>   link_t;
@@ -40,7 +40,9 @@ protected:
       template <typename T> struct type {
             
       };
-      
+      typedef typename traits::weight_value_type weight_t_t;
+      typedef typename weight_traits_t<weight_t_t>::value_type weight_t;
+
 public :
       template <typename edge_t_, typename property_t, typename retval_t>
       friend retval_t property(search_base<edge_t_>& , typename edge_t_::label_value_type n);
@@ -101,7 +103,7 @@ public :
       }
       
       template<typename prop_t=graph_property_t>
-      typename prop_t::retval property(typename edge_t::label_value_type node) {            
+      typename prop_t::retval property(value_t node) {
             return get_val(type<prop_t>(), node);
       }
       
@@ -195,9 +197,10 @@ protected:
             typename graph_base<edge_t>::vertex_generator s(G);            
             while (! s.iter_done() ) {
                   auto node = s.yield();
+                  weight_t_t sw = weight_traits_t<weight_t_t>::make_weight(1);
                   if (order.at(node) == SENTINEL) {  
                         assert (preorder.at(node) == SENTINEL);      
-                        search_c(edge_t(node, node, 1), RCOLOR);
+                        search_c(traits::make_edge(node, node, sw), RCOLOR);
                         comp_count++;
                   }
             }
@@ -219,8 +222,8 @@ protected:
             bipartite = false;
       }
 
-      
-      component_t::retval get_val(const type<component_t>& t, typename edge_t::label_value_type node) {
+public:
+      component_t::retval get_val(const type<component_t>& t, value_t node) {
             return search_base<edge_t>::component.at(node);
       }
       
@@ -228,15 +231,15 @@ protected:
             return search_base<edge_t>::comp_count;
       }
       
-      preorder_t::retval get_val(const type<preorder_t>& t, typename edge_t::label_value_type node) {
+      preorder_t::retval get_val(const type<preorder_t>& t, value_t node) {
             return search_base<edge_t>::preorder.at(node);
       }
       
-      postorder_t::retval get_val(const type<postorder_t>& t, typename edge_t::label_value_type node) {
+      postorder_t::retval get_val(const type<postorder_t>& t, value_t node) {
             return search_base<edge_t>::postorder.at(node);
       }
       
-      void get_val(const type<graph_property_t>& val, typename edge_t::label_value_type node) {
+      void get_val(const type<graph_property_t>& val, value_t node) {
             return ;
       }
       
@@ -268,7 +271,7 @@ protected:
             return search_base<edge_t>::bipartite;
       }
  
-      parent_t::retval get_val(const type<parent_t>& t, typename edge_t::label_value_type node) {
+      parent_t::retval get_val(const type<parent_t>& t, value_t node) {
             return parent_link.at(node);
       }
       
@@ -281,9 +284,8 @@ std::ostream& operator<< (std::ostream &strm, search_base<edge_t>& g)
       return g.pretty_print(strm);      
 }
 
-
-template<typename edge_t, typename property_t, typename retval_t= typename property_t::retval>
-retval_t property (search_base<edge_t>& g, typename edge_t::label_value_type node)
+template<typename edge_t, typename property_t, typename retval_t= typename property_t::retval, typename traits=edge_trait_t<edge_t> >
+retval_t property (search_base<edge_t>& g, typename traits::label_value_type node)
 {
       return g.get_val(typename search_base<edge_t>::template type<property_t>(), node);
 }
